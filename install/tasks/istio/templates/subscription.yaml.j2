@@ -1,0 +1,13 @@
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: {{ operators.istio.name }}
+  namespace: {{ operators.istio.namespace }}
+spec:
+  channel: {{ operators.istio.channel }}
+  installPlanApproval: {{ operators.istio.approval_strategy }}
+  name: {{ operators.istio.name }}
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+...

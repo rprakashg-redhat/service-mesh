@@ -1,0 +1,22 @@
+operators:
+  namespace: openshift-operators-redhat
+  es:
+    name: elasticsearch-operator
+    namespace: openshift-operators-redhat
+    channel: stable
+    approval_strategy: Automatic 
+  jaeger:
+    name: jaeger-operator
+    namespace: openshift-operators
+    channel: stable
+    approval_strategy: Automatic
+  kiali:
+    name: kiali-operator
+    namespace: openshift-operators
+    channel: stable
+    approval_strategy: Automatic
+  istio:
+    name: servicemesh-operator
+    namespace: openshift-operators
+    channel: stable
+    approval_strategy: Automatic
