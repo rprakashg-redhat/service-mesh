@@ -1,0 +1,19 @@
+- name: deploy control plane
+  kubernetes.core.k8s:
+    state: present
+    api_key: "{{ api_key }}"  
+    apply: true
+    validate_certs: false
+    resource_definition: "{{ lookup('template', './templates/smcp.yaml.j2') | from_yaml }}"
+
+- name: wait for the control plane to be ready
+  kubernetes.core.k8s_info:
+    api_key: "{{ api_key }}"
+    kind: ServiceMeshControlPlane
+    name: "{{ controlplane.name }}"
+    api_version: maistra.io/v2
+    namespace: "{{ controlplane.namespace }}"
+  register: __smcp_install_result
+  until: "(__smcp_install_result['resources'][0]['status']['conditions'] is defined) and (__smcp_install_result['resources'][0]['status']['conditions'][0].status == 'True') and (__smcp_install_result['resources'][0]['status']['conditions'][1].status == 'True') and (__smcp_install_result['resources'][0]['status']['conditions'][2].status == 'True')"
+  retries: 50
+  delay: 20

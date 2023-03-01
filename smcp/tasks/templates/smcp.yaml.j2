@@ -1,0 +1,161 @@
+---
+apiVersion: maistra.io/v2
+kind: ServiceMeshControlPlane
+metadata:
+    name: {{ controlplane.name }}
+    namespace: {{ controlplane.namespace }}
+spec:
+    version: {{ controlplane.version }}
+    general:
+        logging:
+            componentLevels: {}  
+            logAsJSON: true
+        validationMessages: true
+    proxy:
+        accessLogging:
+            file:
+                name: /dev/stdout
+        runtime:
+            container:
+                resources:
+                    requests:
+                    cpu: 50m
+                    memory: 50Mi
+
+    security:
+        dataPlane:
+            mtls: true
+            automtls: true
+        controlPlane:
+            mtls: true
+    
+    runtime:
+        components:
+            grafana:
+                container:
+                    resources:
+                        requests:
+                            cpu: 100m
+                            memory: 256Mi
+            prometheus:
+                container:
+                    resources:
+                        requests:
+                            cpu: 100m
+                            memory: 256Mi    
+            kiali:
+                container:
+                    resources:
+                        requests:
+                            cpu: 100m
+                            memory: 256Mi
+                            
+            tracing.jaeger.elasticsearch:
+                container:
+                    resources:
+                        requests:
+                            cpu: '1'
+                            memory: 4Gi
+                        limits:
+                            cpu: '1'
+                            memory: 4Gi
+
+            tracing.jaeger.collector:
+                container:
+                    resources:
+                        requests:
+                            cpu: 100m
+                            memory: 256Mi
+
+            tracing.jaeger.query:
+                container:
+                    resources:
+                        requests:
+                            cpu: 100m
+                            memory: 256Mi
+
+    gateways:
+        enabled: true
+        ingress:
+            enabled: true
+            ingress: true
+            sds:
+                enabled: true
+            #Runtime configuration for sds sidecar
+            routerMode: "standard" #sni-dnat sni passthrough, use it if you dont want tls termination
+            volumes: [] #Volumes is used to configure additional Secret and ConfigMap volumes that should be mounted for the gateway's pod.
+            runtime:
+                #Deployment specific overrides
+                deployment:
+                    replicas: 3
+                    autoScaling:
+                        maxReplicas: 10
+                        minReplicas: 3
+                        targetCPUUtilizationPercentage: 75
+                    strategy: {} #The deployment strategy to use to replace existing pods with new ones.
+                pod: {} #Pod specific overrides
+                container: {} #Container specific overrides
+                service: {} #keep it default, configure this for specific production requirements
+        egress:
+            enabled: true
+            routerMode: "standard"
+            volumes: [] #Volumes is used to configure additional Secret and ConfigMap volumes that should be mounted for the gateway's pod. 
+            runtime:
+                deployment:
+                    replicas: 3
+                    autoScaling:
+                        maxReplicas: 10
+                        minReplicas: 3
+                        targetCPUUtilizationPercentage: 75
+                    strategy: {} #The deployment strategy to use to replace existing pods with new ones.
+                pod: {} #Pod specific overrides
+                container: {} #Container specific overrides
+
+        openshiftRoute:
+            enabled: false
+    tracing:
+        type: Jaeger
+    
+    addons:
+        jaeger:
+            name: jaeger
+            install:
+                ingress:
+                    enabled: true
+                    metadata:
+                        annotations: {}
+                        labels: {}
+                storage:
+                    type: Elasticsearch
+                    elasticsearch:
+                        indexCleaner:
+                            enabled: true
+                            numberOfDays: 2
+                            schedule: "55 23 * * *"
+                        nodeCount: 3
+                        redundancyPolicy: "SingleRedundancy"
+                        storage:
+                            storageClassName: gp2-csi
+                            size: 50Gi
+
+        grafana:
+            enabled: true
+            install: {}
+
+        kiali:
+            name: kiali
+            enabled: true
+            install:
+                dashboard:
+                    enableGrafana: true
+                    enablePromethues: true
+                    enableTracing: true
+                deployment: {}
+                service:
+                    ingress:
+                        enabled: true
+                        contextPath: "/dashboards/kiali"
+
+        prometheus:
+            enabled: true
+...

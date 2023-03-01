@@ -1,0 +1,13 @@
+---
+apiVersion: maistra.io/v1
+kind: ServiceMeshMemberRoll
+metadata:
+  name: default
+  namespace: {{ controlplane.namespace }}
+spec:
+  members:
+  {% for p in controlplane.projects %}
+  - {{ p }}
+  {% endfor %}
+  
+...

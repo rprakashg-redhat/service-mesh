@@ -1,0 +1,8 @@
+controlplane:
+  name: basic 
+  namespace: istio-system
+  version: v2.3
+  projects:
+  - istio-samples
+  - cascade-openshifty
+  - cascade-sealedsecrets

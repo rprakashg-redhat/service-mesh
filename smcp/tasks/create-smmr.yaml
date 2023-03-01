@@ -1,0 +1,7 @@
+- name: create the servicemesh memberrole resource
+  kubernetes.core.k8s:
+    state: present
+    api_key: "{{ api_key }}"  
+    apply: true
+    validate_certs: false
+    resource_definition: "{{ lookup('template', './templates/smmr.yaml.j2') | from_yaml }}"
