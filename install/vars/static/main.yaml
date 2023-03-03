@@ -20,3 +20,8 @@ operators:
     namespace: openshift-operators
     channel: stable
     approval_strategy: Automatic
+  cert-manager:
+    name: cert-manager-operator
+    namespace: openshift-cert-manager-operator
+    channel: tech-preview
+    approval_strategy: Automatic

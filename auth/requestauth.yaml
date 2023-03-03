@@ -1,0 +1,12 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: "jwt"
+  namespace: istio-samples
+spec:
+  selector:
+    matchLabels:
+      app: httpbin
+  jwtRules:
+  - issuer: https://dev-6782679.okta.com
+    jwksUri: https://dev-6782679.okta.com/oauth2/v1/keys

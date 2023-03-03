@@ -60,3 +60,5 @@
     - name: install openshift servicemesh operator
       include: ./tasks/istio/install-istio.yaml
       
+    - name: install cert manager operator
+      include: ./tasks/cert-manager/install-cert-manager.yaml  

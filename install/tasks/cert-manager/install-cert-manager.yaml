@@ -1,0 +1,15 @@
+- name: create namespace
+  kubernetes.core.k8s:
+    name: "{{ operators.cert-manager.namespace }}"
+    api_version: v1
+    kind: Namespace
+    state: present
+    api_key: "{{ api_key }}"  
+
+- name: install cert-manager operator
+  kubernetes.core.k8s:
+    state: present
+    api_key: "{{ api_key }}"      
+    apply: true
+    validate_certs: false
+    resource_definition: "{{ lookup('template', './templates/subscription.yaml.j2') | from_yaml }}"

@@ -5,4 +5,3 @@ controlplane:
   projects:
   - istio-samples
   - cascade-openshifty
-  - cascade-sealedsecrets

@@ -19,8 +19,8 @@ spec:
             container:
                 resources:
                     requests:
-                    cpu: 50m
-                    memory: 50Mi
+                        cpu: 50m
+                        memory: 50Mi
 
     security:
         dataPlane:
@@ -81,9 +81,35 @@ spec:
             ingress: true
             sds:
                 enabled: true
-            #Runtime configuration for sds sidecar
-            routerMode: "standard" #sni-dnat sni passthrough, use it if you dont want tls termination
-            volumes: [] #Volumes is used to configure additional Secret and ConfigMap volumes that should be mounted for the gateway's pod.
+                #Runtime configuration for sds sidecar
+                runtime: {}
+            # namespace: ""
+            service:
+                metadata:
+                    name: istio-ingressgateway
+                    labels:
+                        istio: ingressgateway
+                        app: istio-ingressgateway
+                spec:
+                    selector:
+                        app: istio-ingressgateway
+                        istio: ingressgateway
+                    type: LoadBalancer
+                    ports:
+                        - name: status-port
+                          protocol: TCP
+                          port: 15021
+                          targetPort: 15021
+                        - name: http2
+                          protocol: TCP
+                          port: 80
+                          targetPort: 8080
+                        - name: https
+                          protocol: TCP
+                          port: 443
+                          targetPort: 8443                    
+            routerMode: "sni-dnat" 
+            volumes: [] 
             runtime:
                 #Deployment specific overrides
                 deployment:
@@ -95,11 +121,13 @@ spec:
                     strategy: {} #The deployment strategy to use to replace existing pods with new ones.
                 pod: {} #Pod specific overrides
                 container: {} #Container specific overrides
-                service: {} #keep it default, configure this for specific production requirements
+            
+            routeConfig:
+                enabled: false
         egress:
             enabled: true
             routerMode: "standard"
-            volumes: [] #Volumes is used to configure additional Secret and ConfigMap volumes that should be mounted for the gateway's pod. 
+            volumes: [] 
             runtime:
                 deployment:
                     replicas: 3
@@ -109,8 +137,7 @@ spec:
                         targetCPUUtilizationPercentage: 75
                     strategy: {} #The deployment strategy to use to replace existing pods with new ones.
                 pod: {} #Pod specific overrides
-                container: {} #Container specific overrides
-
+                container: {} #Container specific overrides        
         openshiftRoute:
             enabled: false
     tracing:
