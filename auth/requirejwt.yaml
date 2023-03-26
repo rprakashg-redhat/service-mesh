@@ -2,13 +2,16 @@ apiVersion: "security.istio.io/v1beta1"
 kind: "AuthorizationPolicy"
 metadata:
   name: "requirejwt"
-  namespace: istio-samples
+  namespace: istio-system
 spec:
   selector:
     matchLabels:
-      app: httpbin
-  action: DENY
+      istio: ingressgateway
+  action: ALLOW
   rules:
   - from:
     - source:
-        notRequestPrincipals: ["*"]
+        requestPrincipals: ["*"]
+    when:
+    - key: request.auth.claims[iss]
+      values: ["https://keycloak-sso.apps.demos.sandbox686.opentlc.com/auth/realms/istio-samples"]

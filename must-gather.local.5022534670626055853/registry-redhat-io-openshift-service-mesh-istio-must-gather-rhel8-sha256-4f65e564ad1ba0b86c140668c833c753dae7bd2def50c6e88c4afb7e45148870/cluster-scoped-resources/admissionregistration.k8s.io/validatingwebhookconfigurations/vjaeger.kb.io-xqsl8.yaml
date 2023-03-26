@@ -1,0 +1,44 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  creationTimestamp: "2023-03-24T09:39:03Z"
+  generateName: vjaeger.kb.io-
+  generation: 1
+  labels:
+    olm.owner: jaeger-operator.v1.39.0-3
+    olm.owner.kind: ClusterServiceVersion
+    olm.owner.namespace: openshift-distributed-tracing
+    olm.webhook-description-generate-name: vjaeger.kb.io
+    olm.webhook-description-hash: b47b786
+  name: vjaeger.kb.io-xqsl8
+  resourceVersion: "639669"
+  uid: c3ce9e5f-364f-4dac-896a-cdb544e0d9c4
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJ2RENDQVdLZ0F3SUJBZ0lJZHl1ak55TDdNeEV3Q2dZSUtvWkl6ajBFQXdJd1FqRVdNQlFHQTFVRUNoTU4KVW1Wa0lFaGhkQ3dnU1c1akxqRW9NQ1lHQTFVRUF4TWZiMnh0TFhObGJHWnphV2R1WldRdE56Y3lZbUV6TXpjeQpNbVppTXpNeE1UQWVGdzB5TXpBek1qUXdPVE01TUROYUZ3MHlOVEF6TWpNd09UTTVNRE5hTUVJeEZqQVVCZ05WCkJBb1REVkpsWkNCSVlYUXNJRWx1WXk0eEtEQW1CZ05WQkFNVEgyOXNiUzF6Wld4bWMybG5ibVZrTFRjM01tSmgKTXpNM01qSm1Zak16TVRFd1dUQVRCZ2NxaGtqT1BRSUJCZ2dxaGtqT1BRTUJCd05DQUFRVjlSZlIyWXlZYXIxMwoyRlRhQmxFeEw2ajBGc3h0UDVob3Q3UEhkUDd4bE9uMGlaTGdzUWN1eXpnMkcwdGlMZzQzR0RsWlJrdlNkd2tFCi9GV3piRER1bzBJd1FEQU9CZ05WSFE4QkFmOEVCQU1DQWdRd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlYKSFE0RUZnUVVmNW11SUVsS25BUUNEYU1SWDJJc3RpSTJsQXN3Q2dZSUtvWkl6ajBFQXdJRFNBQXdSUUlnSnFveQpZY2p3RVR3Vm8raEtuNU9rM1Z1UVBrQWVRSGhrNzNMN2g4ZkRZRlFDSVFDS1dQQ3Y3YVFQUzYyQ2dJZGpBTk1GCnVDZ2h0UTc1cGlPdFB1clB0RFR5eUE9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    service:
+      name: jaeger-operator-service
+      namespace: openshift-distributed-tracing
+      path: /validate-jaegertracing-io-v1-jaeger
+      port: 443
+  failurePolicy: Fail
+  matchPolicy: Equivalent
+  name: vjaeger.kb.io
+  namespaceSelector: {}
+  objectSelector: {}
+  rules:
+  - apiGroups:
+    - jaegertracing.io
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - jaegers
+    scope: '*'
+  sideEffects: None
+  timeoutSeconds: 10

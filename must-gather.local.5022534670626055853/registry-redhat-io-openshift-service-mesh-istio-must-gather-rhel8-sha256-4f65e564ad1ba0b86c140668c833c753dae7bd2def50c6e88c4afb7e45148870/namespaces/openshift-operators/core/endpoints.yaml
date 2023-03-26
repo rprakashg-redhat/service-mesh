@@ -1,0 +1,130 @@
+---
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2023-03-24T09:41:49Z"
+    labels:
+      name: istio-operator
+    name: istio-operator-metrics
+    namespace: openshift-operators
+    resourceVersion: "681705"
+    uid: 8dc2bb8d-ff29-4bc5-8160-280b268ad348
+  subsets:
+  - addresses:
+    - ip: 10.129.2.151
+      nodeName: ip-10-0-215-253.us-west-2.compute.internal
+      targetRef:
+        kind: Pod
+        name: istio-operator-589bdfb57c-gldk4
+        namespace: openshift-operators
+        uid: 4cbd6928-6959-43d2-95c5-8c4938f5c162
+    ports:
+    - name: http-metrics
+      port: 8383
+      protocol: TCP
+    - name: cr-metrics
+      port: 8686
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2023-03-24T09:41:46Z"
+    name: maistra-admission-controller
+    namespace: openshift-operators
+    resourceVersion: "681702"
+    uid: 3178f360-62bf-4703-8c98-5b39ed931256
+  subsets:
+  - addresses:
+    - ip: 10.129.2.151
+      nodeName: ip-10-0-215-253.us-west-2.compute.internal
+      targetRef:
+        kind: Pod
+        name: istio-operator-589bdfb57c-gldk4
+        namespace: openshift-operators
+        uid: 4cbd6928-6959-43d2-95c5-8c4938f5c162
+    ports:
+    - name: validation
+      port: 11999
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2023-03-24T09:33:58Z"
+    creationTimestamp: "2023-03-24T09:33:20Z"
+    labels:
+      app.kubernetes.io/name: opentelemetry-operator
+      control-plane: controller-manager
+      operators.coreos.com/opentelemetry-product.openshift-operators: ""
+    name: opentelemetry-operator-controller-manager-metrics-service
+    namespace: openshift-operators
+    resourceVersion: "636829"
+    uid: 33f08224-6a87-417e-8454-73ce463f8590
+  subsets:
+  - addresses:
+    - ip: 10.128.2.27
+      nodeName: ip-10-0-156-53.us-west-2.compute.internal
+      targetRef:
+        kind: Pod
+        name: opentelemetry-operator-controller-manager-bfbf89c88-n7k8g
+        namespace: openshift-operators
+        uid: 8512dd9b-42d1-4a1f-81b8-090f17988ddf
+    ports:
+    - name: https
+      port: 8443
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2023-03-24T09:33:58Z"
+    creationTimestamp: "2023-03-24T09:33:22Z"
+    labels:
+      operators.coreos.com/opentelemetry-product.openshift-operators: ""
+    name: opentelemetry-operator-controller-manager-service
+    namespace: openshift-operators
+    resourceVersion: "636825"
+    uid: bc96a287-aea2-4bcb-af80-354d8f70e37a
+  subsets:
+  - addresses:
+    - ip: 10.128.2.27
+      nodeName: ip-10-0-156-53.us-west-2.compute.internal
+      targetRef:
+        kind: Pod
+        name: opentelemetry-operator-controller-manager-bfbf89c88-n7k8g
+        namespace: openshift-operators
+        uid: 8512dd9b-42d1-4a1f-81b8-090f17988ddf
+    ports:
+    - name: "443"
+      port: 9443
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2023-03-24T09:33:58Z"
+    creationTimestamp: "2023-03-24T09:33:19Z"
+    labels:
+      app.kubernetes.io/name: opentelemetry-operator
+      operators.coreos.com/opentelemetry-product.openshift-operators: ""
+    name: opentelemetry-operator-webhook-service
+    namespace: openshift-operators
+    resourceVersion: "636824"
+    uid: 82301c30-c36c-41a4-800f-59c6d8246aa4
+  subsets:
+  - addresses:
+    - ip: 10.128.2.27
+      nodeName: ip-10-0-156-53.us-west-2.compute.internal
+      targetRef:
+        kind: Pod
+        name: opentelemetry-operator-controller-manager-bfbf89c88-n7k8g
+        namespace: openshift-operators
+        uid: 8512dd9b-42d1-4a1f-81b8-090f17988ddf
+    ports:
+    - port: 9443
+      protocol: TCP
+kind: EndpointsList
+metadata:
+  resourceVersion: "1903142"

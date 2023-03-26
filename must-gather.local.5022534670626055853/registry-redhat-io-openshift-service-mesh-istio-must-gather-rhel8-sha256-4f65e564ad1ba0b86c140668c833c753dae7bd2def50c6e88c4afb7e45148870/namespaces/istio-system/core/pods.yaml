@@ -1,0 +1,4254 @@
+---
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.131.0.63/23"],"mac_address":"0a:58:0a:83:00:3f","gateway_ips":["10.131.0.1"],"ip_address":"10.131.0.63/23","gateway_ip":"10.131.0.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.131.0.63"
+            ],
+            "mac": "0a:58:0a:83:00:3f",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.131.0.63"
+            ],
+            "mac": "0a:58:0a:83:00:3f",
+            "default": true,
+            "dns": {}
+        }]
+      openshift.io/scc: restricted-v2
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+    creationTimestamp: "2023-03-24T17:28:34Z"
+    generateName: elasticsearch-cdm-istiosystemjaeger-1-64b7c88b45-
+    labels:
+      cluster-name: elasticsearch
+      component: elasticsearch
+      es-node-client: "true"
+      es-node-data: "true"
+      es-node-master: "true"
+      node-name: elasticsearch-cdm-istiosystemjaeger-1
+      pod-template-hash: 64b7c88b45
+    name: elasticsearch-cdm-istiosystemjaeger-1-64b7c88b45-d9mbb
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: elasticsearch-cdm-istiosystemjaeger-1-64b7c88b45
+      uid: 15a4fa2d-84fb-4e3a-bf8b-7db736bb81e5
+    resourceVersion: "859740"
+    uid: d522b994-607d-4e67-8017-21e380e5fb41
+  spec:
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: es-node-client
+                operator: In
+                values:
+                - "true"
+              - key: es-node-data
+                operator: In
+                values:
+                - "true"
+              - key: es-node-master
+                operator: In
+                values:
+                - "true"
+            topologyKey: kubernetes.io/hostname
+          weight: 100
+    containers:
+    - env:
+      - name: DC_NAME
+        value: elasticsearch-cdm-istiosystemjaeger-1
+      - name: NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+      - name: POD_IP
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.podIP
+      - name: KUBERNETES_MASTER
+        value: https://kubernetes.default.svc
+      - name: KUBERNETES_TRUST_CERT
+        value: "true"
+      - name: SERVICE_DNS
+        value: elasticsearch-cluster
+      - name: CLUSTER_NAME
+        value: elasticsearch
+      - name: INSTANCE_RAM
+        value: 4Gi
+      - name: HEAP_DUMP_LOCATION
+        value: /elasticsearch/persistent/heapdump.hprof
+      - name: RECOVER_AFTER_TIME
+        value: 5m
+      - name: READINESS_PROBE_TIMEOUT
+        value: "30"
+      - name: POD_LABEL
+        value: cluster=elasticsearch
+      - name: IS_MASTER
+        value: "true"
+      - name: HAS_DATA
+        value: "true"
+      image: registry.redhat.io/openshift-logging/elasticsearch6-rhel8@sha256:83d264250d555aeaf58c1011a9caf04351ba8cd445a444ca52e6162f3c603e43
+      imagePullPolicy: IfNotPresent
+      name: elasticsearch
+      ports:
+      - containerPort: 9300
+        name: cluster
+        protocol: TCP
+      - containerPort: 9200
+        protocol: TCP
+      readinessProbe:
+        exec:
+          command:
+          - /usr/share/elasticsearch/probe/readiness.sh
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 30
+      resources:
+        limits:
+          cpu: "1"
+          memory: 4Gi
+        requests:
+          cpu: "1"
+          memory: 4Gi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /elasticsearch/persistent
+        name: elasticsearch-storage
+      - mountPath: /usr/share/java/elasticsearch/config
+        name: elasticsearch-config
+      - mountPath: /etc/openshift/elasticsearch/secret
+        name: certificates
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-d9vhh
+        readOnly: true
+    - args:
+      - --listening-address=:60000
+      - --tls-cert=/etc/proxy/elasticsearch/logging-es.crt
+      - --tls-key=/etc/proxy/elasticsearch/logging-es.key
+      - --tls-client-ca=/etc/proxy/elasticsearch/admin-ca
+      - --metrics-listening-address=:60001
+      - --metrics-tls-cert=/etc/proxy/secrets/tls.crt
+      - --metrics-tls-key=/etc/proxy/secrets/tls.key
+      - --upstream-ca=/etc/proxy/elasticsearch/admin-ca
+      - --cache-expiry=60s
+      - '--auth-backend-role=admin_reader={"namespace": "default", "verb": "get",
+        "resource": "pods/log"}'
+      - '--auth-backend-role=prometheus={"namespace":"istio-system", "verb": "get",
+        "resource": "metrics", "resourceAPIGroup": "elasticsearch.openshift.io"}'
+      - '--auth-backend-role=jaeger={"verb": "get", "resource": "/jaeger", "resourceAPIGroup":
+        "elasticsearch.jaegertracing.io"}'
+      - '--auth-backend-role=elasticsearch-operator={"namespace": "*", "verb": "*",
+        "resource": "*", "resourceAPIGroup": "logging.openshift.io"}'
+      - '--auth-backend-role=index-management={"namespace":"istio-system", "verb":
+        "*", "resource": "indices", "resourceAPIGroup": "elasticsearch.openshift.io"}'
+      - --auth-admin-role=admin_reader
+      - --auth-default-role=project_user
+      env:
+      - name: LOG_LEVEL
+        value: info
+      image: registry.redhat.io/openshift-logging/elasticsearch-proxy-rhel8@sha256:9fe71dcfa955ca396e85619f4fe72be76045b61f1bbb983a84cdf6f6b6783292
+      imagePullPolicy: IfNotPresent
+      name: proxy
+      ports:
+      - containerPort: 60000
+        name: restapi
+        protocol: TCP
+      - containerPort: 60001
+        name: metrics
+        protocol: TCP
+      resources:
+        limits:
+          memory: 256Mi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        readOnlyRootFilesystem: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/proxy/secrets
+        name: elasticsearch-metrics
+        readOnly: true
+      - mountPath: /etc/proxy/elasticsearch
+        name: certificates
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-d9vhh
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: elasticsearch-dockercfg-lbxlp
+    nodeName: ip-10-0-189-49.us-west-2.compute.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      runAsNonRoot: true
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: elasticsearch
+    serviceAccountName: elasticsearch
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: elasticsearch
+      name: elasticsearch-config
+    - name: elasticsearch-storage
+      persistentVolumeClaim:
+        claimName: elasticsearch-elasticsearch-cdm-istiosystemjaeger-1
+    - name: certificates
+      secret:
+        defaultMode: 420
+        secretName: elasticsearch
+    - name: elasticsearch-metrics
+      secret:
+        defaultMode: 420
+        secretName: elasticsearch-metrics
+    - name: kube-api-access-d9vhh
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:34Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:14Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:14Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:34Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://040ecfbed2bfd3f36280d8fc0ad46b13465296a1514378c636769473dfebaff6
+      image: registry.redhat.io/openshift-logging/elasticsearch6-rhel8@sha256:83d264250d555aeaf58c1011a9caf04351ba8cd445a444ca52e6162f3c603e43
+      imageID: registry.redhat.io/openshift-logging/elasticsearch6-rhel8@sha256:83d264250d555aeaf58c1011a9caf04351ba8cd445a444ca52e6162f3c603e43
+      lastState: {}
+      name: elasticsearch
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:28:37Z"
+    - containerID: cri-o://e4213a1cb140a54f6ad86148e1560156a60a7c0064864da80e8d529993668ab0
+      image: registry.redhat.io/openshift-logging/elasticsearch-proxy-rhel8@sha256:9fe71dcfa955ca396e85619f4fe72be76045b61f1bbb983a84cdf6f6b6783292
+      imageID: registry.redhat.io/openshift-logging/elasticsearch-proxy-rhel8@sha256:9fe71dcfa955ca396e85619f4fe72be76045b61f1bbb983a84cdf6f6b6783292
+      lastState: {}
+      name: proxy
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:28:37Z"
+    hostIP: 10.0.189.49
+    phase: Running
+    podIP: 10.131.0.63
+    podIPs:
+    - ip: 10.131.0.63
+    qosClass: Burstable
+    startTime: "2023-03-24T17:28:34Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.129.2.175/23"],"mac_address":"0a:58:0a:81:02:af","gateway_ips":["10.129.2.1"],"ip_address":"10.129.2.175/23","gateway_ip":"10.129.2.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.129.2.175"
+            ],
+            "mac": "0a:58:0a:81:02:af",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.129.2.175"
+            ],
+            "mac": "0a:58:0a:81:02:af",
+            "default": true,
+            "dns": {}
+        }]
+      openshift.io/scc: restricted-v2
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+    creationTimestamp: "2023-03-24T17:28:35Z"
+    generateName: elasticsearch-cdm-istiosystemjaeger-2-7745b79d6-
+    labels:
+      cluster-name: elasticsearch
+      component: elasticsearch
+      es-node-client: "true"
+      es-node-data: "true"
+      es-node-master: "true"
+      node-name: elasticsearch-cdm-istiosystemjaeger-2
+      pod-template-hash: 7745b79d6
+    name: elasticsearch-cdm-istiosystemjaeger-2-7745b79d6-h629v
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: elasticsearch-cdm-istiosystemjaeger-2-7745b79d6
+      uid: d3a7b01b-5d9d-4afa-8436-cabb3b2baf00
+    resourceVersion: "859761"
+    uid: a72680eb-b3ba-4a58-9fad-f3d47594190d
+  spec:
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: es-node-client
+                operator: In
+                values:
+                - "true"
+              - key: es-node-data
+                operator: In
+                values:
+                - "true"
+              - key: es-node-master
+                operator: In
+                values:
+                - "true"
+            topologyKey: kubernetes.io/hostname
+          weight: 100
+    containers:
+    - env:
+      - name: DC_NAME
+        value: elasticsearch-cdm-istiosystemjaeger-2
+      - name: NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+      - name: POD_IP
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.podIP
+      - name: KUBERNETES_MASTER
+        value: https://kubernetes.default.svc
+      - name: KUBERNETES_TRUST_CERT
+        value: "true"
+      - name: SERVICE_DNS
+        value: elasticsearch-cluster
+      - name: CLUSTER_NAME
+        value: elasticsearch
+      - name: INSTANCE_RAM
+        value: 4Gi
+      - name: HEAP_DUMP_LOCATION
+        value: /elasticsearch/persistent/heapdump.hprof
+      - name: RECOVER_AFTER_TIME
+        value: 5m
+      - name: READINESS_PROBE_TIMEOUT
+        value: "30"
+      - name: POD_LABEL
+        value: cluster=elasticsearch
+      - name: IS_MASTER
+        value: "true"
+      - name: HAS_DATA
+        value: "true"
+      image: registry.redhat.io/openshift-logging/elasticsearch6-rhel8@sha256:83d264250d555aeaf58c1011a9caf04351ba8cd445a444ca52e6162f3c603e43
+      imagePullPolicy: IfNotPresent
+      name: elasticsearch
+      ports:
+      - containerPort: 9300
+        name: cluster
+        protocol: TCP
+      - containerPort: 9200
+        protocol: TCP
+      readinessProbe:
+        exec:
+          command:
+          - /usr/share/elasticsearch/probe/readiness.sh
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 30
+      resources:
+        limits:
+          cpu: "1"
+          memory: 4Gi
+        requests:
+          cpu: "1"
+          memory: 4Gi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /elasticsearch/persistent
+        name: elasticsearch-storage
+      - mountPath: /usr/share/java/elasticsearch/config
+        name: elasticsearch-config
+      - mountPath: /etc/openshift/elasticsearch/secret
+        name: certificates
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-gjr2x
+        readOnly: true
+    - args:
+      - --listening-address=:60000
+      - --tls-cert=/etc/proxy/elasticsearch/logging-es.crt
+      - --tls-key=/etc/proxy/elasticsearch/logging-es.key
+      - --tls-client-ca=/etc/proxy/elasticsearch/admin-ca
+      - --metrics-listening-address=:60001
+      - --metrics-tls-cert=/etc/proxy/secrets/tls.crt
+      - --metrics-tls-key=/etc/proxy/secrets/tls.key
+      - --upstream-ca=/etc/proxy/elasticsearch/admin-ca
+      - --cache-expiry=60s
+      - '--auth-backend-role=admin_reader={"namespace": "default", "verb": "get",
+        "resource": "pods/log"}'
+      - '--auth-backend-role=prometheus={"namespace":"istio-system", "verb": "get",
+        "resource": "metrics", "resourceAPIGroup": "elasticsearch.openshift.io"}'
+      - '--auth-backend-role=jaeger={"verb": "get", "resource": "/jaeger", "resourceAPIGroup":
+        "elasticsearch.jaegertracing.io"}'
+      - '--auth-backend-role=elasticsearch-operator={"namespace": "*", "verb": "*",
+        "resource": "*", "resourceAPIGroup": "logging.openshift.io"}'
+      - '--auth-backend-role=index-management={"namespace":"istio-system", "verb":
+        "*", "resource": "indices", "resourceAPIGroup": "elasticsearch.openshift.io"}'
+      - --auth-admin-role=admin_reader
+      - --auth-default-role=project_user
+      env:
+      - name: LOG_LEVEL
+        value: info
+      image: registry.redhat.io/openshift-logging/elasticsearch-proxy-rhel8@sha256:9fe71dcfa955ca396e85619f4fe72be76045b61f1bbb983a84cdf6f6b6783292
+      imagePullPolicy: IfNotPresent
+      name: proxy
+      ports:
+      - containerPort: 60000
+        name: restapi
+        protocol: TCP
+      - containerPort: 60001
+        name: metrics
+        protocol: TCP
+      resources:
+        limits:
+          memory: 256Mi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        readOnlyRootFilesystem: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/proxy/secrets
+        name: elasticsearch-metrics
+        readOnly: true
+      - mountPath: /etc/proxy/elasticsearch
+        name: certificates
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-gjr2x
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: elasticsearch-dockercfg-lbxlp
+    nodeName: ip-10-0-215-253.us-west-2.compute.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      runAsNonRoot: true
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: elasticsearch
+    serviceAccountName: elasticsearch
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: elasticsearch
+      name: elasticsearch-config
+    - name: elasticsearch-storage
+      persistentVolumeClaim:
+        claimName: elasticsearch-elasticsearch-cdm-istiosystemjaeger-2
+    - name: certificates
+      secret:
+        defaultMode: 420
+        secretName: elasticsearch
+    - name: elasticsearch-metrics
+      secret:
+        defaultMode: 420
+        secretName: elasticsearch-metrics
+    - name: kube-api-access-gjr2x
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:35Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:16Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:16Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:35Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://d026861a04c6aa01d5850eaba9fdf2511fd3c223aa186742c7a812ae8263ee17
+      image: registry.redhat.io/openshift-logging/elasticsearch6-rhel8@sha256:83d264250d555aeaf58c1011a9caf04351ba8cd445a444ca52e6162f3c603e43
+      imageID: registry.redhat.io/openshift-logging/elasticsearch6-rhel8@sha256:83d264250d555aeaf58c1011a9caf04351ba8cd445a444ca52e6162f3c603e43
+      lastState: {}
+      name: elasticsearch
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:28:39Z"
+    - containerID: cri-o://52d997d17956cdd01adb96f7522b1267f28945ce586a945347949043876a3017
+      image: registry.redhat.io/openshift-logging/elasticsearch-proxy-rhel8@sha256:9fe71dcfa955ca396e85619f4fe72be76045b61f1bbb983a84cdf6f6b6783292
+      imageID: registry.redhat.io/openshift-logging/elasticsearch-proxy-rhel8@sha256:9fe71dcfa955ca396e85619f4fe72be76045b61f1bbb983a84cdf6f6b6783292
+      lastState: {}
+      name: proxy
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:28:39Z"
+    hostIP: 10.0.215.253
+    phase: Running
+    podIP: 10.129.2.175
+    podIPs:
+    - ip: 10.129.2.175
+    qosClass: Burstable
+    startTime: "2023-03-24T17:28:35Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.128.2.68/23"],"mac_address":"0a:58:0a:80:02:44","gateway_ips":["10.128.2.1"],"ip_address":"10.128.2.68/23","gateway_ip":"10.128.2.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.128.2.68"
+            ],
+            "mac": "0a:58:0a:80:02:44",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.128.2.68"
+            ],
+            "mac": "0a:58:0a:80:02:44",
+            "default": true,
+            "dns": {}
+        }]
+      openshift.io/scc: restricted-v2
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+    creationTimestamp: "2023-03-24T17:28:36Z"
+    generateName: elasticsearch-cdm-istiosystemjaeger-3-5d89c85dff-
+    labels:
+      cluster-name: elasticsearch
+      component: elasticsearch
+      es-node-client: "true"
+      es-node-data: "true"
+      es-node-master: "true"
+      node-name: elasticsearch-cdm-istiosystemjaeger-3
+      pod-template-hash: 5d89c85dff
+    name: elasticsearch-cdm-istiosystemjaeger-3-5d89c85dff-76kl9
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: elasticsearch-cdm-istiosystemjaeger-3-5d89c85dff
+      uid: 345d1451-f307-4c18-af8d-75f67c007a13
+    resourceVersion: "859769"
+    uid: 7a2ebcfa-6fb8-4304-949e-289a1b6ae616
+  spec:
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: es-node-client
+                operator: In
+                values:
+                - "true"
+              - key: es-node-data
+                operator: In
+                values:
+                - "true"
+              - key: es-node-master
+                operator: In
+                values:
+                - "true"
+            topologyKey: kubernetes.io/hostname
+          weight: 100
+    containers:
+    - env:
+      - name: DC_NAME
+        value: elasticsearch-cdm-istiosystemjaeger-3
+      - name: NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+      - name: POD_IP
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.podIP
+      - name: KUBERNETES_MASTER
+        value: https://kubernetes.default.svc
+      - name: KUBERNETES_TRUST_CERT
+        value: "true"
+      - name: SERVICE_DNS
+        value: elasticsearch-cluster
+      - name: CLUSTER_NAME
+        value: elasticsearch
+      - name: INSTANCE_RAM
+        value: 4Gi
+      - name: HEAP_DUMP_LOCATION
+        value: /elasticsearch/persistent/heapdump.hprof
+      - name: RECOVER_AFTER_TIME
+        value: 5m
+      - name: READINESS_PROBE_TIMEOUT
+        value: "30"
+      - name: POD_LABEL
+        value: cluster=elasticsearch
+      - name: IS_MASTER
+        value: "true"
+      - name: HAS_DATA
+        value: "true"
+      image: registry.redhat.io/openshift-logging/elasticsearch6-rhel8@sha256:83d264250d555aeaf58c1011a9caf04351ba8cd445a444ca52e6162f3c603e43
+      imagePullPolicy: IfNotPresent
+      name: elasticsearch
+      ports:
+      - containerPort: 9300
+        name: cluster
+        protocol: TCP
+      - containerPort: 9200
+        protocol: TCP
+      readinessProbe:
+        exec:
+          command:
+          - /usr/share/elasticsearch/probe/readiness.sh
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 30
+      resources:
+        limits:
+          cpu: "1"
+          memory: 4Gi
+        requests:
+          cpu: "1"
+          memory: 4Gi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /elasticsearch/persistent
+        name: elasticsearch-storage
+      - mountPath: /usr/share/java/elasticsearch/config
+        name: elasticsearch-config
+      - mountPath: /etc/openshift/elasticsearch/secret
+        name: certificates
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-5x2dd
+        readOnly: true
+    - args:
+      - --listening-address=:60000
+      - --tls-cert=/etc/proxy/elasticsearch/logging-es.crt
+      - --tls-key=/etc/proxy/elasticsearch/logging-es.key
+      - --tls-client-ca=/etc/proxy/elasticsearch/admin-ca
+      - --metrics-listening-address=:60001
+      - --metrics-tls-cert=/etc/proxy/secrets/tls.crt
+      - --metrics-tls-key=/etc/proxy/secrets/tls.key
+      - --upstream-ca=/etc/proxy/elasticsearch/admin-ca
+      - --cache-expiry=60s
+      - '--auth-backend-role=admin_reader={"namespace": "default", "verb": "get",
+        "resource": "pods/log"}'
+      - '--auth-backend-role=prometheus={"namespace":"istio-system", "verb": "get",
+        "resource": "metrics", "resourceAPIGroup": "elasticsearch.openshift.io"}'
+      - '--auth-backend-role=jaeger={"verb": "get", "resource": "/jaeger", "resourceAPIGroup":
+        "elasticsearch.jaegertracing.io"}'
+      - '--auth-backend-role=elasticsearch-operator={"namespace": "*", "verb": "*",
+        "resource": "*", "resourceAPIGroup": "logging.openshift.io"}'
+      - '--auth-backend-role=index-management={"namespace":"istio-system", "verb":
+        "*", "resource": "indices", "resourceAPIGroup": "elasticsearch.openshift.io"}'
+      - --auth-admin-role=admin_reader
+      - --auth-default-role=project_user
+      env:
+      - name: LOG_LEVEL
+        value: info
+      image: registry.redhat.io/openshift-logging/elasticsearch-proxy-rhel8@sha256:9fe71dcfa955ca396e85619f4fe72be76045b61f1bbb983a84cdf6f6b6783292
+      imagePullPolicy: IfNotPresent
+      name: proxy
+      ports:
+      - containerPort: 60000
+        name: restapi
+        protocol: TCP
+      - containerPort: 60001
+        name: metrics
+        protocol: TCP
+      resources:
+        limits:
+          memory: 256Mi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        readOnlyRootFilesystem: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/proxy/secrets
+        name: elasticsearch-metrics
+        readOnly: true
+      - mountPath: /etc/proxy/elasticsearch
+        name: certificates
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-5x2dd
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: elasticsearch-dockercfg-lbxlp
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      runAsNonRoot: true
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: elasticsearch
+    serviceAccountName: elasticsearch
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: elasticsearch
+      name: elasticsearch-config
+    - name: elasticsearch-storage
+      persistentVolumeClaim:
+        claimName: elasticsearch-elasticsearch-cdm-istiosystemjaeger-3
+    - name: certificates
+      secret:
+        defaultMode: 420
+        secretName: elasticsearch
+    - name: elasticsearch-metrics
+      secret:
+        defaultMode: 420
+        secretName: elasticsearch-metrics
+    - name: kube-api-access-5x2dd
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:36Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:16Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:16Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:36Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://bb8258524664139c994b29055e0b6c5b651aedca28b2af7f4c7ee7c7f80c5252
+      image: registry.redhat.io/openshift-logging/elasticsearch6-rhel8@sha256:83d264250d555aeaf58c1011a9caf04351ba8cd445a444ca52e6162f3c603e43
+      imageID: registry.redhat.io/openshift-logging/elasticsearch6-rhel8@sha256:83d264250d555aeaf58c1011a9caf04351ba8cd445a444ca52e6162f3c603e43
+      lastState: {}
+      name: elasticsearch
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:28:38Z"
+    - containerID: cri-o://606011cc14c74425a3e01524fc06e5c5c1593d5d3b68ab03ff02a75e2409a8cf
+      image: registry.redhat.io/openshift-logging/elasticsearch-proxy-rhel8@sha256:9fe71dcfa955ca396e85619f4fe72be76045b61f1bbb983a84cdf6f6b6783292
+      imageID: registry.redhat.io/openshift-logging/elasticsearch-proxy-rhel8@sha256:9fe71dcfa955ca396e85619f4fe72be76045b61f1bbb983a84cdf6f6b6783292
+      lastState: {}
+      name: proxy
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:28:39Z"
+    hostIP: 10.0.156.53
+    phase: Running
+    podIP: 10.128.2.68
+    podIPs:
+    - ip: 10.128.2.68
+    qosClass: Burstable
+    startTime: "2023-03-24T17:28:36Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      checksum/config: d2485b1ee9f9be63381c231826a43742bb10ebac2964bdc3f22a100eab9d032c
+      checksum/dashboards-json-config: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+      checksum/sc-dashboard-provider-config: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.128.2.67/23"],"mac_address":"0a:58:0a:80:02:43","gateway_ips":["10.128.2.1"],"ip_address":"10.128.2.67/23","gateway_ip":"10.128.2.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.128.2.67"
+            ],
+            "mac": "0a:58:0a:80:02:43",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.128.2.67"
+            ],
+            "mac": "0a:58:0a:80:02:43",
+            "default": true,
+            "dns": {}
+        }]
+      openshift.io/scc: restricted-v2
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+      sidecar.istio.io/inject: "false"
+    creationTimestamp: "2023-03-24T17:28:23Z"
+    generateName: grafana-655cf7756-
+    labels:
+      app: grafana
+      maistra-control-plane: istio-system
+      pod-template-hash: 655cf7756
+    name: grafana-655cf7756-glfcp
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: grafana-655cf7756
+      uid: f15b7812-b4ef-44a3-a53a-cfefdf74b943
+    resourceVersion: "858472"
+    uid: 22b83b6f-965d-4d08-b489-e96f67274a4b
+  spec:
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - ppc64le
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - s390x
+          weight: 2
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+              - ppc64le
+              - s390x
+    containers:
+    - args:
+      - -provider=openshift
+      - -https-address=:3001
+      - -http-address=
+      - -email-domain=*
+      - -upstream=http://localhost:3000
+      - -htpasswd-file=/etc/proxy/htpasswd/auth
+      - -display-htpasswd-form=false
+      - '-openshift-sar={"namespace": "istio-system", "resource": "pods", "verb":
+        "get"}'
+      - -client-secret-file=/var/run/secrets/kubernetes.io/serviceaccount/token
+      - -openshift-service-account=grafana
+      - -cookie-secret-file=/etc/proxy/secrets/session_secret
+      - -tls-cert=/etc/tls/private/tls.crt
+      - -tls-key=/etc/tls/private/tls.key
+      - -openshift-ca=/etc/pki/tls/cert.pem
+      - -openshift-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f968922564c3eea1c69d6bbe529d8970784d6cae8935afaf674d9fa7c0f72ea3
+      imagePullPolicy: IfNotPresent
+      name: grafana-proxy
+      ports:
+      - containerPort: 3001
+        name: https
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /oauth/healthz
+          port: https
+          scheme: HTTPS
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsNonRoot: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/tls/private
+        name: secret-grafana-tls
+      - mountPath: /etc/proxy/htpasswd
+        name: secret-htpasswd
+      - mountPath: /etc/proxy/secrets
+        name: secret-grafana-proxy
+      - mountPath: /etc/pki/ca-trust/extracted/pem/
+        name: trusted-ca-bundle
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-7xnlc
+        readOnly: true
+    - env:
+      - name: GRAFANA_PORT
+        value: "3000"
+      - name: GF_AUTH_BASIC_ENABLED
+        value: "false"
+      - name: GF_AUTH_PROXY_ENABLED
+        value: "true"
+      - name: GF_AUTH_PROXY_AUTO_SIGN_UP
+        value: "true"
+      - name: GF_AUTH_PROXY_WHITELIST
+        value: 127.0.0.0/24,::1
+      - name: GF_AUTH_PROXY_HEADERS
+        value: Email:X-Forwarded-Email
+      - name: GF_AUTH_PROXY_HEADER_NAME
+        value: X-Forwarded-User
+      - name: GF_USERS_AUTO_ASSIGN_ORG_ROLE
+        value: Admin
+      image: registry.redhat.io/openshift-service-mesh/grafana-rhel8@sha256:6c4b1ec87fdb6259a9845ac8530b7a6ea249acc2ba205ed79a6aa9a639d1a18f
+      imagePullPolicy: IfNotPresent
+      livenessProbe:
+        failureThreshold: 10
+        httpGet:
+          path: /api/health
+          port: 3000
+          scheme: HTTP
+        initialDelaySeconds: 60
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 30
+      name: grafana
+      ports:
+      - containerPort: 3000
+        name: service
+        protocol: TCP
+      - containerPort: 3000
+        name: grafana
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /api/health
+          port: 3000
+          scheme: HTTP
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsNonRoot: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/grafana/grafana.ini
+        name: config
+        subPath: grafana.ini
+      - mountPath: /data/grafana
+        name: data
+      - mountPath: /var/lib/grafana/dashboards/istio/istio-extension-dashboard.json
+        name: dashboards-istio-istio-extension-dashboard
+        readOnly: true
+        subPath: istio-extension-dashboard.json
+      - mountPath: /var/lib/grafana/dashboards/istio/istio-mesh-dashboard.json
+        name: dashboards-istio-istio-mesh-dashboard
+        readOnly: true
+        subPath: istio-mesh-dashboard.json
+      - mountPath: /var/lib/grafana/dashboards/istio/istio-performance-dashboard.json
+        name: dashboards-istio-istio-performance-dashboard
+        readOnly: true
+        subPath: istio-performance-dashboard.json
+      - mountPath: /var/lib/grafana/dashboards/istio/istio-service-dashboard.json
+        name: dashboards-istio-istio-service-dashboard
+        readOnly: true
+        subPath: istio-service-dashboard.json
+      - mountPath: /var/lib/grafana/dashboards/istio/istio-workload-dashboard.json
+        name: dashboards-istio-istio-workload-dashboard
+        readOnly: true
+        subPath: istio-workload-dashboard.json
+      - mountPath: /var/lib/grafana/dashboards/istio/pilot-dashboard.json
+        name: dashboards-istio-pilot-dashboard
+        readOnly: true
+        subPath: pilot-dashboard.json
+      - mountPath: /etc/grafana/provisioning/datasources/datasources.yaml
+        name: config
+        subPath: datasources.yaml
+      - mountPath: /etc/grafana/provisioning/dashboards/dashboardproviders.yaml
+        name: config
+        subPath: dashboardproviders.yaml
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-7xnlc
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: grafana-dockercfg-mffjr
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: grafana
+    serviceAccountName: grafana
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - name: secret-grafana-tls
+      secret:
+        defaultMode: 420
+        secretName: grafana-tls
+    - name: secret-htpasswd
+      secret:
+        defaultMode: 420
+        secretName: htpasswd
+    - name: secret-grafana-proxy
+      secret:
+        defaultMode: 420
+        secretName: grafana-proxy
+    - configMap:
+        defaultMode: 420
+        items:
+        - key: ca-bundle.crt
+          path: tls-ca-bundle.pem
+        name: trusted-ca-bundle
+        optional: true
+      name: trusted-ca-bundle
+    - configMap:
+        defaultMode: 420
+        name: istio-grafana
+      name: config
+    - emptyDir: {}
+      name: data
+    - configMap:
+        defaultMode: 420
+        name: istio-grafana-configuration-dashboards-istio-extension-dashboard
+      name: dashboards-istio-istio-extension-dashboard
+    - configMap:
+        defaultMode: 420
+        name: istio-grafana-configuration-dashboards-istio-mesh-dashboard
+      name: dashboards-istio-istio-mesh-dashboard
+    - configMap:
+        defaultMode: 420
+        name: istio-grafana-configuration-dashboards-istio-performance-dashboard
+      name: dashboards-istio-istio-performance-dashboard
+    - configMap:
+        defaultMode: 420
+        name: istio-grafana-configuration-dashboards-istio-service-dashboard
+      name: dashboards-istio-istio-service-dashboard
+    - configMap:
+        defaultMode: 420
+        name: istio-grafana-configuration-dashboards-istio-workload-dashboard
+      name: dashboards-istio-istio-workload-dashboard
+    - configMap:
+        defaultMode: 420
+        name: istio-grafana-configuration-dashboards-pilot-dashboard
+      name: dashboards-istio-pilot-dashboard
+    - name: kube-api-access-7xnlc
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:23Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:26Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:26Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:23Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://7ac957458beaa6fc227e738ef959d63bd333e8796ee1d11c42e4e4c333da981d
+      image: registry.redhat.io/openshift-service-mesh/grafana-rhel8@sha256:6c4b1ec87fdb6259a9845ac8530b7a6ea249acc2ba205ed79a6aa9a639d1a18f
+      imageID: registry.redhat.io/openshift-service-mesh/grafana-rhel8@sha256:6c4b1ec87fdb6259a9845ac8530b7a6ea249acc2ba205ed79a6aa9a639d1a18f
+      lastState: {}
+      name: grafana
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:28:25Z"
+    - containerID: cri-o://13a23f01c095cf7dec899bc5fa747d80f9da6ca692792f78c80a4af5450b7256
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f968922564c3eea1c69d6bbe529d8970784d6cae8935afaf674d9fa7c0f72ea3
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f968922564c3eea1c69d6bbe529d8970784d6cae8935afaf674d9fa7c0f72ea3
+      lastState: {}
+      name: grafana-proxy
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:28:24Z"
+    hostIP: 10.0.156.53
+    phase: Running
+    podIP: 10.128.2.67
+    podIPs:
+    - ip: 10.128.2.67
+    qosClass: Burstable
+    startTime: "2023-03-24T17:28:23Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.129.2.174/23"],"mac_address":"0a:58:0a:81:02:ae","gateway_ips":["10.129.2.1"],"ip_address":"10.129.2.174/23","gateway_ip":"10.129.2.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.129.2.174"
+            ],
+            "mac": "0a:58:0a:81:02:ae",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.129.2.174"
+            ],
+            "mac": "0a:58:0a:81:02:ae",
+            "default": true,
+            "dns": {}
+        }]
+      openshift.io/scc: restricted-v2
+      prometheus.io/path: /stats/prometheus
+      prometheus.io/port: "15020"
+      prometheus.io/scrape: "true"
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+      sidecar.istio.io/inject: "false"
+    creationTimestamp: "2023-03-24T17:28:23Z"
+    generateName: istio-egressgateway-74b6d5dd78-
+    labels:
+      app: istio-egressgateway
+      chart: gateways
+      heritage: Tiller
+      istio: egressgateway
+      istio.io/rev: basic
+      maistra-control-plane: istio-system
+      maistra.io/gateway: istio-egressgateway.istio-system
+      pod-template-hash: 74b6d5dd78
+      release: istio
+      service.istio.io/canonical-name: istio-egressgateway
+      service.istio.io/canonical-revision: basic
+      sidecar.istio.io/inject: "false"
+    name: istio-egressgateway-74b6d5dd78-2tnlx
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: istio-egressgateway-74b6d5dd78
+      uid: fbf77c20-a94d-45a1-9ba1-2f2a97db602a
+    resourceVersion: "858397"
+    uid: b1e097c1-42be-4675-8772-22bd0fb2225d
+  spec:
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - ppc64le
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - s390x
+          weight: 2
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+              - ppc64le
+              - s390x
+    containers:
+    - args:
+      - proxy
+      - router
+      - --domain
+      - $(POD_NAMESPACE).svc.cluster.local
+      - --proxyLogLevel=warning
+      - --proxyComponentLogLevel=misc:error
+      - --log_output_level=default:warn
+      - --log_as_json
+      env:
+      - name: ISTIO_META_DNS_CAPTURE
+        value: "true"
+      - name: ISTIO_META_DNS_AUTO_ALLOCATE
+        value: "true"
+      - name: PROXY_XDS_VIA_AGENT
+        value: "true"
+      - name: ISTIO_META_UNPRIVILEGED_POD
+        value: "true"
+      - name: JWT_POLICY
+        value: first-party-jwt
+      - name: PILOT_CERT_PROVIDER
+        value: istiod
+      - name: CA_ADDR
+        value: istiod-basic.istio-system.svc:15012
+      - name: NODE_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: spec.nodeName
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.name
+      - name: POD_NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+      - name: INSTANCE_IP
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.podIP
+      - name: HOST_IP
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.hostIP
+      - name: SERVICE_ACCOUNT
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: spec.serviceAccountName
+      - name: ISTIO_META_WORKLOAD_NAME
+        value: istio-egressgateway
+      - name: ISTIO_META_OWNER
+        value: kubernetes://apis/apps/v1/namespaces/istio-system/deployments/istio-egressgateway
+      - name: ISTIO_META_MESH_ID
+        value: cluster.local
+      - name: TRUST_DOMAIN
+        value: cluster.local
+      - name: ISTIO_META_UNPRIVILEGED_POD
+        value: "true"
+      - name: ISTIO_META_ROUTER_MODE
+        value: standard
+      - name: ISTIO_META_DNS_AUTO_ALLOCATE
+        value: "true"
+      - name: ISTIO_META_DNS_CAPTURE
+        value: "true"
+      - name: PROXY_XDS_VIA_AGENT
+        value: "true"
+      - name: ISTIO_META_CLUSTER_ID
+        value: Kubernetes
+      image: registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:15444e6b93a05d88c6fc6ce1d1e7744635141291b86a7c3abb57758849a5d19e
+      imagePullPolicy: IfNotPresent
+      name: istio-proxy
+      ports:
+      - containerPort: 8080
+        name: http2
+        protocol: TCP
+      - containerPort: 8443
+        name: https
+        protocol: TCP
+      - containerPort: 15090
+        name: http-envoy-prom
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 30
+        httpGet:
+          path: /healthz/ready
+          port: 15021
+          scheme: HTTP
+        initialDelaySeconds: 1
+        periodSeconds: 2
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        limits:
+          cpu: "2"
+          memory: 1Gi
+        requests:
+          cpu: 10m
+          memory: 128Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        privileged: false
+        readOnlyRootFilesystem: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/workload-spiffe-uds
+        name: workload-socket
+      - mountPath: /var/run/secrets/workload-spiffe-credentials
+        name: workload-certs
+      - mountPath: /etc/istio/proxy
+        name: istio-envoy
+      - mountPath: /etc/istio/config
+        name: config-volume
+      - mountPath: /var/run/secrets/istio
+        name: istiod-ca-cert
+      - mountPath: /var/lib/istio/data
+        name: istio-data
+      - mountPath: /etc/istio/pod
+        name: podinfo
+      - mountPath: /etc/istio/egressgateway-certs
+        name: egressgateway-certs
+        readOnly: true
+      - mountPath: /etc/istio/egressgateway-ca-certs
+        name: egressgateway-ca-certs
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-kzstl
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: istio-egressgateway-service-account-dockercfg-k2whl
+    nodeName: ip-10-0-215-253.us-west-2.compute.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      runAsNonRoot: true
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: istio-egressgateway-service-account
+    serviceAccountName: istio-egressgateway-service-account
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - emptyDir: {}
+      name: workload-socket
+    - emptyDir: {}
+      name: workload-certs
+    - configMap:
+        defaultMode: 420
+        name: istio-ca-root-cert
+      name: istiod-ca-cert
+    - downwardAPI:
+        defaultMode: 420
+        items:
+        - fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.labels
+          path: labels
+        - fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.annotations
+          path: annotations
+      name: podinfo
+    - emptyDir: {}
+      name: istio-envoy
+    - emptyDir: {}
+      name: istio-data
+    - configMap:
+        defaultMode: 420
+        name: istio-basic
+        optional: true
+      name: config-volume
+    - name: egressgateway-certs
+      secret:
+        defaultMode: 420
+        optional: true
+        secretName: istio-egressgateway-certs
+    - name: egressgateway-ca-certs
+      secret:
+        defaultMode: 420
+        optional: true
+        secretName: istio-egressgateway-ca-certs
+    - name: kube-api-access-kzstl
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:23Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:25Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:25Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:23Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://b93fd044a520096b61acbd4b298105c242137b948e29f12a311f9608600149a6
+      image: registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:15444e6b93a05d88c6fc6ce1d1e7744635141291b86a7c3abb57758849a5d19e
+      imageID: registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:15444e6b93a05d88c6fc6ce1d1e7744635141291b86a7c3abb57758849a5d19e
+      lastState: {}
+      name: istio-proxy
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:28:24Z"
+    hostIP: 10.0.215.253
+    phase: Running
+    podIP: 10.129.2.174
+    podIPs:
+    - ip: 10.129.2.174
+    qosClass: Burstable
+    startTime: "2023-03-24T17:28:23Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.131.0.222/23"],"mac_address":"0a:58:0a:83:00:de","gateway_ips":["10.131.0.1"],"ip_address":"10.131.0.222/23","gateway_ip":"10.131.0.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.131.0.222"
+            ],
+            "mac": "0a:58:0a:83:00:de",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.131.0.222"
+            ],
+            "mac": "0a:58:0a:83:00:de",
+            "default": true,
+            "dns": {}
+        }]
+      openshift.io/scc: restricted-v2
+      openshift.openshift.io/restartedAt: "2023-03-26T08:24:13.569Z"
+      prometheus.io/path: /stats/prometheus
+      prometheus.io/port: "15020"
+      prometheus.io/scrape: "true"
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+      sidecar.istio.io/inject: "false"
+    creationTimestamp: "2023-03-26T08:24:14Z"
+    generateName: istio-ingressgateway-678f8dbfc6-
+    labels:
+      app: istio-ingressgateway
+      chart: gateways
+      heritage: Tiller
+      istio: ingressgateway
+      istio.io/rev: basic
+      maistra-control-plane: istio-system
+      maistra.io/gateway: istio-ingressgateway.istio-system
+      pod-template-hash: 678f8dbfc6
+      release: istio
+      service.istio.io/canonical-name: istio-ingressgateway
+      service.istio.io/canonical-revision: basic
+      sidecar.istio.io/inject: "false"
+    name: istio-ingressgateway-678f8dbfc6-h778h
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: istio-ingressgateway-678f8dbfc6
+      uid: 838ebd6c-900f-4c53-a929-01be2e2d37b6
+    resourceVersion: "1898447"
+    uid: a4424184-d6e4-4fbf-8dc7-5a91268d77ff
+  spec:
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - ppc64le
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - s390x
+          weight: 2
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+              - ppc64le
+              - s390x
+    containers:
+    - args:
+      - proxy
+      - router
+      - --domain
+      - $(POD_NAMESPACE).svc.cluster.local
+      - --proxyLogLevel=warning
+      - --proxyComponentLogLevel=misc:error
+      - --log_output_level=default:warn
+      - --log_as_json
+      env:
+      - name: ISTIO_META_DNS_CAPTURE
+        value: "true"
+      - name: ISTIO_META_DNS_AUTO_ALLOCATE
+        value: "true"
+      - name: PROXY_XDS_VIA_AGENT
+        value: "true"
+      - name: ISTIO_META_UNPRIVILEGED_POD
+        value: "true"
+      - name: JWT_POLICY
+        value: first-party-jwt
+      - name: PILOT_CERT_PROVIDER
+        value: istiod
+      - name: CA_ADDR
+        value: istiod-basic.istio-system.svc:15012
+      - name: NODE_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: spec.nodeName
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.name
+      - name: POD_NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+      - name: INSTANCE_IP
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.podIP
+      - name: HOST_IP
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.hostIP
+      - name: SERVICE_ACCOUNT
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: spec.serviceAccountName
+      - name: ISTIO_META_WORKLOAD_NAME
+        value: istio-ingressgateway
+      - name: ISTIO_META_OWNER
+        value: kubernetes://apis/apps/v1/namespaces/istio-system/deployments/istio-ingressgateway
+      - name: ISTIO_META_MESH_ID
+        value: cluster.local
+      - name: TRUST_DOMAIN
+        value: cluster.local
+      - name: ISTIO_META_UNPRIVILEGED_POD
+        value: "true"
+      - name: ISTIO_META_ROUTER_MODE
+        value: sni-dnat
+      - name: ISTIO_META_DNS_AUTO_ALLOCATE
+        value: "true"
+      - name: ISTIO_META_DNS_CAPTURE
+        value: "true"
+      - name: PROXY_XDS_VIA_AGENT
+        value: "true"
+      - name: ISTIO_META_CLUSTER_ID
+        value: Kubernetes
+      image: registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:15444e6b93a05d88c6fc6ce1d1e7744635141291b86a7c3abb57758849a5d19e
+      imagePullPolicy: IfNotPresent
+      name: istio-proxy
+      ports:
+      - containerPort: 15021
+        name: status-port
+        protocol: TCP
+      - containerPort: 8080
+        name: http2
+        protocol: TCP
+      - containerPort: 8443
+        name: https
+        protocol: TCP
+      - containerPort: 15090
+        name: http-envoy-prom
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 30
+        httpGet:
+          path: /healthz/ready
+          port: 15021
+          scheme: HTTP
+        initialDelaySeconds: 1
+        periodSeconds: 2
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        limits:
+          cpu: "2"
+          memory: 1Gi
+        requests:
+          cpu: 10m
+          memory: 128Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        privileged: false
+        readOnlyRootFilesystem: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/workload-spiffe-uds
+        name: workload-socket
+      - mountPath: /var/run/secrets/workload-spiffe-credentials
+        name: workload-certs
+      - mountPath: /etc/istio/proxy
+        name: istio-envoy
+      - mountPath: /etc/istio/config
+        name: config-volume
+      - mountPath: /var/run/secrets/istio
+        name: istiod-ca-cert
+      - mountPath: /var/lib/istio/data
+        name: istio-data
+      - mountPath: /etc/istio/pod
+        name: podinfo
+      - mountPath: /etc/istio/ingressgateway-certs
+        name: ingressgateway-certs
+        readOnly: true
+      - mountPath: /etc/istio/ingressgateway-ca-certs
+        name: ingressgateway-ca-certs
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-bs2gm
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: istio-ingressgateway-service-account-dockercfg-2qlhr
+    nodeName: ip-10-0-189-49.us-west-2.compute.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      runAsNonRoot: true
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: istio-ingressgateway-service-account
+    serviceAccountName: istio-ingressgateway-service-account
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - emptyDir: {}
+      name: workload-socket
+    - emptyDir: {}
+      name: workload-certs
+    - configMap:
+        defaultMode: 420
+        name: istio-ca-root-cert
+      name: istiod-ca-cert
+    - downwardAPI:
+        defaultMode: 420
+        items:
+        - fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.labels
+          path: labels
+        - fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.annotations
+          path: annotations
+      name: podinfo
+    - emptyDir: {}
+      name: istio-envoy
+    - emptyDir: {}
+      name: istio-data
+    - configMap:
+        defaultMode: 420
+        name: istio-basic
+        optional: true
+      name: config-volume
+    - name: ingressgateway-certs
+      secret:
+        defaultMode: 420
+        optional: true
+        secretName: istio-ingressgateway-certs
+    - name: ingressgateway-ca-certs
+      secret:
+        defaultMode: 420
+        optional: true
+        secretName: istio-ingressgateway-ca-certs
+    - name: kube-api-access-bs2gm
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-26T08:24:14Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-26T08:24:15Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-26T08:24:15Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-26T08:24:14Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://82a5de9eca650efc96373b48af7a550249f55f6fae29cd97f8671e22f86c1c64
+      image: registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:15444e6b93a05d88c6fc6ce1d1e7744635141291b86a7c3abb57758849a5d19e
+      imageID: registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:15444e6b93a05d88c6fc6ce1d1e7744635141291b86a7c3abb57758849a5d19e
+      lastState: {}
+      name: istio-proxy
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-26T08:24:14Z"
+    hostIP: 10.0.189.49
+    phase: Running
+    podIP: 10.131.0.222
+    podIPs:
+    - ip: 10.131.0.222
+    qosClass: Burstable
+    startTime: "2023-03-26T08:24:14Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.128.2.81/23"],"mac_address":"0a:58:0a:80:02:51","gateway_ips":["10.128.2.1"],"ip_address":"10.128.2.81/23","gateway_ip":"10.128.2.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.128.2.81"
+            ],
+            "mac": "0a:58:0a:80:02:51",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.128.2.81"
+            ],
+            "mac": "0a:58:0a:80:02:51",
+            "default": true,
+            "dns": {}
+        }]
+      openshift.io/scc: restricted-v2
+      openshift.openshift.io/restartedAt: "2023-03-26T08:19:02.276Z"
+      prometheus.io/port: "15014"
+      prometheus.io/scrape: "true"
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+      sidecar.istio.io/inject: "false"
+    creationTimestamp: "2023-03-26T08:19:02Z"
+    generateName: istiod-basic-6fc5ddbd5d-
+    labels:
+      app: istiod
+      istio: istiod
+      istio.io/rev: basic
+      maistra-control-plane: istio-system
+      pod-template-hash: 6fc5ddbd5d
+      sidecar.istio.io/inject: "false"
+    name: istiod-basic-6fc5ddbd5d-65slf
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: istiod-basic-6fc5ddbd5d
+      uid: e5793d6f-3ca4-43c2-9ec8-315a2da5d527
+    resourceVersion: "1896102"
+    uid: ba1e7d55-b51c-4adb-a6c9-9c00d31c43b9
+  spec:
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - ppc64le
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - s390x
+          weight: 2
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+              - ppc64le
+              - s390x
+    containers:
+    - args:
+      - discovery
+      - --memberRollName=default
+      - --disableNodeAccess=true
+      - --enableCRDScan=false
+      - --enableIngressClassName=false
+      - --monitoringAddr=:15014
+      - --log_output_level=default:warn
+      - --log_as_json
+      - --domain
+      - cluster.local
+      - --keepaliveMaxServerConnectionAge
+      - 30m
+      env:
+      - name: ENABLE_IOR
+        value: "false"
+      - name: PRIORITIZED_LEADER_ELECTION
+        value: "false"
+      - name: VALIDATION_WEBHOOK_CONFIG_NAME
+      - name: INJECTION_WEBHOOK_CONFIG_NAME
+      - name: REVISION
+        value: basic
+      - name: JWT_POLICY
+        value: first-party-jwt
+      - name: PILOT_CERT_PROVIDER
+        value: istiod
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.name
+      - name: POD_NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+      - name: SERVICE_ACCOUNT
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: spec.serviceAccountName
+      - name: KUBECONFIG
+        value: /var/run/secrets/remote/config
+      - name: PILOT_ENABLE_GATEWAY_API
+        value: "false"
+      - name: PILOT_ENABLE_GATEWAY_API_DEPLOYMENT_CONTROLLER
+        value: "false"
+      - name: PILOT_ENABLE_GATEWAY_API_STATUS
+        value: "false"
+      - name: PILOT_ENABLE_FEDERATION
+        value: "true"
+      - name: PILOT_TRACE_SAMPLING
+        value: "1"
+      - name: PILOT_ENABLE_PROTOCOL_SNIFFING_FOR_OUTBOUND
+        value: "false"
+      - name: PILOT_ENABLE_PROTOCOL_SNIFFING_FOR_INBOUND
+        value: "false"
+      - name: ISTIOD_ADDR
+        value: istiod-basic.istio-system.svc:15012
+      - name: PILOT_ENABLE_STATUS
+        value: "true"
+      - name: PILOT_ENABLE_ANALYSIS
+        value: "true"
+      - name: CLUSTER_ID
+        value: Kubernetes
+      image: registry.redhat.io/openshift-service-mesh/pilot-rhel8@sha256:daa1c9b3ffde151a2efb12a7a4bf4c9665dbd4a8be0490192c32a4e5532c0ad8
+      imagePullPolicy: IfNotPresent
+      name: discovery
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      - containerPort: 15010
+        protocol: TCP
+      - containerPort: 15017
+        name: webhook
+        protocol: TCP
+      - containerPort: 8188
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /ready
+          port: 8080
+          scheme: HTTP
+        initialDelaySeconds: 1
+        periodSeconds: 3
+        successThreshold: 1
+        timeoutSeconds: 5
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsNonRoot: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/istio-dns
+        name: local-certs
+      - mountPath: /etc/cacerts
+        name: cacerts
+        readOnly: true
+      - mountPath: /var/run/secrets/remote
+        name: istio-kubeconfig
+        readOnly: true
+      - mountPath: /cacerts
+        name: extracacerts
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-q8t4z
+        readOnly: true
+      workingDir: /
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: istiod-basic-dockercfg-c847q
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: istiod-basic
+    serviceAccountName: istiod-basic
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - emptyDir:
+        medium: Memory
+      name: local-certs
+    - name: cacerts
+      secret:
+        defaultMode: 420
+        optional: true
+        secretName: cacerts
+    - name: istio-kubeconfig
+      secret:
+        defaultMode: 420
+        optional: true
+        secretName: istio-kubeconfig
+    - configMap:
+        defaultMode: 420
+        name: pilot-jwks-extra-cacerts-basic
+      name: extracacerts
+    - name: kube-api-access-q8t4z
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-26T08:19:02Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-26T08:19:04Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-26T08:19:04Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-26T08:19:02Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://5bc197867054c03cf4ce8e9cabd82bb9db18cf8a28d5a5100ae09d3acb6612cc
+      image: registry.redhat.io/openshift-service-mesh/pilot-rhel8@sha256:daa1c9b3ffde151a2efb12a7a4bf4c9665dbd4a8be0490192c32a4e5532c0ad8
+      imageID: registry.redhat.io/openshift-service-mesh/pilot-rhel8@sha256:daa1c9b3ffde151a2efb12a7a4bf4c9665dbd4a8be0490192c32a4e5532c0ad8
+      lastState: {}
+      name: discovery
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-26T08:19:03Z"
+    hostIP: 10.0.156.53
+    phase: Running
+    podIP: 10.128.2.81
+    podIPs:
+    - ip: 10.128.2.81
+    qosClass: Burstable
+    startTime: "2023-03-26T08:19:02Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.129.2.176/23"],"mac_address":"0a:58:0a:81:02:b0","gateway_ips":["10.129.2.1"],"ip_address":"10.129.2.176/23","gateway_ip":"10.129.2.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.129.2.176"
+            ],
+            "mac": "0a:58:0a:81:02:b0",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.129.2.176"
+            ],
+            "mac": "0a:58:0a:81:02:b0",
+            "default": true,
+            "dns": {}
+        }]
+      linkerd.io/inject: disabled
+      openshift.io/scc: restricted-v2
+      prometheus.io/port: "14269"
+      prometheus.io/scrape: "true"
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+      sidecar.istio.io/inject: "false"
+    creationTimestamp: "2023-03-24T17:29:17Z"
+    generateName: jaeger-collector-6665599fc4-
+    labels:
+      app: jaeger
+      app.kubernetes.io/component: collector
+      app.kubernetes.io/instance: jaeger
+      app.kubernetes.io/managed-by: jaeger-operator
+      app.kubernetes.io/name: jaeger-collector
+      app.kubernetes.io/part-of: jaeger
+      pod-template-hash: 6665599fc4
+    name: jaeger-collector-6665599fc4-pxs52
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: jaeger-collector-6665599fc4
+      uid: d6e917fa-1b67-450b-ae7f-223f98b60c7e
+    resourceVersion: "859901"
+    uid: 6f434a85-2f14-4432-affa-c0fc669c028d
+  spec:
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - ppc64le
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - s390x
+          weight: 2
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+              - ppc64le
+              - s390x
+    containers:
+    - args:
+      - --collector.grpc.tls.cert=/etc/tls-config/tls.crt
+      - --collector.grpc.tls.enabled=true
+      - --collector.grpc.tls.key=/etc/tls-config/tls.key
+      - --sampling.strategies-file=/etc/jaeger/sampling/sampling.json
+      - --es.server-urls=https://elasticsearch:9200
+      - --es.tls.enabled=true
+      - --es.tls.ca=/certs/ca
+      - --es.tls.cert=/certs/cert
+      - --es.tls.key=/certs/key
+      - --es.timeout=15s
+      - --es.num-shards=3
+      - --es.num-replicas=1
+      env:
+      - name: SPAN_STORAGE_TYPE
+        value: elasticsearch
+      - name: COLLECTOR_ZIPKIN_HOST_PORT
+        value: :9411
+      - name: COLLECTOR_OTLP_ENABLED
+        value: "true"
+      image: registry.redhat.io/rhosdt/jaeger-collector-rhel8@sha256:e04094d1c23e7f99d2c24078c85534d16740b240e75c3d36e53a7f24a6814913
+      imagePullPolicy: IfNotPresent
+      livenessProbe:
+        failureThreshold: 5
+        httpGet:
+          path: /
+          port: 14269
+          scheme: HTTP
+        initialDelaySeconds: 5
+        periodSeconds: 15
+        successThreshold: 1
+        timeoutSeconds: 1
+      name: jaeger-collector
+      ports:
+      - containerPort: 9411
+        name: zipkin
+        protocol: TCP
+      - containerPort: 14267
+        name: c-tchan-trft
+        protocol: TCP
+      - containerPort: 14268
+        name: c-binary-trft
+        protocol: TCP
+      - containerPort: 14269
+        name: admin-http
+        protocol: TCP
+      - containerPort: 14250
+        name: grpc
+        protocol: TCP
+      - containerPort: 4317
+        name: grpc-otlp
+        protocol: TCP
+      - containerPort: 4318
+        name: http-otlp
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: 14269
+          scheme: HTTP
+        initialDelaySeconds: 1
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsNonRoot: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/proxy/htpasswd
+        name: secret-htpasswd
+      - mountPath: /etc/pki/ca-trust/extracted/pem/
+        name: trusted-ca-bundle
+        readOnly: true
+      - mountPath: /etc/jaeger/sampling
+        name: jaeger-sampling-configuration-volume
+        readOnly: true
+      - mountPath: /etc/tls-config
+        name: jaeger-collector-tls-config-volume
+        readOnly: true
+      - mountPath: /certs
+        name: certs
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-m9824
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: false
+    imagePullSecrets:
+    - name: jaeger-dockercfg-qr4tl
+    nodeName: ip-10-0-215-253.us-west-2.compute.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: jaeger
+    serviceAccountName: jaeger
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - name: secret-htpasswd
+      secret:
+        defaultMode: 420
+        secretName: htpasswd
+    - configMap:
+        defaultMode: 420
+        items:
+        - key: ca-bundle.crt
+          path: tls-ca-bundle.pem
+        name: trusted-ca-bundle
+        optional: true
+      name: trusted-ca-bundle
+    - configMap:
+        defaultMode: 420
+        items:
+        - key: sampling
+          path: sampling.json
+        name: jaeger-sampling-configuration
+      name: jaeger-sampling-configuration-volume
+    - name: jaeger-collector-tls-config-volume
+      secret:
+        defaultMode: 420
+        secretName: jaeger-collector-headless-tls
+    - name: certs
+      secret:
+        defaultMode: 420
+        secretName: jaeger-jaeger-elasticsearch
+    - name: kube-api-access-m9824
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:17Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:19Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:19Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:17Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://0f2aabcf68f4590b6dfef926d4b8c6239f36713861a89e11f2f21948640f82f0
+      image: registry.redhat.io/rhosdt/jaeger-collector-rhel8@sha256:e04094d1c23e7f99d2c24078c85534d16740b240e75c3d36e53a7f24a6814913
+      imageID: registry.redhat.io/rhosdt/jaeger-collector-rhel8@sha256:e04094d1c23e7f99d2c24078c85534d16740b240e75c3d36e53a7f24a6814913
+      lastState: {}
+      name: jaeger-collector
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:29:18Z"
+    hostIP: 10.0.215.253
+    phase: Running
+    podIP: 10.129.2.176
+    podIPs:
+    - ip: 10.129.2.176
+    qosClass: Burstable
+    startTime: "2023-03-24T17:29:17Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.131.0.88/23"],"mac_address":"0a:58:0a:83:00:58","gateway_ips":["10.131.0.1"],"ip_address":"10.131.0.88/23","gateway_ip":"10.131.0.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.131.0.88"
+            ],
+            "mac": "0a:58:0a:83:00:58",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.131.0.88"
+            ],
+            "mac": "0a:58:0a:83:00:58",
+            "default": true,
+            "dns": {}
+        }]
+      linkerd.io/inject: disabled
+      openshift.io/scc: restricted-v2
+      prometheus.io/scrape: "false"
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+      sidecar.istio.io/inject: "false"
+    creationTimestamp: "2023-03-24T23:55:00Z"
+    generateName: jaeger-es-index-cleaner-27995035-
+    labels:
+      app: jaeger
+      app.kubernetes.io/component: cronjob-es-index-cleaner
+      app.kubernetes.io/instance: jaeger
+      app.kubernetes.io/managed-by: jaeger-operator
+      app.kubernetes.io/name: jaeger-es-index-cleaner
+      app.kubernetes.io/part-of: jaeger
+      controller-uid: db47c2db-cb40-4281-ad5c-886d20e5f7f4
+      job-name: jaeger-es-index-cleaner-27995035
+    name: jaeger-es-index-cleaner-27995035-c22d2
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Job
+      name: jaeger-es-index-cleaner-27995035
+      uid: db47c2db-cb40-4281-ad5c-886d20e5f7f4
+    resourceVersion: "1034129"
+    uid: 2f13f2c5-f65f-435f-9a2b-32d0967c90a2
+  spec:
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - ppc64le
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - s390x
+          weight: 2
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+              - ppc64le
+              - s390x
+    containers:
+    - args:
+      - "2"
+      - https://elasticsearch:9200
+      env:
+      - name: SKIP_DEPENDENCIES
+        value: "true"
+      - name: ES_TLS_ENABLED
+        value: "true"
+      - name: ES_TLS_CA
+        value: /certs/ca
+      - name: ES_TLS_KEY
+        value: /certs/key
+      - name: ES_TLS_CERT
+        value: /certs/cert
+      - name: SHARDS
+        value: "3"
+      - name: REPLICAS
+        value: "1"
+      image: registry.redhat.io/rhosdt/jaeger-es-index-cleaner-rhel8@sha256:0065bf16da7fdf11c018388a4eb33349610129ea0465491d2bb6b24c275621dc
+      imagePullPolicy: IfNotPresent
+      name: jaeger-es-index-cleaner
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsNonRoot: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/proxy/htpasswd
+        name: secret-htpasswd
+      - mountPath: /etc/pki/ca-trust/extracted/pem/
+        name: trusted-ca-bundle
+        readOnly: true
+      - mountPath: /certs
+        name: certs
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-mmwsb
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: jaeger-dockercfg-qr4tl
+    nodeName: ip-10-0-189-49.us-west-2.compute.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Never
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: jaeger
+    serviceAccountName: jaeger
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - name: secret-htpasswd
+      secret:
+        defaultMode: 420
+        secretName: htpasswd
+    - configMap:
+        defaultMode: 420
+        items:
+        - key: ca-bundle.crt
+          path: tls-ca-bundle.pem
+        name: trusted-ca-bundle
+        optional: true
+      name: trusted-ca-bundle
+    - name: certs
+      secret:
+        defaultMode: 420
+        secretName: jaeger-curator
+    - name: kube-api-access-mmwsb
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T23:55:00Z"
+      reason: PodCompleted
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T23:55:00Z"
+      reason: PodCompleted
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T23:55:00Z"
+      reason: PodCompleted
+      status: "False"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T23:55:00Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://38e386f73757bb222aa99c7cee0b75f9e5496a0a7343ec8d380c12fa7f42d1c5
+      image: registry.redhat.io/rhosdt/jaeger-es-index-cleaner-rhel8@sha256:0065bf16da7fdf11c018388a4eb33349610129ea0465491d2bb6b24c275621dc
+      imageID: registry.redhat.io/rhosdt/jaeger-es-index-cleaner-rhel8@sha256:0065bf16da7fdf11c018388a4eb33349610129ea0465491d2bb6b24c275621dc
+      lastState: {}
+      name: jaeger-es-index-cleaner
+      ready: false
+      restartCount: 0
+      started: false
+      state:
+        terminated:
+          containerID: cri-o://38e386f73757bb222aa99c7cee0b75f9e5496a0a7343ec8d380c12fa7f42d1c5
+          exitCode: 0
+          finishedAt: "2023-03-24T23:55:04Z"
+          reason: Completed
+          startedAt: "2023-03-24T23:55:04Z"
+    hostIP: 10.0.189.49
+    phase: Succeeded
+    podIP: 10.131.0.88
+    podIPs:
+    - ip: 10.131.0.88
+    qosClass: Burstable
+    startTime: "2023-03-24T23:55:00Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.128.2.78/23"],"mac_address":"0a:58:0a:80:02:4e","gateway_ips":["10.128.2.1"],"ip_address":"10.128.2.78/23","gateway_ip":"10.128.2.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.128.2.78"
+            ],
+            "mac": "0a:58:0a:80:02:4e",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.128.2.78"
+            ],
+            "mac": "0a:58:0a:80:02:4e",
+            "default": true,
+            "dns": {}
+        }]
+      linkerd.io/inject: disabled
+      openshift.io/scc: restricted-v2
+      prometheus.io/scrape: "false"
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+      sidecar.istio.io/inject: "false"
+    creationTimestamp: "2023-03-25T23:55:00Z"
+    generateName: jaeger-es-index-cleaner-27996475-
+    labels:
+      app: jaeger
+      app.kubernetes.io/component: cronjob-es-index-cleaner
+      app.kubernetes.io/instance: jaeger
+      app.kubernetes.io/managed-by: jaeger-operator
+      app.kubernetes.io/name: jaeger-es-index-cleaner
+      app.kubernetes.io/part-of: jaeger
+      controller-uid: c2a0def7-183a-4161-bffd-cb9d6c9b022b
+      job-name: jaeger-es-index-cleaner-27996475
+    name: jaeger-es-index-cleaner-27996475-bdz5c
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Job
+      name: jaeger-es-index-cleaner-27996475
+      uid: c2a0def7-183a-4161-bffd-cb9d6c9b022b
+    resourceVersion: "1672732"
+    uid: f78a51a3-d6fc-4648-90ac-a469f0f05d2b
+  spec:
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - ppc64le
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - s390x
+          weight: 2
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+              - ppc64le
+              - s390x
+    containers:
+    - args:
+      - "2"
+      - https://elasticsearch:9200
+      env:
+      - name: SKIP_DEPENDENCIES
+        value: "true"
+      - name: ES_TLS_ENABLED
+        value: "true"
+      - name: ES_TLS_CA
+        value: /certs/ca
+      - name: ES_TLS_KEY
+        value: /certs/key
+      - name: ES_TLS_CERT
+        value: /certs/cert
+      - name: SHARDS
+        value: "3"
+      - name: REPLICAS
+        value: "1"
+      image: registry.redhat.io/rhosdt/jaeger-es-index-cleaner-rhel8@sha256:0065bf16da7fdf11c018388a4eb33349610129ea0465491d2bb6b24c275621dc
+      imagePullPolicy: IfNotPresent
+      name: jaeger-es-index-cleaner
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsNonRoot: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/proxy/htpasswd
+        name: secret-htpasswd
+      - mountPath: /etc/pki/ca-trust/extracted/pem/
+        name: trusted-ca-bundle
+        readOnly: true
+      - mountPath: /certs
+        name: certs
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-bb26x
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: jaeger-dockercfg-qr4tl
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Never
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: jaeger
+    serviceAccountName: jaeger
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - name: secret-htpasswd
+      secret:
+        defaultMode: 420
+        secretName: htpasswd
+    - configMap:
+        defaultMode: 420
+        items:
+        - key: ca-bundle.crt
+          path: tls-ca-bundle.pem
+        name: trusted-ca-bundle
+        optional: true
+      name: trusted-ca-bundle
+    - name: certs
+      secret:
+        defaultMode: 420
+        secretName: jaeger-curator
+    - name: kube-api-access-bb26x
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-25T23:55:00Z"
+      reason: PodCompleted
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-25T23:55:00Z"
+      reason: PodCompleted
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-25T23:55:00Z"
+      reason: PodCompleted
+      status: "False"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-25T23:55:00Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://d02efea2a51891d6cffae4903ff4fb1f8f15acd121157c4492c786ae6061acb1
+      image: registry.redhat.io/rhosdt/jaeger-es-index-cleaner-rhel8@sha256:0065bf16da7fdf11c018388a4eb33349610129ea0465491d2bb6b24c275621dc
+      imageID: registry.redhat.io/rhosdt/jaeger-es-index-cleaner-rhel8@sha256:0065bf16da7fdf11c018388a4eb33349610129ea0465491d2bb6b24c275621dc
+      lastState: {}
+      name: jaeger-es-index-cleaner
+      ready: false
+      restartCount: 0
+      started: false
+      state:
+        terminated:
+          containerID: cri-o://d02efea2a51891d6cffae4903ff4fb1f8f15acd121157c4492c786ae6061acb1
+          exitCode: 0
+          finishedAt: "2023-03-25T23:55:07Z"
+          reason: Completed
+          startedAt: "2023-03-25T23:55:07Z"
+    hostIP: 10.0.156.53
+    phase: Succeeded
+    podIP: 10.128.2.78
+    podIPs:
+    - ip: 10.128.2.78
+    qosClass: Burstable
+    startTime: "2023-03-25T23:55:00Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.129.2.177/23"],"mac_address":"0a:58:0a:81:02:b1","gateway_ips":["10.129.2.1"],"ip_address":"10.129.2.177/23","gateway_ip":"10.129.2.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.129.2.177"
+            ],
+            "mac": "0a:58:0a:81:02:b1",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.129.2.177"
+            ],
+            "mac": "0a:58:0a:81:02:b1",
+            "default": true,
+            "dns": {}
+        }]
+      linkerd.io/inject: disabled
+      openshift.io/scc: restricted-v2
+      prometheus.io/port: "16687"
+      prometheus.io/scrape: "true"
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+      sidecar.istio.io/inject: "false"
+      sidecar.jaegertracing.io/inject: jaeger
+    creationTimestamp: "2023-03-24T17:29:17Z"
+    generateName: jaeger-query-54c8d9c5b9-
+    labels:
+      app: jaeger
+      app.kubernetes.io/component: query
+      app.kubernetes.io/instance: jaeger
+      app.kubernetes.io/managed-by: jaeger-operator
+      app.kubernetes.io/name: jaeger-query
+      app.kubernetes.io/part-of: jaeger
+      pod-template-hash: 54c8d9c5b9
+    name: jaeger-query-54c8d9c5b9-wq6hm
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: jaeger-query-54c8d9c5b9
+      uid: c58357a8-5d23-4c9a-8d6f-d97bf9f39917
+    resourceVersion: "859920"
+    uid: 688409a9-0c13-4026-9971-f82e6e15224c
+  spec:
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - ppc64le
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - s390x
+          weight: 2
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+              - ppc64le
+              - s390x
+    containers:
+    - args:
+      - --query.base-path=/
+      - --query.ui-config=/etc/config/ui.json
+      - --es.server-urls=https://elasticsearch:9200
+      - --es.tls.enabled=true
+      - --es.tls.ca=/certs/ca
+      - --es.tls.cert=/certs/cert
+      - --es.tls.key=/certs/key
+      - --es.timeout=15s
+      - --es.num-shards=3
+      - --es.num-replicas=1
+      env:
+      - name: SPAN_STORAGE_TYPE
+        value: elasticsearch
+      - name: METRICS_STORAGE_TYPE
+      - name: JAEGER_DISABLED
+        value: "false"
+      - name: JAEGER_SERVICE_NAME
+        value: jaeger.istio-system
+      - name: JAEGER_PROPAGATION
+        value: jaeger,b3,w3c
+      image: registry.redhat.io/rhosdt/jaeger-query-rhel8@sha256:faed0ead147c051ec26fa4ed71efb6d806384ae4f3b689b5a4e277c9aecf1172
+      imagePullPolicy: IfNotPresent
+      livenessProbe:
+        failureThreshold: 5
+        httpGet:
+          path: /
+          port: 16687
+          scheme: HTTP
+        initialDelaySeconds: 5
+        periodSeconds: 15
+        successThreshold: 1
+        timeoutSeconds: 1
+      name: jaeger-query
+      ports:
+      - containerPort: 16686
+        name: query
+        protocol: TCP
+      - containerPort: 16687
+        name: admin-http
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: 16687
+          scheme: HTTP
+        initialDelaySeconds: 1
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsNonRoot: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/proxy/htpasswd
+        name: secret-htpasswd
+      - mountPath: /etc/pki/ca-trust/extracted/pem/
+        name: trusted-ca-bundle
+        readOnly: true
+      - mountPath: /etc/config
+        name: jaeger-ui-configuration-volume
+        readOnly: true
+      - mountPath: /certs
+        name: certs
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-h9mck
+        readOnly: true
+    - args:
+      - --cookie-secret=ugnXwLVmPCOSE4pCDEWFQg==
+      - --display-htpasswd-form=false
+      - --htpasswd-file=/etc/proxy/htpasswd/auth
+      - --https-address=:8443
+      - '--openshift-sar={"namespace": "istio-system", "resource": "pods", "verb":
+        "get"}'
+      - --openshift-service-account=jaeger-ui-proxy
+      - --provider=openshift
+      - --tls-cert=/etc/tls/private/tls.crt
+      - --tls-key=/etc/tls/private/tls.key
+      - --upstream=http://localhost:16686
+      env:
+      - name: JAEGER_SERVICE_NAME
+        value: jaeger.istio-system
+      - name: JAEGER_PROPAGATION
+        value: jaeger,b3,w3c
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f968922564c3eea1c69d6bbe529d8970784d6cae8935afaf674d9fa7c0f72ea3
+      imagePullPolicy: IfNotPresent
+      name: oauth-proxy
+      ports:
+      - containerPort: 8443
+        name: public
+        protocol: TCP
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsNonRoot: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/tls/private
+        name: jaeger-ui-oauth-proxy-tls
+      - mountPath: /etc/proxy/htpasswd
+        name: secret-htpasswd
+      - mountPath: /etc/pki/ca-trust/extracted/pem/
+        name: trusted-ca-bundle
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-h9mck
+        readOnly: true
+    - args:
+      - --agent.tags=cluster=undefined,deployment.name=jaeger-query,host.ip=${HOST_IP:},pod.name=${POD_NAME:},pod.namespace=istio-system
+      - --reporter.grpc.host-port=dns:///jaeger-collector-headless.istio-system.svc:14250
+      - --reporter.grpc.tls.ca=/etc/pki/ca-trust/source/service-ca/service-ca.crt
+      - --reporter.grpc.tls.enabled=true
+      env:
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.name
+      - name: HOST_IP
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.hostIP
+      image: registry.redhat.io/rhosdt/jaeger-agent-rhel8@sha256:3e1ba1ee591592252d89de9fefcda9827994046a85f66fc4462866f7f23c590a
+      imagePullPolicy: IfNotPresent
+      livenessProbe:
+        failureThreshold: 5
+        httpGet:
+          path: /
+          port: 14271
+          scheme: HTTP
+        initialDelaySeconds: 5
+        periodSeconds: 15
+        successThreshold: 1
+        timeoutSeconds: 1
+      name: jaeger-agent
+      ports:
+      - containerPort: 5775
+        name: zk-compact-trft
+        protocol: UDP
+      - containerPort: 5778
+        name: config-rest
+        protocol: TCP
+      - containerPort: 6831
+        name: jg-compact-trft
+        protocol: UDP
+      - containerPort: 6832
+        name: jg-binary-trft
+        protocol: UDP
+      - containerPort: 14271
+        name: admin-http
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: 14271
+          scheme: HTTP
+        initialDelaySeconds: 1
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsNonRoot: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/pki/ca-trust/source/service-ca
+        name: jaeger-service-ca
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-h9mck
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: false
+    imagePullSecrets:
+    - name: jaeger-ui-proxy-dockercfg-krgt8
+    nodeName: ip-10-0-215-253.us-west-2.compute.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: jaeger-ui-proxy
+    serviceAccountName: jaeger-ui-proxy
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - name: secret-htpasswd
+      secret:
+        defaultMode: 420
+        secretName: htpasswd
+    - configMap:
+        defaultMode: 420
+        items:
+        - key: ca-bundle.crt
+          path: tls-ca-bundle.pem
+        name: trusted-ca-bundle
+        optional: true
+      name: trusted-ca-bundle
+    - configMap:
+        defaultMode: 420
+        items:
+        - key: ui
+          path: ui.json
+        name: jaeger-ui-configuration
+      name: jaeger-ui-configuration-volume
+    - name: jaeger-ui-oauth-proxy-tls
+      secret:
+        defaultMode: 420
+        secretName: jaeger-ui-oauth-proxy-tls
+    - name: certs
+      secret:
+        defaultMode: 420
+        secretName: jaeger-jaeger-elasticsearch
+    - configMap:
+        defaultMode: 420
+        items:
+        - key: service-ca.crt
+          path: service-ca.crt
+        name: jaeger-service-ca
+      name: jaeger-service-ca
+    - name: kube-api-access-h9mck
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:17Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:20Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:20Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:29:17Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://7b996b124d4c526b0ce0a8b4920e9f801a1256d3a6649e29eb0003fdd2ae2e8d
+      image: registry.redhat.io/rhosdt/jaeger-agent-rhel8@sha256:3e1ba1ee591592252d89de9fefcda9827994046a85f66fc4462866f7f23c590a
+      imageID: registry.redhat.io/rhosdt/jaeger-agent-rhel8@sha256:3e1ba1ee591592252d89de9fefcda9827994046a85f66fc4462866f7f23c590a
+      lastState: {}
+      name: jaeger-agent
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:29:19Z"
+    - containerID: cri-o://77714594642d59f2dded8fb24933adc6cdde52f3e19024d75488539b0cddfcb2
+      image: registry.redhat.io/rhosdt/jaeger-query-rhel8@sha256:faed0ead147c051ec26fa4ed71efb6d806384ae4f3b689b5a4e277c9aecf1172
+      imageID: registry.redhat.io/rhosdt/jaeger-query-rhel8@sha256:802d625a3e4747c1f986c8418748f10a8f92ea89c0f4f1706581cc9bddf66d2c
+      lastState: {}
+      name: jaeger-query
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:29:18Z"
+    - containerID: cri-o://e62afb08c422e3ca9addad4baddb6cd1cdf2034f0f6a6f4262f07122320460f8
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f968922564c3eea1c69d6bbe529d8970784d6cae8935afaf674d9fa7c0f72ea3
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f968922564c3eea1c69d6bbe529d8970784d6cae8935afaf674d9fa7c0f72ea3
+      lastState: {}
+      name: oauth-proxy
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:29:18Z"
+    hostIP: 10.0.215.253
+    phase: Running
+    podIP: 10.129.2.177
+    podIPs:
+    - ip: 10.129.2.177
+    qosClass: Burstable
+    startTime: "2023-03-24T17:29:17Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.128.2.70/23"],"mac_address":"0a:58:0a:80:02:46","gateway_ips":["10.128.2.1"],"ip_address":"10.128.2.70/23","gateway_ip":"10.128.2.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.128.2.70"
+            ],
+            "mac": "0a:58:0a:80:02:46",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.128.2.70"
+            ],
+            "mac": "0a:58:0a:80:02:46",
+            "default": true,
+            "dns": {}
+        }]
+      kiali.io/dashboards: go,kiali
+      openshift.io/scc: restricted-v2
+      operator.kiali.io/last-updated: Fri Mar 24 17:30:04 UTC 2023
+      prometheus.io/port: "9090"
+      prometheus.io/scrape: "true"
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+    creationTimestamp: "2023-03-24T17:30:04Z"
+    generateName: kiali-6c47d88b48-
+    labels:
+      app: kiali
+      app.kubernetes.io/instance: kiali
+      app.kubernetes.io/name: kiali
+      app.kubernetes.io/part-of: kiali
+      app.kubernetes.io/version: b38ef0fd4444e449f7f6cf84f6aa7558d502c9e848181a936bc338cd0e4aXXX
+      pod-template-hash: 6c47d88b48
+      version: b38ef0fd4444e449f7f6cf84f6aa7558d502c9e848181a936bc338cd0e4aXXX
+    name: kiali-6c47d88b48-fhksv
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: kiali-6c47d88b48
+      uid: 9793bff2-f0dd-496e-be8c-ed9893d1fc2a
+    resourceVersion: "860635"
+    uid: 0de269b8-acf5-459a-9cb0-3857fd40a7f0
+  spec:
+    containers:
+    - command:
+      - /opt/kiali/kiali
+      - -config
+      - /kiali-configuration/config.yaml
+      env:
+      - name: ACTIVE_NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+      - name: LOG_FORMAT
+        value: text
+      - name: LOG_LEVEL
+        value: info
+      - name: LOG_SAMPLER_RATE
+        value: "1"
+      - name: LOG_TIME_FIELD_FORMAT
+        value: 2006-01-02T15:04:05Z07:00
+      image: registry.redhat.io/openshift-service-mesh/kiali-rhel8@sha256:b38ef0fd4444e449f7f6cf84f6aa7558d502c9e848181a936bc338cd0e4aeaa5
+      imagePullPolicy: IfNotPresent
+      livenessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /dashboards/kiali/healthz
+          port: api-port
+          scheme: HTTPS
+        initialDelaySeconds: 5
+        periodSeconds: 30
+        successThreshold: 1
+        timeoutSeconds: 1
+      name: kiali
+      ports:
+      - containerPort: 20001
+        name: api-port
+        protocol: TCP
+      - containerPort: 9090
+        name: http-metrics
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /dashboards/kiali/healthz
+          port: api-port
+          scheme: HTTPS
+        initialDelaySeconds: 5
+        periodSeconds: 30
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        privileged: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /kiali-configuration
+        name: kiali-configuration
+      - mountPath: /kiali-cert
+        name: kiali-cert
+      - mountPath: /kiali-secret
+        name: kiali-secret
+      - mountPath: /kiali-cabundle
+        name: kiali-cabundle
+      - mountPath: /kiali-override-secrets/login-token-signing-key
+        name: login-token-signing-key
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-spgzc
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: kiali-service-account-dockercfg-9vt6j
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: kiali-service-account
+    serviceAccountName: kiali-service-account
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: kiali
+      name: kiali-configuration
+    - name: kiali-cert
+      secret:
+        defaultMode: 420
+        secretName: kiali-cert-secret
+    - name: kiali-secret
+      secret:
+        defaultMode: 420
+        optional: true
+        secretName: kiali
+    - configMap:
+        defaultMode: 420
+        name: kiali-cabundle
+      name: kiali-cabundle
+    - name: login-token-signing-key
+      secret:
+        defaultMode: 420
+        items:
+        - key: key
+          path: value.txt
+        optional: false
+        secretName: kiali-signing-key
+    - name: kube-api-access-spgzc
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:30:04Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:30:35Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:30:35Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:30:04Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://c0f2fdfe6c94b0ef5672ce65672b9c96474bf4ecd7068130ff9b527dc7887b9e
+      image: registry.redhat.io/openshift-service-mesh/kiali-rhel8@sha256:b38ef0fd4444e449f7f6cf84f6aa7558d502c9e848181a936bc338cd0e4aeaa5
+      imageID: registry.redhat.io/openshift-service-mesh/kiali-rhel8@sha256:1794453b96ced9d22eb62b0562ceb3d313966326e1f4c58812d630c96b768a0f
+      lastState: {}
+      name: kiali
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:30:05Z"
+    hostIP: 10.0.156.53
+    phase: Running
+    podIP: 10.128.2.70
+    podIPs:
+    - ip: 10.128.2.70
+    qosClass: Burstable
+    startTime: "2023-03-24T17:30:04Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.128.2.64/23"],"mac_address":"0a:58:0a:80:02:40","gateway_ips":["10.128.2.1"],"ip_address":"10.128.2.64/23","gateway_ip":"10.128.2.1"}}'
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.128.2.64"
+            ],
+            "mac": "0a:58:0a:80:02:40",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "ovn-kubernetes",
+            "interface": "eth0",
+            "ips": [
+                "10.128.2.64"
+            ],
+            "mac": "0a:58:0a:80:02:40",
+            "default": true,
+            "dns": {}
+        }]
+      openshift.io/scc: restricted-v2
+      seccomp.security.alpha.kubernetes.io/pod: runtime/default
+      sidecar.istio.io/inject: "false"
+    creationTimestamp: "2023-03-24T17:28:13Z"
+    generateName: prometheus-6fdb86d67b-
+    labels:
+      app: prometheus
+      maistra-control-plane: istio-system
+      pod-template-hash: 6fdb86d67b
+      release: istio
+    name: prometheus-6fdb86d67b-rmxmk
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: prometheus-6fdb86d67b
+      uid: d5011e78-4c23-4cfd-b6ec-a6ed90f52b07
+    resourceVersion: "858138"
+    uid: f6e410dd-209b-438e-ac74-1da81d13b8f8
+  spec:
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - ppc64le
+          weight: 2
+        - preference:
+            matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - s390x
+          weight: 2
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: beta.kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+              - ppc64le
+              - s390x
+    containers:
+    - args:
+      - -provider=openshift
+      - -https-address=:3001
+      - -http-address=
+      - -email-domain=*
+      - -upstream=http://localhost:9090
+      - -htpasswd-file=/etc/proxy/htpasswd/auth
+      - -display-htpasswd-form=false
+      - '-openshift-sar={"namespace": "istio-system", "resource": "pods", "verb":
+        "get"}'
+      - -client-secret-file=/var/run/secrets/kubernetes.io/serviceaccount/token
+      - -openshift-service-account=prometheus
+      - -cookie-secret-file=/etc/proxy/secrets/session_secret
+      - -tls-cert=/etc/tls/private/tls.crt
+      - -tls-key=/etc/tls/private/tls.key
+      - -openshift-ca=/etc/pki/tls/cert.pem
+      - -openshift-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f968922564c3eea1c69d6bbe529d8970784d6cae8935afaf674d9fa7c0f72ea3
+      imagePullPolicy: IfNotPresent
+      name: prometheus-proxy
+      ports:
+      - containerPort: 3001
+        name: https
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /oauth/healthz
+          port: https
+          scheme: HTTPS
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsNonRoot: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/tls/private
+        name: secret-prometheus-tls
+      - mountPath: /etc/proxy/htpasswd
+        name: secret-htpasswd
+      - mountPath: /etc/proxy/secrets
+        name: secret-prometheus-proxy
+      - mountPath: /etc/pki/ca-trust/extracted/pem/
+        name: trusted-ca-bundle
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-w2fqc
+        readOnly: true
+    - args:
+      - --storage.tsdb.retention.time=6h
+      - --storage.tsdb.path=/prometheus
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --discovery.member-roll-name=default
+      - --discovery.member-roll-namespace=istio-system
+      image: registry.redhat.io/openshift-service-mesh/prometheus-rhel8@sha256:39224efbb0d80d1f59c290046c981008926a0bce90be25542958045938b9dfcd
+      imagePullPolicy: IfNotPresent
+      livenessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /-/healthy
+          port: 9090
+          scheme: HTTP
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      name: prometheus
+      ports:
+      - containerPort: 9090
+        name: http
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /-/ready
+          port: 9090
+          scheme: HTTP
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsNonRoot: true
+        runAsUser: 1000720000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/prometheus
+        name: config-volume
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-w2fqc
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: prometheus-dockercfg-kcs4p
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000720000
+      seLinuxOptions:
+        level: s0:c27,c9
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: prometheus
+    serviceAccountName: prometheus
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    volumes:
+    - name: secret-prometheus-tls
+      secret:
+        defaultMode: 420
+        secretName: prometheus-tls
+    - name: secret-htpasswd
+      secret:
+        defaultMode: 420
+        secretName: htpasswd
+    - name: secret-prometheus-proxy
+      secret:
+        defaultMode: 420
+        secretName: prometheus-proxy
+    - configMap:
+        defaultMode: 420
+        items:
+        - key: ca-bundle.crt
+          path: tls-ca-bundle.pem
+        name: trusted-ca-bundle
+        optional: true
+      name: trusted-ca-bundle
+    - configMap:
+        defaultMode: 420
+        name: istio-basic
+        optional: true
+      name: istio-config-volume
+    - configMap:
+        defaultMode: 420
+        name: prometheus
+      name: config-volume
+    - name: kube-api-access-w2fqc
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:13Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:22Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:22Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-03-24T17:28:13Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://a5e428951d71667475e09b8cb64d900a5732e79e2611b677fc9df3f2cddf7f04
+      image: registry.redhat.io/openshift-service-mesh/prometheus-rhel8@sha256:39224efbb0d80d1f59c290046c981008926a0bce90be25542958045938b9dfcd
+      imageID: registry.redhat.io/openshift-service-mesh/prometheus-rhel8@sha256:39224efbb0d80d1f59c290046c981008926a0bce90be25542958045938b9dfcd
+      lastState: {}
+      name: prometheus
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:28:21Z"
+    - containerID: cri-o://78ad5ad5adc4f0d5a8fa08341ca3810bc8b4e5c27e46d31c47f5e3fb59150b78
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f968922564c3eea1c69d6bbe529d8970784d6cae8935afaf674d9fa7c0f72ea3
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f968922564c3eea1c69d6bbe529d8970784d6cae8935afaf674d9fa7c0f72ea3
+      lastState: {}
+      name: prometheus-proxy
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-03-24T17:28:14Z"
+    hostIP: 10.0.156.53
+    phase: Running
+    podIP: 10.128.2.64
+    podIPs:
+    - ip: 10.128.2.64
+    qosClass: Burstable
+    startTime: "2023-03-24T17:28:13Z"
+kind: PodList
+metadata:
+  resourceVersion: "1903151"

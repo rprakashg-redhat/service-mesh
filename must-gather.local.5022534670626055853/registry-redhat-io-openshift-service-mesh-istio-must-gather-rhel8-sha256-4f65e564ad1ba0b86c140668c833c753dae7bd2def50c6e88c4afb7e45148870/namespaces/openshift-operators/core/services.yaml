@@ -1,0 +1,190 @@
+---
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2023-03-24T09:41:49Z"
+    labels:
+      name: istio-operator
+    name: istio-operator-metrics
+    namespace: openshift-operators
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: istio-operator
+      uid: ee367ab8-ea7f-4702-a3d0-aa68df22b778
+    resourceVersion: "641544"
+    uid: b915e6fe-01bc-4627-ba8f-a580b79fad08
+  spec:
+    clusterIP: 172.30.100.58
+    clusterIPs:
+    - 172.30.100.58
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http-metrics
+      port: 8383
+      protocol: TCP
+      targetPort: 8383
+    - name: cr-metrics
+      port: 8686
+      protocol: TCP
+      targetPort: 8686
+    selector:
+      name: istio-operator
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1679552846
+      service.beta.openshift.io/serving-cert-secret-name: maistra-operator-serving-cert
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1679552846
+    creationTimestamp: "2023-03-24T09:41:46Z"
+    name: maistra-admission-controller
+    namespace: openshift-operators
+    resourceVersion: "641507"
+    uid: 6bde54f0-d3f8-411d-b64d-9ff09e2ef14f
+  spec:
+    clusterIP: 172.30.91.114
+    clusterIPs:
+    - 172.30.91.114
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: validation
+      port: 443
+      protocol: TCP
+      targetPort: 11999
+    selector:
+      name: istio-operator
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2023-03-24T09:33:20Z"
+    labels:
+      app.kubernetes.io/name: opentelemetry-operator
+      control-plane: controller-manager
+      operators.coreos.com/opentelemetry-product.openshift-operators: ""
+    name: opentelemetry-operator-controller-manager-metrics-service
+    namespace: openshift-operators
+    ownerReferences:
+    - apiVersion: operators.coreos.com/v1alpha1
+      blockOwnerDeletion: false
+      controller: false
+      kind: ClusterServiceVersion
+      name: opentelemetry-operator.v0.63.1-4
+      uid: ab11b7c3-8a4b-429a-82e6-fd943c0aae7f
+    resourceVersion: "636277"
+    uid: e2096f8a-22c9-4f13-9505-0d600bdbc29c
+  spec:
+    clusterIP: 172.30.187.70
+    clusterIPs:
+    - 172.30.187.70
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: https
+      port: 8443
+      protocol: TCP
+      targetPort: https
+    selector:
+      app.kubernetes.io/name: opentelemetry-operator
+      control-plane: controller-manager
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2023-03-24T09:33:22Z"
+    labels:
+      operators.coreos.com/opentelemetry-product.openshift-operators: ""
+    name: opentelemetry-operator-controller-manager-service
+    namespace: openshift-operators
+    ownerReferences:
+    - apiVersion: operators.coreos.com/v1alpha1
+      blockOwnerDeletion: false
+      controller: false
+      kind: ClusterServiceVersion
+      name: opentelemetry-operator.v0.63.1-4
+      uid: ab11b7c3-8a4b-429a-82e6-fd943c0aae7f
+    resourceVersion: "636362"
+    uid: e890db26-4d69-4b97-87e3-d37b6faf70e4
+  spec:
+    clusterIP: 172.30.3.120
+    clusterIPs:
+    - 172.30.3.120
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: "443"
+      port: 443
+      protocol: TCP
+      targetPort: 9443
+    selector:
+      app.kubernetes.io/name: opentelemetry-operator
+      control-plane: controller-manager
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2023-03-24T09:33:19Z"
+    labels:
+      app.kubernetes.io/name: opentelemetry-operator
+      operators.coreos.com/opentelemetry-product.openshift-operators: ""
+    name: opentelemetry-operator-webhook-service
+    namespace: openshift-operators
+    ownerReferences:
+    - apiVersion: operators.coreos.com/v1alpha1
+      blockOwnerDeletion: false
+      controller: false
+      kind: ClusterServiceVersion
+      name: opentelemetry-operator.v0.63.1-4
+      uid: ab11b7c3-8a4b-429a-82e6-fd943c0aae7f
+    resourceVersion: "636247"
+    uid: 08ca91e9-36f7-4e74-a759-da1c4a4be0db
+  spec:
+    clusterIP: 172.30.253.6
+    clusterIPs:
+    - 172.30.253.6
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 443
+      protocol: TCP
+      targetPort: 9443
+    selector:
+      app.kubernetes.io/name: opentelemetry-operator
+      control-plane: controller-manager
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: ServiceList
+metadata:
+  resourceVersion: "1903142"

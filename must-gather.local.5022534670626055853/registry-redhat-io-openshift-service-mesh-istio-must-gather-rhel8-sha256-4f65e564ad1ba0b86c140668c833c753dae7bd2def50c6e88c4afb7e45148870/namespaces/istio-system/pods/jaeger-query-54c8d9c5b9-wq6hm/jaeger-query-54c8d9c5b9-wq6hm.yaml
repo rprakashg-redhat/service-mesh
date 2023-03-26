@@ -1,0 +1,439 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.129.2.177/23"],"mac_address":"0a:58:0a:81:02:b1","gateway_ips":["10.129.2.1"],"ip_address":"10.129.2.177/23","gateway_ip":"10.129.2.1"}}'
+    k8s.v1.cni.cncf.io/network-status: |-
+      [{
+          "name": "ovn-kubernetes",
+          "interface": "eth0",
+          "ips": [
+              "10.129.2.177"
+          ],
+          "mac": "0a:58:0a:81:02:b1",
+          "default": true,
+          "dns": {}
+      }]
+    k8s.v1.cni.cncf.io/networks-status: |-
+      [{
+          "name": "ovn-kubernetes",
+          "interface": "eth0",
+          "ips": [
+              "10.129.2.177"
+          ],
+          "mac": "0a:58:0a:81:02:b1",
+          "default": true,
+          "dns": {}
+      }]
+    linkerd.io/inject: disabled
+    openshift.io/scc: restricted-v2
+    prometheus.io/port: "16687"
+    prometheus.io/scrape: "true"
+    seccomp.security.alpha.kubernetes.io/pod: runtime/default
+    sidecar.istio.io/inject: "false"
+    sidecar.jaegertracing.io/inject: jaeger
+  creationTimestamp: "2023-03-24T17:29:17Z"
+  generateName: jaeger-query-54c8d9c5b9-
+  labels:
+    app: jaeger
+    app.kubernetes.io/component: query
+    app.kubernetes.io/instance: jaeger
+    app.kubernetes.io/managed-by: jaeger-operator
+    app.kubernetes.io/name: jaeger-query
+    app.kubernetes.io/part-of: jaeger
+    pod-template-hash: 54c8d9c5b9
+  name: jaeger-query-54c8d9c5b9-wq6hm
+  namespace: istio-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: jaeger-query-54c8d9c5b9
+    uid: c58357a8-5d23-4c9a-8d6f-d97bf9f39917
+  resourceVersion: "859920"
+  uid: 688409a9-0c13-4026-9971-f82e6e15224c
+spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - preference:
+          matchExpressions:
+          - key: beta.kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+        weight: 2
+      - preference:
+          matchExpressions:
+          - key: beta.kubernetes.io/arch
+            operator: In
+            values:
+            - ppc64le
+        weight: 2
+      - preference:
+          matchExpressions:
+          - key: beta.kubernetes.io/arch
+            operator: In
+            values:
+            - s390x
+        weight: 2
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: beta.kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+            - ppc64le
+            - s390x
+  containers:
+  - args:
+    - --query.base-path=/
+    - --query.ui-config=/etc/config/ui.json
+    - --es.server-urls=https://elasticsearch:9200
+    - --es.tls.enabled=true
+    - --es.tls.ca=/certs/ca
+    - --es.tls.cert=/certs/cert
+    - --es.tls.key=/certs/key
+    - --es.timeout=15s
+    - --es.num-shards=3
+    - --es.num-replicas=1
+    env:
+    - name: SPAN_STORAGE_TYPE
+      value: elasticsearch
+    - name: METRICS_STORAGE_TYPE
+    - name: JAEGER_DISABLED
+      value: "false"
+    - name: JAEGER_SERVICE_NAME
+      value: jaeger.istio-system
+    - name: JAEGER_PROPAGATION
+      value: jaeger,b3,w3c
+    image: registry.redhat.io/rhosdt/jaeger-query-rhel8@sha256:faed0ead147c051ec26fa4ed71efb6d806384ae4f3b689b5a4e277c9aecf1172
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 5
+      httpGet:
+        path: /
+        port: 16687
+        scheme: HTTP
+      initialDelaySeconds: 5
+      periodSeconds: 15
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: jaeger-query
+    ports:
+    - containerPort: 16686
+      name: query
+      protocol: TCP
+    - containerPort: 16687
+      name: admin-http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 16687
+        scheme: HTTP
+      initialDelaySeconds: 1
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 1000720000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/proxy/htpasswd
+      name: secret-htpasswd
+    - mountPath: /etc/pki/ca-trust/extracted/pem/
+      name: trusted-ca-bundle
+      readOnly: true
+    - mountPath: /etc/config
+      name: jaeger-ui-configuration-volume
+      readOnly: true
+    - mountPath: /certs
+      name: certs
+      readOnly: true
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-h9mck
+      readOnly: true
+  - args:
+    - --cookie-secret=ugnXwLVmPCOSE4pCDEWFQg==
+    - --display-htpasswd-form=false
+    - --htpasswd-file=/etc/proxy/htpasswd/auth
+    - --https-address=:8443
+    - '--openshift-sar={"namespace": "istio-system", "resource": "pods", "verb": "get"}'
+    - --openshift-service-account=jaeger-ui-proxy
+    - --provider=openshift
+    - --tls-cert=/etc/tls/private/tls.crt
+    - --tls-key=/etc/tls/private/tls.key
+    - --upstream=http://localhost:16686
+    env:
+    - name: JAEGER_SERVICE_NAME
+      value: jaeger.istio-system
+    - name: JAEGER_PROPAGATION
+      value: jaeger,b3,w3c
+    image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f968922564c3eea1c69d6bbe529d8970784d6cae8935afaf674d9fa7c0f72ea3
+    imagePullPolicy: IfNotPresent
+    name: oauth-proxy
+    ports:
+    - containerPort: 8443
+      name: public
+      protocol: TCP
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 1000720000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/tls/private
+      name: jaeger-ui-oauth-proxy-tls
+    - mountPath: /etc/proxy/htpasswd
+      name: secret-htpasswd
+    - mountPath: /etc/pki/ca-trust/extracted/pem/
+      name: trusted-ca-bundle
+      readOnly: true
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-h9mck
+      readOnly: true
+  - args:
+    - --agent.tags=cluster=undefined,deployment.name=jaeger-query,host.ip=${HOST_IP:},pod.name=${POD_NAME:},pod.namespace=istio-system
+    - --reporter.grpc.host-port=dns:///jaeger-collector-headless.istio-system.svc:14250
+    - --reporter.grpc.tls.ca=/etc/pki/ca-trust/source/service-ca/service-ca.crt
+    - --reporter.grpc.tls.enabled=true
+    env:
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: HOST_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.hostIP
+    image: registry.redhat.io/rhosdt/jaeger-agent-rhel8@sha256:3e1ba1ee591592252d89de9fefcda9827994046a85f66fc4462866f7f23c590a
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 5
+      httpGet:
+        path: /
+        port: 14271
+        scheme: HTTP
+      initialDelaySeconds: 5
+      periodSeconds: 15
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: jaeger-agent
+    ports:
+    - containerPort: 5775
+      name: zk-compact-trft
+      protocol: UDP
+    - containerPort: 5778
+      name: config-rest
+      protocol: TCP
+    - containerPort: 6831
+      name: jg-compact-trft
+      protocol: UDP
+    - containerPort: 6832
+      name: jg-binary-trft
+      protocol: UDP
+    - containerPort: 14271
+      name: admin-http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /
+        port: 14271
+        scheme: HTTP
+      initialDelaySeconds: 1
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 1000720000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/pki/ca-trust/source/service-ca
+      name: jaeger-service-ca
+      readOnly: true
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-h9mck
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  imagePullSecrets:
+  - name: jaeger-ui-proxy-dockercfg-krgt8
+  nodeName: ip-10-0-215-253.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1000720000
+    seLinuxOptions:
+      level: s0:c27,c9
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount: jaeger-ui-proxy
+  serviceAccountName: jaeger-ui-proxy
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  volumes:
+  - name: secret-htpasswd
+    secret:
+      defaultMode: 420
+      secretName: htpasswd
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: ca-bundle.crt
+        path: tls-ca-bundle.pem
+      name: trusted-ca-bundle
+      optional: true
+    name: trusted-ca-bundle
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: ui
+        path: ui.json
+      name: jaeger-ui-configuration
+    name: jaeger-ui-configuration-volume
+  - name: jaeger-ui-oauth-proxy-tls
+    secret:
+      defaultMode: 420
+      secretName: jaeger-ui-oauth-proxy-tls
+  - name: certs
+    secret:
+      defaultMode: 420
+      secretName: jaeger-jaeger-elasticsearch
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: service-ca.crt
+        path: service-ca.crt
+      name: jaeger-service-ca
+    name: jaeger-service-ca
+  - name: kube-api-access-h9mck
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+      - configMap:
+          items:
+          - key: service-ca.crt
+            path: service-ca.crt
+          name: openshift-service-ca.crt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-03-24T17:29:17Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-03-24T17:29:20Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-03-24T17:29:20Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-03-24T17:29:17Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: cri-o://7b996b124d4c526b0ce0a8b4920e9f801a1256d3a6649e29eb0003fdd2ae2e8d
+    image: registry.redhat.io/rhosdt/jaeger-agent-rhel8@sha256:3e1ba1ee591592252d89de9fefcda9827994046a85f66fc4462866f7f23c590a
+    imageID: registry.redhat.io/rhosdt/jaeger-agent-rhel8@sha256:3e1ba1ee591592252d89de9fefcda9827994046a85f66fc4462866f7f23c590a
+    lastState: {}
+    name: jaeger-agent
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-03-24T17:29:19Z"
+  - containerID: cri-o://77714594642d59f2dded8fb24933adc6cdde52f3e19024d75488539b0cddfcb2
+    image: registry.redhat.io/rhosdt/jaeger-query-rhel8@sha256:faed0ead147c051ec26fa4ed71efb6d806384ae4f3b689b5a4e277c9aecf1172
+    imageID: registry.redhat.io/rhosdt/jaeger-query-rhel8@sha256:802d625a3e4747c1f986c8418748f10a8f92ea89c0f4f1706581cc9bddf66d2c
+    lastState: {}
+    name: jaeger-query
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-03-24T17:29:18Z"
+  - containerID: cri-o://e62afb08c422e3ca9addad4baddb6cd1cdf2034f0f6a6f4262f07122320460f8
+    image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f968922564c3eea1c69d6bbe529d8970784d6cae8935afaf674d9fa7c0f72ea3
+    imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f968922564c3eea1c69d6bbe529d8970784d6cae8935afaf674d9fa7c0f72ea3
+    lastState: {}
+    name: oauth-proxy
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-03-24T17:29:18Z"
+  hostIP: 10.0.215.253
+  phase: Running
+  podIP: 10.129.2.177
+  podIPs:
+  - ip: 10.129.2.177
+  qosClass: Burstable
+  startTime: "2023-03-24T17:29:17Z"

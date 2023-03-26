@@ -1,0 +1,116 @@
+2023-03-24T17:25:10.137822800Z INFO:root:start at port 9080
+2023-03-24T17:25:10.137918214Z  * Serving Flask app "productpage" (lazy loading)
+2023-03-24T17:25:10.137931864Z  * Environment: production
+2023-03-24T17:25:10.137965573Z    WARNING: Do not use the development server in a production environment.
+2023-03-24T17:25:10.137988004Z    Use a production WSGI server instead.
+2023-03-24T17:25:10.137998021Z  * Debug mode: on
+2023-03-24T17:25:10.151022816Z INFO:werkzeug: * Running on http://[::]:9080/ (Press CTRL+C to quit)
+2023-03-24T17:25:10.151616719Z INFO:werkzeug: * Restarting with stat
+2023-03-24T17:25:10.344346346Z INFO:root:start at port 9080
+2023-03-24T17:25:10.356553704Z WARNING:werkzeug: * Debugger is active!
+2023-03-24T17:25:10.356947645Z INFO:werkzeug: * Debugger PIN: 335-351-107
+2023-03-24T17:38:19.351604064Z DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): details:9080
+2023-03-24T17:38:19.371110925Z send: b'GET /details/0 HTTP/1.1\r\nHost: details:9080\r\nuser-agent: curl/7.86.0\r\nAccept-Encoding: gzip, deflate\r\nAccept: */*\r\nConnection: keep-alive\r\nX-B3-TraceId: 72692577f198037663e851dccec58f40\r\nX-B3-SpanId: 57ef65635d02f3aa\r\nX-B3-ParentSpanId: 63e851dccec58f40\r\nx-request-id: da19dd36-9400-4dcc-b444-fbbbc003962c\r\n\r\n'
+2023-03-24T17:38:19.371110925Z reply: 'HTTP/1.1 200 OK\r\n'
+2023-03-24T17:38:19.371110925Z header: content-type: application/json
+2023-03-24T17:38:19.371110925Z header: server: envoy
+2023-03-24T17:38:19.371110925Z header: date: Fri, 24 Mar 2023 17:38:19 GMT
+2023-03-24T17:38:19.371110925Z header: content-length: 178
+2023-03-24T17:38:19.371110925Z header: x-envoy-upstream-service-time: 12
+2023-03-24T17:38:19.371110925Z DEBUG:urllib3.connectionpool:http://details:9080 "GET /details/0 HTTP/1.1" 200 178
+2023-03-24T17:38:19.372698960Z DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): reviews:9080
+2023-03-24T17:38:19.973017395Z send: b'GET /reviews/0 HTTP/1.1\r\nHost: reviews:9080\r\nuser-agent: curl/7.86.0\r\nAccept-Encoding: gzip, deflate\r\nAccept: */*\r\nConnection: keep-alive\r\nX-B3-TraceId: 72692577f198037663e851dccec58f40\r\nX-B3-SpanId: 57ef65635d02f3aa\r\nX-B3-ParentSpanId: 63e851dccec58f40\r\nx-request-id: da19dd36-9400-4dcc-b444-fbbbc003962c\r\n\r\n'
+2023-03-24T17:38:19.973017395Z reply: 'HTTP/1.1 200 OK\r\n'
+2023-03-24T17:38:19.973017395Z header: x-powered-by: Servlet/3.1
+2023-03-24T17:38:19.973017395Z header: content-type: application/json
+2023-03-24T17:38:19.973017395Z header: date: Fri, 24 Mar 2023 17:38:19 GMT
+2023-03-24T17:38:19.973017395Z header: content-language: en-US
+2023-03-24T17:38:19.973017395Z header: content-length: 379
+2023-03-24T17:38:19.973017395Z header: x-envoy-upstream-service-time: 593
+2023-03-24T17:38:19.973017395Z header: server: envoy
+2023-03-24T17:38:19.973017395Z DEBUG:urllib3.connectionpool:http://reviews:9080 "GET /reviews/0 HTTP/1.1" 200 379
+2023-03-24T17:38:19.992498578Z INFO:werkzeug:::ffff:127.0.0.6 - - [24/Mar/2023 17:38:19] "GET /productpage HTTP/1.1" 200 -
+2023-03-24T17:58:39.628382866Z DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): details:9080
+2023-03-24T17:58:39.640433333Z send: b'GET /details/0 HTTP/1.1\r\nHost: details:9080\r\nuser-agent: curl/7.86.0\r\nAccept-Encoding: gzip, deflate\r\nAccept: */*\r\nConnection: keep-alive\r\nX-B3-TraceId: a629a3e3ed55d4a9dab5b79e9d028350\r\nX-B3-SpanId: 51db3826413c0fbf\r\nX-B3-ParentSpanId: dab5b79e9d028350\r\nx-request-id: 13f82bfa-9f3c-463b-a349-d6e9d09da000\r\n\r\n'
+2023-03-24T17:58:39.640433333Z reply: 'HTTP/1.1 200 OK\r\n'
+2023-03-24T17:58:39.640433333Z header: content-type: application/json
+2023-03-24T17:58:39.640433333Z header: server: envoy
+2023-03-24T17:58:39.640433333Z header: date: Fri, 24 Mar 2023 17:58:39 GMT
+2023-03-24T17:58:39.640433333Z header: content-length: 178
+2023-03-24T17:58:39.640433333Z header: x-envoy-upstream-service-time: 8
+2023-03-24T17:58:39.640433333Z DEBUG:urllib3.connectionpool:http://details:9080 "GET /details/0 HTTP/1.1" 200 178
+2023-03-24T17:58:39.641898342Z DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): reviews:9080
+2023-03-24T17:58:40.065931517Z send: b'GET /reviews/0 HTTP/1.1\r\nHost: reviews:9080\r\nuser-agent: curl/7.86.0\r\nAccept-Encoding: gzip, deflate\r\nAccept: */*\r\nConnection: keep-alive\r\nX-B3-TraceId: a629a3e3ed55d4a9dab5b79e9d028350\r\nX-B3-SpanId: 51db3826413c0fbf\r\nX-B3-ParentSpanId: dab5b79e9d028350\r\nx-request-id: 13f82bfa-9f3c-463b-a349-d6e9d09da000\r\n\r\n'
+2023-03-24T17:58:40.065931517Z reply: 'HTTP/1.1 200 OK\r\n'
+2023-03-24T17:58:40.065931517Z header: x-powered-by: Servlet/3.1
+2023-03-24T17:58:40.065931517Z header: content-type: application/json
+2023-03-24T17:58:40.065931517Z header: date: Fri, 24 Mar 2023 17:58:40 GMT
+2023-03-24T17:58:40.065931517Z header: content-language: en-US
+2023-03-24T17:58:40.065931517Z header: content-length: 295
+2023-03-24T17:58:40.065931517Z header: x-envoy-upstream-service-time: 417
+2023-03-24T17:58:40.065931517Z header: server: envoy
+2023-03-24T17:58:40.065931517Z DEBUG:urllib3.connectionpool:http://reviews:9080 "GET /reviews/0 HTTP/1.1" 200 295
+2023-03-24T17:58:40.066985354Z INFO:werkzeug:::ffff:127.0.0.6 - - [24/Mar/2023 17:58:40] "GET /productpage HTTP/1.1" 200 -
+2023-03-24T17:58:53.673169178Z DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): details:9080
+2023-03-24T17:58:53.676405902Z send: b'GET /details/0 HTTP/1.1\r\nHost: details:9080\r\nuser-agent: curl/7.86.0\r\nAccept-Encoding: gzip, deflate\r\nAccept: */*\r\nConnection: keep-alive\r\nX-B3-TraceId: 204f85c0c342d5140f4a82c02052b52d\r\nX-B3-SpanId: 65fbcf90ad4f5d29\r\nX-B3-ParentSpanId: 0f4a82c02052b52d\r\nx-request-id: 928fe50d-eaa0-49f3-a93b-a2939f16cb79\r\n\r\n'
+2023-03-24T17:58:53.676405902Z reply: 'HTTP/1.1 200 OK\r\n'
+2023-03-24T17:58:53.676405902Z header: content-type: application/json
+2023-03-24T17:58:53.676405902Z header: server: envoy
+2023-03-24T17:58:53.676405902Z header: date: Fri, 24 Mar 2023 17:58:53 GMT
+2023-03-24T17:58:53.676405902Z header: content-length: 178
+2023-03-24T17:58:53.676405902Z header: x-envoy-upstream-service-time: 2
+2023-03-24T17:58:53.676405902Z DEBUG:urllib3.connectionpool:http://details:9080 "GET /details/0 HTTP/1.1" 200 178
+2023-03-24T17:58:53.677875612Z DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): reviews:9080
+2023-03-24T17:58:53.684491129Z send: b'GET /reviews/0 HTTP/1.1\r\nHost: reviews:9080\r\nuser-agent: curl/7.86.0\r\nAccept-Encoding: gzip, deflate\r\nAccept: */*\r\nConnection: keep-alive\r\nX-B3-TraceId: 204f85c0c342d5140f4a82c02052b52d\r\nX-B3-SpanId: 65fbcf90ad4f5d29\r\nX-B3-ParentSpanId: 0f4a82c02052b52d\r\nx-request-id: 928fe50d-eaa0-49f3-a93b-a2939f16cb79\r\n\r\n'
+2023-03-24T17:58:53.684491129Z reply: 'HTTP/1.1 200 OK\r\n'
+2023-03-24T17:58:53.684491129Z header: x-powered-by: Servlet/3.1
+2023-03-24T17:58:53.684491129Z header: content-type: application/json
+2023-03-24T17:58:53.684491129Z header: date: Fri, 24 Mar 2023 17:58:53 GMT
+2023-03-24T17:58:53.684491129Z header: content-language: en-US
+2023-03-24T17:58:53.684491129Z header: content-length: 295
+2023-03-24T17:58:53.684491129Z header: x-envoy-upstream-service-time: 5
+2023-03-24T17:58:53.684491129Z header: server: envoy
+2023-03-24T17:58:53.684491129Z DEBUG:urllib3.connectionpool:http://reviews:9080 "GET /reviews/0 HTTP/1.1" 200 295
+2023-03-24T17:58:53.685298851Z INFO:werkzeug:::ffff:127.0.0.6 - - [24/Mar/2023 17:58:53] "GET /productpage HTTP/1.1" 200 -
+2023-03-24T17:59:43.101668867Z DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): details:9080
+2023-03-24T17:59:43.105176171Z send: b'GET /details/0 HTTP/1.1\r\nHost: details:9080\r\nuser-agent: curl/7.86.0\r\nAccept-Encoding: gzip, deflate\r\nAccept: */*\r\nConnection: keep-alive\r\nX-B3-TraceId: ce9918a909e4a59594c53dfad897bea7\r\nX-B3-SpanId: 4b358b5bddaef3f4\r\nX-B3-ParentSpanId: 94c53dfad897bea7\r\nx-request-id: 36bb85de-a8d9-4315-9015-8343591089f5\r\n\r\n'
+2023-03-24T17:59:43.105176171Z reply: 'HTTP/1.1 200 OK\r\n'
+2023-03-24T17:59:43.105176171Z header: content-type: application/json
+2023-03-24T17:59:43.105176171Z header: server: envoy
+2023-03-24T17:59:43.105176171Z header: date: Fri, 24 Mar 2023 17:59:43 GMT
+2023-03-24T17:59:43.105176171Z header: content-length: 178
+2023-03-24T17:59:43.105176171Z header: x-envoy-upstream-service-time: 2
+2023-03-24T17:59:43.105176171Z DEBUG:urllib3.connectionpool:http://details:9080 "GET /details/0 HTTP/1.1" 200 178
+2023-03-24T17:59:43.106560931Z DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): reviews:9080
+2023-03-24T17:59:43.146082337Z send: b'GET /reviews/0 HTTP/1.1\r\nHost: reviews:9080\r\nuser-agent: curl/7.86.0\r\nAccept-Encoding: gzip, deflate\r\nAccept: */*\r\nConnection: keep-alive\r\nX-B3-TraceId: ce9918a909e4a59594c53dfad897bea7\r\nX-B3-SpanId: 4b358b5bddaef3f4\r\nX-B3-ParentSpanId: 94c53dfad897bea7\r\nx-request-id: 36bb85de-a8d9-4315-9015-8343591089f5\r\n\r\n'
+2023-03-24T17:59:43.146082337Z reply: 'HTTP/1.1 200 OK\r\n'
+2023-03-24T17:59:43.146082337Z header: x-powered-by: Servlet/3.1
+2023-03-24T17:59:43.146082337Z header: content-type: application/json
+2023-03-24T17:59:43.146082337Z header: date: Fri, 24 Mar 2023 17:59:43 GMT
+2023-03-24T17:59:43.146082337Z header: content-language: en-US
+2023-03-24T17:59:43.146082337Z header: content-length: 379
+2023-03-24T17:59:43.146082337Z header: x-envoy-upstream-service-time: 35
+2023-03-24T17:59:43.146082337Z header: server: envoy
+2023-03-24T17:59:43.146082337Z DEBUG:urllib3.connectionpool:http://reviews:9080 "GET /reviews/0 HTTP/1.1" 200 379
+2023-03-24T17:59:43.147011297Z INFO:werkzeug:::ffff:127.0.0.6 - - [24/Mar/2023 17:59:43] "GET /productpage HTTP/1.1" 200 -
+2023-03-24T18:17:32.726227651Z DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): details:9080
+2023-03-24T18:17:32.730009572Z send: b'GET /details/0 HTTP/1.1\r\nHost: details:9080\r\nuser-agent: curl/7.86.0\r\nAccept-Encoding: gzip, deflate\r\nAccept: */*\r\nConnection: keep-alive\r\nX-B3-TraceId: 94c28746a62c2d5d53aa8027efb59b9d\r\nX-B3-SpanId: d645e434a7b69b0c\r\nX-B3-ParentSpanId: 53aa8027efb59b9d\r\nx-request-id: b9b17a66-dad8-4f28-8918-b612b049d5cf\r\n\r\n'
+2023-03-24T18:17:32.730009572Z reply: 'HTTP/1.1 200 OK\r\n'
+2023-03-24T18:17:32.730009572Z header: content-type: application/json
+2023-03-24T18:17:32.730009572Z header: server: envoy
+2023-03-24T18:17:32.730009572Z header: date: Fri, 24 Mar 2023 18:17:32 GMT
+2023-03-24T18:17:32.730009572Z header: content-length: 178
+2023-03-24T18:17:32.730009572Z header: x-envoy-upstream-service-time: 2
+2023-03-24T18:17:32.730009572Z DEBUG:urllib3.connectionpool:http://details:9080 "GET /details/0 HTTP/1.1" 200 178
+2023-03-24T18:17:32.731649583Z DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): reviews:9080
+2023-03-24T18:17:33.268227869Z send: b'GET /reviews/0 HTTP/1.1\r\nHost: reviews:9080\r\nuser-agent: curl/7.86.0\r\nAccept-Encoding: gzip, deflate\r\nAccept: */*\r\nConnection: keep-alive\r\nX-B3-TraceId: 94c28746a62c2d5d53aa8027efb59b9d\r\nX-B3-SpanId: d645e434a7b69b0c\r\nX-B3-ParentSpanId: 53aa8027efb59b9d\r\nx-request-id: b9b17a66-dad8-4f28-8918-b612b049d5cf\r\n\r\n'
+2023-03-24T18:17:33.268227869Z reply: 'HTTP/1.1 200 OK\r\n'
+2023-03-24T18:17:33.268227869Z header: x-powered-by: Servlet/3.1
+2023-03-24T18:17:33.268227869Z header: content-type: application/json
+2023-03-24T18:17:33.268227869Z header: date: Fri, 24 Mar 2023 18:17:33 GMT
+2023-03-24T18:17:33.268227869Z header: content-language: en-US
+2023-03-24T18:17:33.268227869Z header: content-length: 375
+2023-03-24T18:17:33.268227869Z header: x-envoy-upstream-service-time: 529
+2023-03-24T18:17:33.268227869Z header: server: envoy
+2023-03-24T18:17:33.268227869Z DEBUG:urllib3.connectionpool:http://reviews:9080 "GET /reviews/0 HTTP/1.1" 200 375
+2023-03-24T18:17:33.269409071Z INFO:werkzeug:::ffff:127.0.0.6 - - [24/Mar/2023 18:17:33] "GET /productpage HTTP/1.1" 200 -

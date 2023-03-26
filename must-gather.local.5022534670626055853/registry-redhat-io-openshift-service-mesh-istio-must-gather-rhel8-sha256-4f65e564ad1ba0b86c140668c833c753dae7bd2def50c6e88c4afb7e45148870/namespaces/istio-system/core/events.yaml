@@ -1,0 +1,678 @@
+---
+apiVersion: v1
+items:
+- apiVersion: v1
+  count: 12
+  eventTime: null
+  firstTimestamp: "2023-03-24T17:28:32Z"
+  involvedObject:
+    apiVersion: maistra.io/v2
+    kind: ServiceMeshControlPlane
+    name: basic
+    namespace: istio-system
+    resourceVersion: "1896071"
+    uid: ea62ab37-de81-47cf-a7a3-ecf2986a0b2f
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:15Z"
+  message: All component deployments are Available
+  metadata:
+    creationTimestamp: "2023-03-26T08:19:02Z"
+    name: basic.174f6b125f7fc73a
+    namespace: istio-system
+    resourceVersion: "1898461"
+    uid: 73a139ea-9b3a-42fc-b83b-953211c6b185
+  reason: Ready
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: servicemeshcontrolplane-controller
+  type: Normal
+- apiVersion: v1
+  count: 4
+  eventTime: null
+  firstTimestamp: "2023-03-24T18:22:57Z"
+  involvedObject:
+    apiVersion: maistra.io/v2
+    kind: ServiceMeshControlPlane
+    name: basic
+    namespace: istio-system
+    resourceVersion: "886130"
+    uid: ea62ab37-de81-47cf-a7a3-ecf2986a0b2f
+  kind: Event
+  lastTimestamp: "2023-03-26T08:19:02Z"
+  message: 'The following components are not fully available: [istio-discovery]'
+  metadata:
+    creationTimestamp: "2023-03-26T08:19:02Z"
+    name: basic.174f6e0a85b29f1d
+    namespace: istio-system
+    resourceVersion: "1896085"
+    uid: 355e1916-1cca-466b-8400-158c4d59b2d9
+  reason: NotReady
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: servicemeshcontrolplane-controller
+  type: Warning
+- apiVersion: v1
+  count: 4
+  eventTime: null
+  firstTimestamp: "2023-03-24T18:23:18Z"
+  involvedObject:
+    apiVersion: maistra.io/v2
+    kind: ServiceMeshControlPlane
+    name: basic
+    namespace: istio-system
+    resourceVersion: "1896125"
+    uid: ea62ab37-de81-47cf-a7a3-ecf2986a0b2f
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:14Z"
+  message: 'The following components are not fully available: [istio-ingress]'
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:13Z"
+    name: basic.174f6e0f78c81321
+    namespace: istio-system
+    resourceVersion: "1898424"
+    uid: 648be272-5f31-475d-ac8b-5cacc4a81a54
+  reason: NotReady
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: servicemeshcontrolplane-controller
+  type: Warning
+- action: Binding
+  apiVersion: v1
+  eventTime: "2023-03-26T08:24:14.022140Z"
+  firstTimestamp: null
+  involvedObject:
+    apiVersion: v1
+    kind: Pod
+    name: istio-ingressgateway-678f8dbfc6-h778h
+    namespace: istio-system
+    resourceVersion: "1898412"
+    uid: a4424184-d6e4-4fbf-8dc7-5a91268d77ff
+  kind: Event
+  lastTimestamp: null
+  message: Successfully assigned istio-system/istio-ingressgateway-678f8dbfc6-h778h
+    to ip-10-0-189-49.us-west-2.compute.internal
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:14Z"
+    name: istio-ingressgateway-678f8dbfc6-h778h.174fea8791ec3513
+    namespace: istio-system
+    resourceVersion: "1898417"
+    uid: 07f02c63-a670-4681-9e51-69a109da5e3a
+  reason: Scheduled
+  reportingComponent: default-scheduler
+  reportingInstance: default-scheduler-ip-10-0-140-16
+  source: {}
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:24:14Z"
+  involvedObject:
+    apiVersion: v1
+    kind: Pod
+    name: istio-ingressgateway-678f8dbfc6-h778h
+    namespace: istio-system
+    resourceVersion: "1898422"
+    uid: a4424184-d6e4-4fbf-8dc7-5a91268d77ff
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:14Z"
+  message: Add eth0 [10.131.0.222/23] from ovn-kubernetes
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:14Z"
+    name: istio-ingressgateway-678f8dbfc6-h778h.174fea87b2f02ecb
+    namespace: istio-system
+    resourceVersion: "1898429"
+    uid: e4f97ded-a199-4a06-be20-b54f75c784d6
+  reason: AddedInterface
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: multus
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:24:14Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{istio-proxy}
+    kind: Pod
+    name: istio-ingressgateway-678f8dbfc6-h778h
+    namespace: istio-system
+    resourceVersion: "1898415"
+    uid: a4424184-d6e4-4fbf-8dc7-5a91268d77ff
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:14Z"
+  message: Container image "registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:15444e6b93a05d88c6fc6ce1d1e7744635141291b86a7c3abb57758849a5d19e"
+    already present on machine
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:14Z"
+    name: istio-ingressgateway-678f8dbfc6-h778h.174fea87b428a736
+    namespace: istio-system
+    resourceVersion: "1898431"
+    uid: 67827ae7-188c-4e34-a716-0cd5ca42fac5
+  reason: Pulled
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: kubelet
+    host: ip-10-0-189-49.us-west-2.compute.internal
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:24:14Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{istio-proxy}
+    kind: Pod
+    name: istio-ingressgateway-678f8dbfc6-h778h
+    namespace: istio-system
+    resourceVersion: "1898415"
+    uid: a4424184-d6e4-4fbf-8dc7-5a91268d77ff
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:14Z"
+  message: Created container istio-proxy
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:14Z"
+    name: istio-ingressgateway-678f8dbfc6-h778h.174fea87bff45942
+    namespace: istio-system
+    resourceVersion: "1898435"
+    uid: 11c19e8e-7e5f-4fd8-924d-d874100d6164
+  reason: Created
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: kubelet
+    host: ip-10-0-189-49.us-west-2.compute.internal
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:24:14Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{istio-proxy}
+    kind: Pod
+    name: istio-ingressgateway-678f8dbfc6-h778h
+    namespace: istio-system
+    resourceVersion: "1898415"
+    uid: a4424184-d6e4-4fbf-8dc7-5a91268d77ff
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:14Z"
+  message: Started container istio-proxy
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:14Z"
+    name: istio-ingressgateway-678f8dbfc6-h778h.174fea87c28995e4
+    namespace: istio-system
+    resourceVersion: "1898436"
+    uid: 9fe3f894-523e-42bc-b11f-5532019b8562
+  reason: Started
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: kubelet
+    host: ip-10-0-189-49.us-west-2.compute.internal
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:24:14Z"
+  involvedObject:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: istio-ingressgateway-678f8dbfc6
+    namespace: istio-system
+    resourceVersion: "1898406"
+    uid: 838ebd6c-900f-4c53-a929-01be2e2d37b6
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:14Z"
+  message: 'Created pod: istio-ingressgateway-678f8dbfc6-h778h'
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:14Z"
+    name: istio-ingressgateway-678f8dbfc6.174fea8791815d96
+    namespace: istio-system
+    resourceVersion: "1898413"
+    uid: 50124c8b-b9ac-4a0b-9ee6-a04c7bec3822
+  reason: SuccessfulCreate
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: replicaset-controller
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:24:15Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{istio-proxy}
+    kind: Pod
+    name: istio-ingressgateway-844d586945-5vc4s
+    namespace: istio-system
+    resourceVersion: "885137"
+    uid: d7359121-3748-404f-95e1-c589bacb57ce
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:15Z"
+  message: Stopping container istio-proxy
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:15Z"
+    name: istio-ingressgateway-844d586945-5vc4s.174fea88031272f0
+    namespace: istio-system
+    resourceVersion: "1898459"
+    uid: f0e89a0d-789e-4149-b3ee-a099dd4eff07
+  reason: Killing
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: kubelet
+    host: ip-10-0-189-49.us-west-2.compute.internal
+  type: Normal
+- apiVersion: v1
+  count: 2
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:24:17Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{istio-proxy}
+    kind: Pod
+    name: istio-ingressgateway-844d586945-5vc4s
+    namespace: istio-system
+    resourceVersion: "885137"
+    uid: d7359121-3748-404f-95e1-c589bacb57ce
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:19Z"
+  message: 'Readiness probe failed: HTTP probe failed with statuscode: 503'
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:17Z"
+    name: istio-ingressgateway-844d586945-5vc4s.174fea884baa1a60
+    namespace: istio-system
+    resourceVersion: "1898488"
+    uid: 9b5d96fb-c0d1-4df6-aa96-c336355a1bda
+  reason: Unhealthy
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: kubelet
+    host: ip-10-0-189-49.us-west-2.compute.internal
+  type: Warning
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:24:21Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{istio-proxy}
+    kind: Pod
+    name: istio-ingressgateway-844d586945-5vc4s
+    namespace: istio-system
+    resourceVersion: "885137"
+    uid: d7359121-3748-404f-95e1-c589bacb57ce
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:21Z"
+  message: 'Readiness probe failed: Get "http://10.131.0.66:15021/healthz/ready":
+    dial tcp 10.131.0.66:15021: connect: connection refused'
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:21Z"
+    name: istio-ingressgateway-844d586945-5vc4s.174fea893a194cfb
+    namespace: istio-system
+    resourceVersion: "1898509"
+    uid: 8c3ec399-ce8b-450d-95a9-5afb4b5df07c
+  reason: Unhealthy
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: kubelet
+    host: ip-10-0-189-49.us-west-2.compute.internal
+  type: Warning
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:24:15Z"
+  involvedObject:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: istio-ingressgateway-844d586945
+    namespace: istio-system
+    resourceVersion: "1898451"
+    uid: 23d9b7ef-7fad-4cd8-b621-9ba2fe9f9702
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:15Z"
+  message: 'Deleted pod: istio-ingressgateway-844d586945-5vc4s'
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:15Z"
+    name: istio-ingressgateway-844d586945.174fea8802ebc27a
+    namespace: istio-system
+    resourceVersion: "1898455"
+    uid: f0562a56-ab28-40fe-859b-43115453a685
+  reason: SuccessfulDelete
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: replicaset-controller
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:24:13Z"
+  involvedObject:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: istio-ingressgateway
+    namespace: istio-system
+    resourceVersion: "1898405"
+    uid: 19a79f15-9f5b-4395-b241-c5e90ac8a5a8
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:13Z"
+  message: Scaled up replica set istio-ingressgateway-678f8dbfc6 to 1
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:13Z"
+    name: istio-ingressgateway.174fea878fd1e64d
+    namespace: istio-system
+    resourceVersion: "1898409"
+    uid: 7b845649-b269-4aa9-88a4-e898f82216a9
+  reason: ScalingReplicaSet
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: deployment-controller
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:24:15Z"
+  involvedObject:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: istio-ingressgateway
+    namespace: istio-system
+    resourceVersion: "1898418"
+    uid: 19a79f15-9f5b-4395-b241-c5e90ac8a5a8
+  kind: Event
+  lastTimestamp: "2023-03-26T08:24:15Z"
+  message: Scaled down replica set istio-ingressgateway-844d586945 to 0 from 1
+  metadata:
+    creationTimestamp: "2023-03-26T08:24:15Z"
+    name: istio-ingressgateway.174fea8802683669
+    namespace: istio-system
+    resourceVersion: "1898452"
+    uid: 6d92dce5-82ef-4cb8-84dc-56f4d7a612f3
+  reason: ScalingReplicaSet
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: deployment-controller
+  type: Normal
+- action: Binding
+  apiVersion: v1
+  eventTime: "2023-03-26T08:19:02.762315Z"
+  firstTimestamp: null
+  involvedObject:
+    apiVersion: v1
+    kind: Pod
+    name: istiod-basic-6fc5ddbd5d-65slf
+    namespace: istio-system
+    resourceVersion: "1896075"
+    uid: ba1e7d55-b51c-4adb-a6c9-9c00d31c43b9
+  kind: Event
+  lastTimestamp: null
+  message: Successfully assigned istio-system/istiod-basic-6fc5ddbd5d-65slf to ip-10-0-156-53.us-west-2.compute.internal
+  metadata:
+    creationTimestamp: "2023-03-26T08:19:02Z"
+    name: istiod-basic-6fc5ddbd5d-65slf.174fea3f19643256
+    namespace: istio-system
+    resourceVersion: "1896081"
+    uid: 9b9efaae-a180-4ab6-9037-cc15268f46ac
+  reason: Scheduled
+  reportingComponent: default-scheduler
+  reportingInstance: default-scheduler-ip-10-0-140-16
+  source: {}
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:19:03Z"
+  involvedObject:
+    apiVersion: v1
+    kind: Pod
+    name: istiod-basic-6fc5ddbd5d-65slf
+    namespace: istio-system
+    resourceVersion: "1896086"
+    uid: ba1e7d55-b51c-4adb-a6c9-9c00d31c43b9
+  kind: Event
+  lastTimestamp: "2023-03-26T08:19:03Z"
+  message: Add eth0 [10.128.2.81/23] from ovn-kubernetes
+  metadata:
+    creationTimestamp: "2023-03-26T08:19:03Z"
+    name: istiod-basic-6fc5ddbd5d-65slf.174fea3f3a28dce1
+    namespace: istio-system
+    resourceVersion: "1896089"
+    uid: 48da715b-dcb9-4f2d-8090-793457d9f24e
+  reason: AddedInterface
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: multus
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:19:03Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{discovery}
+    kind: Pod
+    name: istiod-basic-6fc5ddbd5d-65slf
+    namespace: istio-system
+    resourceVersion: "1896077"
+    uid: ba1e7d55-b51c-4adb-a6c9-9c00d31c43b9
+  kind: Event
+  lastTimestamp: "2023-03-26T08:19:03Z"
+  message: Container image "registry.redhat.io/openshift-service-mesh/pilot-rhel8@sha256:daa1c9b3ffde151a2efb12a7a4bf4c9665dbd4a8be0490192c32a4e5532c0ad8"
+    already present on machine
+  metadata:
+    creationTimestamp: "2023-03-26T08:19:03Z"
+    name: istiod-basic-6fc5ddbd5d-65slf.174fea3f3bab789c
+    namespace: istio-system
+    resourceVersion: "1896091"
+    uid: aa75ba30-6ae0-4a13-be08-02b915dea48b
+  reason: Pulled
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: kubelet
+    host: ip-10-0-156-53.us-west-2.compute.internal
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:19:03Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{discovery}
+    kind: Pod
+    name: istiod-basic-6fc5ddbd5d-65slf
+    namespace: istio-system
+    resourceVersion: "1896077"
+    uid: ba1e7d55-b51c-4adb-a6c9-9c00d31c43b9
+  kind: Event
+  lastTimestamp: "2023-03-26T08:19:03Z"
+  message: Created container discovery
+  metadata:
+    creationTimestamp: "2023-03-26T08:19:03Z"
+    name: istiod-basic-6fc5ddbd5d-65slf.174fea3f47b8ae83
+    namespace: istio-system
+    resourceVersion: "1896092"
+    uid: 662b392d-aa04-4a40-817c-7fb0e9f2b534
+  reason: Created
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: kubelet
+    host: ip-10-0-156-53.us-west-2.compute.internal
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:19:03Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{discovery}
+    kind: Pod
+    name: istiod-basic-6fc5ddbd5d-65slf
+    namespace: istio-system
+    resourceVersion: "1896077"
+    uid: ba1e7d55-b51c-4adb-a6c9-9c00d31c43b9
+  kind: Event
+  lastTimestamp: "2023-03-26T08:19:03Z"
+  message: Started container discovery
+  metadata:
+    creationTimestamp: "2023-03-26T08:19:03Z"
+    name: istiod-basic-6fc5ddbd5d-65slf.174fea3f49bb0953
+    namespace: istio-system
+    resourceVersion: "1896093"
+    uid: 406b5d98-bd6c-47c3-b3dc-705220b5f6c9
+  reason: Started
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: kubelet
+    host: ip-10-0-156-53.us-west-2.compute.internal
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:19:02Z"
+  involvedObject:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: istiod-basic-6fc5ddbd5d
+    namespace: istio-system
+    resourceVersion: "1896069"
+    uid: e5793d6f-3ca4-43c2-9ec8-315a2da5d527
+  kind: Event
+  lastTimestamp: "2023-03-26T08:19:02Z"
+  message: 'Created pod: istiod-basic-6fc5ddbd5d-65slf'
+  metadata:
+    creationTimestamp: "2023-03-26T08:19:02Z"
+    name: istiod-basic-6fc5ddbd5d.174fea3f18dcd495
+    namespace: istio-system
+    resourceVersion: "1896076"
+    uid: 4223e40f-d113-450d-b152-a376289b058d
+  reason: SuccessfulCreate
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: replicaset-controller
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:19:04Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{discovery}
+    kind: Pod
+    name: istiod-basic-7d6c6594c6-qjbqr
+    namespace: istio-system
+    resourceVersion: "884863"
+    uid: 055903c7-5778-44f0-842a-e1df3d05d893
+  kind: Event
+  lastTimestamp: "2023-03-26T08:19:04Z"
+  message: Stopping container discovery
+  metadata:
+    creationTimestamp: "2023-03-26T08:19:04Z"
+    name: istiod-basic-7d6c6594c6-qjbqr.174fea3f86de0a9d
+    namespace: istio-system
+    resourceVersion: "1896116"
+    uid: 7a491ea2-c1ea-4ec7-9c52-740b0a2a7a5b
+  reason: Killing
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: kubelet
+    host: ip-10-0-156-53.us-west-2.compute.internal
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:19:04Z"
+  involvedObject:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: istiod-basic-7d6c6594c6
+    namespace: istio-system
+    resourceVersion: "1896106"
+    uid: e768c422-e2c4-47b0-b703-0cedb11ebb82
+  kind: Event
+  lastTimestamp: "2023-03-26T08:19:04Z"
+  message: 'Deleted pod: istiod-basic-7d6c6594c6-qjbqr'
+  metadata:
+    creationTimestamp: "2023-03-26T08:19:04Z"
+    name: istiod-basic-7d6c6594c6.174fea3f86b0c6e3
+    namespace: istio-system
+    resourceVersion: "1896112"
+    uid: cfe469a5-7e54-448f-b198-c1c76405008c
+  reason: SuccessfulDelete
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: replicaset-controller
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:19:02Z"
+  involvedObject:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: istiod-basic
+    namespace: istio-system
+    resourceVersion: "1896066"
+    uid: 1d694308-8997-4a91-b9ea-312cc6bebdf6
+  kind: Event
+  lastTimestamp: "2023-03-26T08:19:02Z"
+  message: Scaled up replica set istiod-basic-6fc5ddbd5d to 1
+  metadata:
+    creationTimestamp: "2023-03-26T08:19:02Z"
+    name: istiod-basic.174fea3f15ec590a
+    namespace: istio-system
+    resourceVersion: "1896070"
+    uid: fb213ae3-1ba7-4063-9bb9-eb91f8edd518
+  reason: ScalingReplicaSet
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: deployment-controller
+  type: Normal
+- apiVersion: v1
+  count: 1
+  eventTime: null
+  firstTimestamp: "2023-03-26T08:19:04Z"
+  involvedObject:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: istiod-basic
+    namespace: istio-system
+    resourceVersion: "1896084"
+    uid: 1d694308-8997-4a91-b9ea-312cc6bebdf6
+  kind: Event
+  lastTimestamp: "2023-03-26T08:19:04Z"
+  message: Scaled down replica set istiod-basic-7d6c6594c6 to 0 from 1
+  metadata:
+    creationTimestamp: "2023-03-26T08:19:04Z"
+    name: istiod-basic.174fea3f860775e9
+    namespace: istio-system
+    resourceVersion: "1896109"
+    uid: 8833cdde-b356-462a-a1f8-5703d9f1c671
+  reason: ScalingReplicaSet
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: deployment-controller
+  type: Normal
+kind: EventList
+metadata:
+  resourceVersion: "1903153"

@@ -1,0 +1,573 @@
+---
+apiVersion: apps/v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"details","version":"v1"},"name":"details-v1","namespace":"istio-samples"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"details","version":"v1"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"details","version":"v1"}},"spec":{"containers":[{"image":"quay.io/maistra/examples-bookinfo-details-v1:2.3.0","imagePullPolicy":"IfNotPresent","name":"details","ports":[{"containerPort":9080}]}],"serviceAccountName":"bookinfo-details"}}}}
+    creationTimestamp: "2023-03-24T11:34:26Z"
+    generation: 3
+    labels:
+      app: details
+      version: v1
+    name: details-v1
+    namespace: istio-samples
+    resourceVersion: "856043"
+    uid: 4f9e1768-5102-4cd2-aa4b-aceaf1327155
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: details
+        version: v1
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          openshift.openshift.io/restartedAt: "2023-03-24T17:25:22.999Z"
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: details
+          version: v1
+      spec:
+        containers:
+        - image: quay.io/maistra/examples-bookinfo-details-v1:2.3.0
+          imagePullPolicy: IfNotPresent
+          name: details
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-details
+        serviceAccountName: bookinfo-details
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2023-03-24T11:34:34Z"
+      lastUpdateTime: "2023-03-24T11:34:34Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2023-03-24T11:34:26Z"
+      lastUpdateTime: "2023-03-24T17:25:25Z"
+      message: ReplicaSet "details-v1-6c4cb8c8d6" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "2"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"nginx-echo-headers","namespace":"istio-samples"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"nginx-echo-headers","version":"v1"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"nginx-echo-headers","version":"v1"}},"spec":{"containers":[{"image":"brndnmtthws/nginx-echo-headers","imagePullPolicy":"IfNotPresent","name":"nginx-echo-headers","ports":[{"containerPort":8080}]}],"serviceAccountName":"nginx-echo-headers"}}}}
+    creationTimestamp: "2023-03-24T18:14:48Z"
+    generation: 2
+    name: nginx-echo-headers
+    namespace: istio-samples
+    resourceVersion: "892026"
+    uid: ba92891d-934b-4208-970d-032bce773007
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: nginx-echo-headers
+        version: v1
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          openshift.openshift.io/restartedAt: "2023-03-24T18:37:30.513Z"
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: nginx-echo-headers
+          version: v1
+      spec:
+        containers:
+        - image: brndnmtthws/nginx-echo-headers
+          imagePullPolicy: IfNotPresent
+          name: nginx-echo-headers
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: nginx-echo-headers
+        serviceAccountName: nginx-echo-headers
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2023-03-24T18:14:55Z"
+      lastUpdateTime: "2023-03-24T18:14:55Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2023-03-24T18:14:48Z"
+      lastUpdateTime: "2023-03-24T18:37:36Z"
+      message: ReplicaSet "nginx-echo-headers-5496b749b9" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"productpage","version":"v1"},"name":"productpage-v1","namespace":"istio-samples"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"productpage","version":"v1"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"productpage","version":"v1"}},"spec":{"containers":[{"image":"quay.io/maistra/examples-bookinfo-productpage-v1:2.3.0","imagePullPolicy":"IfNotPresent","name":"productpage","ports":[{"containerPort":9080}],"volumeMounts":[{"mountPath":"/tmp","name":"tmp"}]}],"serviceAccountName":"bookinfo-productpage","volumes":[{"emptyDir":{},"name":"tmp"}]}}}}
+    creationTimestamp: "2023-03-24T11:34:36Z"
+    generation: 3
+    labels:
+      app: productpage
+      version: v1
+    name: productpage-v1
+    namespace: istio-samples
+    resourceVersion: "855885"
+    uid: e393a07d-a0b7-4e04-8532-55c35fb6e6e3
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: productpage
+        version: v1
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          openshift.openshift.io/restartedAt: "2023-03-24T17:25:08.607Z"
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: productpage
+          version: v1
+      spec:
+        containers:
+        - image: quay.io/maistra/examples-bookinfo-productpage-v1:2.3.0
+          imagePullPolicy: IfNotPresent
+          name: productpage
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-productpage
+        serviceAccountName: bookinfo-productpage
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir: {}
+          name: tmp
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2023-03-24T11:34:44Z"
+      lastUpdateTime: "2023-03-24T11:34:44Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2023-03-24T11:34:36Z"
+      lastUpdateTime: "2023-03-24T17:25:11Z"
+      message: ReplicaSet "productpage-v1-5b595fb7b" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"ratings","version":"v1"},"name":"ratings-v1","namespace":"istio-samples"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"ratings","version":"v1"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"ratings","version":"v1"}},"spec":{"containers":[{"image":"quay.io/maistra/examples-bookinfo-ratings-v1:2.3.0","imagePullPolicy":"IfNotPresent","name":"ratings","ports":[{"containerPort":9080}]}],"serviceAccountName":"bookinfo-ratings"}}}}
+    creationTimestamp: "2023-03-24T11:34:29Z"
+    generation: 3
+    labels:
+      app: ratings
+      version: v1
+    name: ratings-v1
+    namespace: istio-samples
+    resourceVersion: "856259"
+    uid: 77d951eb-175a-4652-b373-93fc937d19d2
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: ratings
+        version: v1
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          openshift.openshift.io/restartedAt: "2023-03-24T17:25:37.544Z"
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: ratings
+          version: v1
+      spec:
+        containers:
+        - image: quay.io/maistra/examples-bookinfo-ratings-v1:2.3.0
+          imagePullPolicy: IfNotPresent
+          name: ratings
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-ratings
+        serviceAccountName: bookinfo-ratings
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2023-03-24T11:34:37Z"
+      lastUpdateTime: "2023-03-24T11:34:37Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2023-03-24T11:34:29Z"
+      lastUpdateTime: "2023-03-24T17:25:40Z"
+      message: ReplicaSet "ratings-v1-5f5c47f6b6" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"reviews","version":"v1"},"name":"reviews-v1","namespace":"istio-samples"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"reviews","version":"v1"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"reviews","version":"v1"}},"spec":{"containers":[{"env":[{"name":"LOG_DIR","value":"/tmp/logs"}],"image":"quay.io/maistra/examples-bookinfo-reviews-v1:2.3.0","imagePullPolicy":"IfNotPresent","name":"reviews","ports":[{"containerPort":9080}],"volumeMounts":[{"mountPath":"/tmp","name":"tmp"},{"mountPath":"/opt/ibm/wlp/output","name":"wlp-output"}]}],"serviceAccountName":"bookinfo-reviews","volumes":[{"emptyDir":{},"name":"wlp-output"},{"emptyDir":{},"name":"tmp"}]}}}}
+    creationTimestamp: "2023-03-24T11:34:32Z"
+    generation: 3
+    labels:
+      app: reviews
+      version: v1
+    name: reviews-v1
+    namespace: istio-samples
+    resourceVersion: "856147"
+    uid: 4b26a5aa-a8e7-4fab-9b3b-06b9e78da400
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: reviews
+        version: v1
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          openshift.openshift.io/restartedAt: "2023-03-24T17:25:29.951Z"
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: reviews
+          version: v1
+      spec:
+        containers:
+        - env:
+          - name: LOG_DIR
+            value: /tmp/logs
+          image: quay.io/maistra/examples-bookinfo-reviews-v1:2.3.0
+          imagePullPolicy: IfNotPresent
+          name: reviews
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /opt/ibm/wlp/output
+            name: wlp-output
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-reviews
+        serviceAccountName: bookinfo-reviews
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir: {}
+          name: wlp-output
+        - emptyDir: {}
+          name: tmp
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2023-03-24T11:34:46Z"
+      lastUpdateTime: "2023-03-24T11:34:46Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2023-03-24T11:34:32Z"
+      lastUpdateTime: "2023-03-24T17:25:32Z"
+      message: ReplicaSet "reviews-v1-5c6f68dd57" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"reviews","version":"v2"},"name":"reviews-v2","namespace":"istio-samples"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"reviews","version":"v2"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"reviews","version":"v2"}},"spec":{"containers":[{"env":[{"name":"LOG_DIR","value":"/tmp/logs"}],"image":"quay.io/maistra/examples-bookinfo-reviews-v2:2.3.0","imagePullPolicy":"IfNotPresent","name":"reviews","ports":[{"containerPort":9080}],"volumeMounts":[{"mountPath":"/tmp","name":"tmp"},{"mountPath":"/opt/ibm/wlp/output","name":"wlp-output"}]}],"serviceAccountName":"bookinfo-reviews","volumes":[{"emptyDir":{},"name":"wlp-output"},{"emptyDir":{},"name":"tmp"}]}}}}
+    creationTimestamp: "2023-03-24T11:34:32Z"
+    generation: 3
+    labels:
+      app: reviews
+      version: v2
+    name: reviews-v2
+    namespace: istio-samples
+    resourceVersion: "856385"
+    uid: 091a1744-0f52-4945-866d-c43e335cb8c9
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: reviews
+        version: v2
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          openshift.openshift.io/restartedAt: "2023-03-24T17:25:48.606Z"
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: reviews
+          version: v2
+      spec:
+        containers:
+        - env:
+          - name: LOG_DIR
+            value: /tmp/logs
+          image: quay.io/maistra/examples-bookinfo-reviews-v2:2.3.0
+          imagePullPolicy: IfNotPresent
+          name: reviews
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /opt/ibm/wlp/output
+            name: wlp-output
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-reviews
+        serviceAccountName: bookinfo-reviews
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir: {}
+          name: wlp-output
+        - emptyDir: {}
+          name: tmp
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2023-03-24T11:34:46Z"
+      lastUpdateTime: "2023-03-24T11:34:46Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2023-03-24T11:34:33Z"
+      lastUpdateTime: "2023-03-24T17:25:51Z"
+      message: ReplicaSet "reviews-v2-85dc48554f" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"reviews","version":"v3"},"name":"reviews-v3","namespace":"istio-samples"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"reviews","version":"v3"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"reviews","version":"v3"}},"spec":{"containers":[{"env":[{"name":"LOG_DIR","value":"/tmp/logs"}],"image":"quay.io/maistra/examples-bookinfo-reviews-v3:2.3.0","imagePullPolicy":"IfNotPresent","name":"reviews","ports":[{"containerPort":9080}],"volumeMounts":[{"mountPath":"/tmp","name":"tmp"},{"mountPath":"/opt/ibm/wlp/output","name":"wlp-output"}]}],"serviceAccountName":"bookinfo-reviews","volumes":[{"emptyDir":{},"name":"wlp-output"},{"emptyDir":{},"name":"tmp"}]}}}}
+    creationTimestamp: "2023-03-24T11:34:33Z"
+    generation: 3
+    labels:
+      app: reviews
+      version: v3
+    name: reviews-v3
+    namespace: istio-samples
+    resourceVersion: "856553"
+    uid: 022113b0-02f2-42b9-a642-969c475509ce
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: reviews
+        version: v3
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          openshift.openshift.io/restartedAt: "2023-03-24T17:26:04.022Z"
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: reviews
+          version: v3
+      spec:
+        containers:
+        - env:
+          - name: LOG_DIR
+            value: /tmp/logs
+          image: quay.io/maistra/examples-bookinfo-reviews-v3:2.3.0
+          imagePullPolicy: IfNotPresent
+          name: reviews
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /opt/ibm/wlp/output
+            name: wlp-output
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-reviews
+        serviceAccountName: bookinfo-reviews
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir: {}
+          name: wlp-output
+        - emptyDir: {}
+          name: tmp
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2023-03-24T11:34:46Z"
+      lastUpdateTime: "2023-03-24T11:34:46Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2023-03-24T11:34:33Z"
+      lastUpdateTime: "2023-03-24T17:26:06Z"
+      message: ReplicaSet "reviews-v3-6d5cf4f8d" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+kind: DeploymentList
+metadata:
+  resourceVersion: "1903160"

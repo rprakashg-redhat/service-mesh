@@ -1,0 +1,30 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"security.istio.io/v1beta1","kind":"AuthorizationPolicy","metadata":{"annotations":{},"name":"requirejwt","namespace":"istio-system"},"spec":{"action":"DENY","rules":[{"from":[{"source":{"notRequestPrincipals":["*"]}}]}],"selector":{"matchLabels":{"istio":"ingressgateway"}}}}
+  creationTimestamp: "2023-03-24T17:43:02Z"
+  generation: 3
+  name: requirejwt
+  namespace: istio-system
+  resourceVersion: "1896239"
+  uid: c205752d-8386-4951-addb-5a6f34fa8652
+spec:
+  action: DENY
+  rules:
+  - from:
+    - source:
+        notRequestPrincipals:
+        - '*'
+  selector:
+    matchLabels:
+      istio: ingressgateway
+status:
+  conditions:
+  - lastProbeTime: "2023-03-26T08:19:16.890286916Z"
+    lastTransitionTime: "2023-03-26T08:19:16.890287088Z"
+    message: 36/36 proxies up to date.
+    status: "True"
+    type: Reconciled
+  observedGeneration: "3"

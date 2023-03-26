@@ -1,0 +1,320 @@
+---
+apiVersion: batch/v1
+items:
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    annotations:
+      batch.kubernetes.io/job-tracking: ""
+    creationTimestamp: "2023-03-24T23:55:00Z"
+    generation: 1
+    labels:
+      app: jaeger
+      app.kubernetes.io/component: cronjob-es-index-cleaner
+      app.kubernetes.io/instance: jaeger
+      app.kubernetes.io/managed-by: jaeger-operator
+      app.kubernetes.io/name: jaeger-es-index-cleaner
+      app.kubernetes.io/part-of: jaeger
+      controller-uid: db47c2db-cb40-4281-ad5c-886d20e5f7f4
+      job-name: jaeger-es-index-cleaner-27995035
+    name: jaeger-es-index-cleaner-27995035
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CronJob
+      name: jaeger-es-index-cleaner
+      uid: fc7dd49a-44a8-410d-8ef3-39c1a2f5fe81
+    resourceVersion: "1034132"
+    uid: db47c2db-cb40-4281-ad5c-886d20e5f7f4
+  spec:
+    backoffLimit: 6
+    completionMode: NonIndexed
+    parallelism: 1
+    selector:
+      matchLabels:
+        controller-uid: db47c2db-cb40-4281-ad5c-886d20e5f7f4
+    suspend: false
+    template:
+      metadata:
+        annotations:
+          linkerd.io/inject: disabled
+          prometheus.io/scrape: "false"
+          sidecar.istio.io/inject: "false"
+        creationTimestamp: null
+        labels:
+          app: jaeger
+          app.kubernetes.io/component: cronjob-es-index-cleaner
+          app.kubernetes.io/instance: jaeger
+          app.kubernetes.io/managed-by: jaeger-operator
+          app.kubernetes.io/name: jaeger-es-index-cleaner
+          app.kubernetes.io/part-of: jaeger
+          controller-uid: db47c2db-cb40-4281-ad5c-886d20e5f7f4
+          job-name: jaeger-es-index-cleaner-27995035
+      spec:
+        affinity:
+          nodeAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
+                - key: beta.kubernetes.io/arch
+                  operator: In
+                  values:
+                  - amd64
+              weight: 2
+            - preference:
+                matchExpressions:
+                - key: beta.kubernetes.io/arch
+                  operator: In
+                  values:
+                  - ppc64le
+              weight: 2
+            - preference:
+                matchExpressions:
+                - key: beta.kubernetes.io/arch
+                  operator: In
+                  values:
+                  - s390x
+              weight: 2
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: beta.kubernetes.io/arch
+                  operator: In
+                  values:
+                  - amd64
+                  - ppc64le
+                  - s390x
+        containers:
+        - args:
+          - "2"
+          - https://elasticsearch:9200
+          env:
+          - name: SKIP_DEPENDENCIES
+            value: "true"
+          - name: ES_TLS_ENABLED
+            value: "true"
+          - name: ES_TLS_CA
+            value: /certs/ca
+          - name: ES_TLS_KEY
+            value: /certs/key
+          - name: ES_TLS_CERT
+            value: /certs/cert
+          - name: SHARDS
+            value: "3"
+          - name: REPLICAS
+            value: "1"
+          image: registry.redhat.io/rhosdt/jaeger-es-index-cleaner-rhel8@sha256:0065bf16da7fdf11c018388a4eb33349610129ea0465491d2bb6b24c275621dc
+          imagePullPolicy: IfNotPresent
+          name: jaeger-es-index-cleaner
+          resources:
+            requests:
+              cpu: 10m
+              memory: 128Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/proxy/htpasswd
+            name: secret-htpasswd
+          - mountPath: /etc/pki/ca-trust/extracted/pem/
+            name: trusted-ca-bundle
+            readOnly: true
+          - mountPath: /certs
+            name: certs
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        restartPolicy: Never
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: jaeger
+        serviceAccountName: jaeger
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: secret-htpasswd
+          secret:
+            defaultMode: 420
+            secretName: htpasswd
+        - configMap:
+            defaultMode: 420
+            items:
+            - key: ca-bundle.crt
+              path: tls-ca-bundle.pem
+            name: trusted-ca-bundle
+            optional: true
+          name: trusted-ca-bundle
+        - name: certs
+          secret:
+            defaultMode: 420
+            secretName: jaeger-curator
+  status:
+    completionTime: "2023-03-24T23:55:07Z"
+    conditions:
+    - lastProbeTime: "2023-03-24T23:55:07Z"
+      lastTransitionTime: "2023-03-24T23:55:07Z"
+      status: "True"
+      type: Complete
+    ready: 0
+    startTime: "2023-03-24T23:55:00Z"
+    succeeded: 1
+    uncountedTerminatedPods: {}
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    annotations:
+      batch.kubernetes.io/job-tracking: ""
+    creationTimestamp: "2023-03-25T23:55:00Z"
+    generation: 1
+    labels:
+      app: jaeger
+      app.kubernetes.io/component: cronjob-es-index-cleaner
+      app.kubernetes.io/instance: jaeger
+      app.kubernetes.io/managed-by: jaeger-operator
+      app.kubernetes.io/name: jaeger-es-index-cleaner
+      app.kubernetes.io/part-of: jaeger
+      controller-uid: c2a0def7-183a-4161-bffd-cb9d6c9b022b
+      job-name: jaeger-es-index-cleaner-27996475
+    name: jaeger-es-index-cleaner-27996475
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CronJob
+      name: jaeger-es-index-cleaner
+      uid: fc7dd49a-44a8-410d-8ef3-39c1a2f5fe81
+    resourceVersion: "1672734"
+    uid: c2a0def7-183a-4161-bffd-cb9d6c9b022b
+  spec:
+    backoffLimit: 6
+    completionMode: NonIndexed
+    parallelism: 1
+    selector:
+      matchLabels:
+        controller-uid: c2a0def7-183a-4161-bffd-cb9d6c9b022b
+    suspend: false
+    template:
+      metadata:
+        annotations:
+          linkerd.io/inject: disabled
+          prometheus.io/scrape: "false"
+          sidecar.istio.io/inject: "false"
+        creationTimestamp: null
+        labels:
+          app: jaeger
+          app.kubernetes.io/component: cronjob-es-index-cleaner
+          app.kubernetes.io/instance: jaeger
+          app.kubernetes.io/managed-by: jaeger-operator
+          app.kubernetes.io/name: jaeger-es-index-cleaner
+          app.kubernetes.io/part-of: jaeger
+          controller-uid: c2a0def7-183a-4161-bffd-cb9d6c9b022b
+          job-name: jaeger-es-index-cleaner-27996475
+      spec:
+        affinity:
+          nodeAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
+                - key: beta.kubernetes.io/arch
+                  operator: In
+                  values:
+                  - amd64
+              weight: 2
+            - preference:
+                matchExpressions:
+                - key: beta.kubernetes.io/arch
+                  operator: In
+                  values:
+                  - ppc64le
+              weight: 2
+            - preference:
+                matchExpressions:
+                - key: beta.kubernetes.io/arch
+                  operator: In
+                  values:
+                  - s390x
+              weight: 2
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: beta.kubernetes.io/arch
+                  operator: In
+                  values:
+                  - amd64
+                  - ppc64le
+                  - s390x
+        containers:
+        - args:
+          - "2"
+          - https://elasticsearch:9200
+          env:
+          - name: SKIP_DEPENDENCIES
+            value: "true"
+          - name: ES_TLS_ENABLED
+            value: "true"
+          - name: ES_TLS_CA
+            value: /certs/ca
+          - name: ES_TLS_KEY
+            value: /certs/key
+          - name: ES_TLS_CERT
+            value: /certs/cert
+          - name: SHARDS
+            value: "3"
+          - name: REPLICAS
+            value: "1"
+          image: registry.redhat.io/rhosdt/jaeger-es-index-cleaner-rhel8@sha256:0065bf16da7fdf11c018388a4eb33349610129ea0465491d2bb6b24c275621dc
+          imagePullPolicy: IfNotPresent
+          name: jaeger-es-index-cleaner
+          resources:
+            requests:
+              cpu: 10m
+              memory: 128Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/proxy/htpasswd
+            name: secret-htpasswd
+          - mountPath: /etc/pki/ca-trust/extracted/pem/
+            name: trusted-ca-bundle
+            readOnly: true
+          - mountPath: /certs
+            name: certs
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        restartPolicy: Never
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: jaeger
+        serviceAccountName: jaeger
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: secret-htpasswd
+          secret:
+            defaultMode: 420
+            secretName: htpasswd
+        - configMap:
+            defaultMode: 420
+            items:
+            - key: ca-bundle.crt
+              path: tls-ca-bundle.pem
+            name: trusted-ca-bundle
+            optional: true
+          name: trusted-ca-bundle
+        - name: certs
+          secret:
+            defaultMode: 420
+            secretName: jaeger-curator
+  status:
+    completionTime: "2023-03-25T23:55:11Z"
+    conditions:
+    - lastProbeTime: "2023-03-25T23:55:11Z"
+      lastTransitionTime: "2023-03-25T23:55:11Z"
+      status: "True"
+      type: Complete
+    ready: 0
+    startTime: "2023-03-25T23:55:00Z"
+    succeeded: 1
+    uncountedTerminatedPods: {}
+kind: JobList
+metadata:
+  resourceVersion: "1903151"

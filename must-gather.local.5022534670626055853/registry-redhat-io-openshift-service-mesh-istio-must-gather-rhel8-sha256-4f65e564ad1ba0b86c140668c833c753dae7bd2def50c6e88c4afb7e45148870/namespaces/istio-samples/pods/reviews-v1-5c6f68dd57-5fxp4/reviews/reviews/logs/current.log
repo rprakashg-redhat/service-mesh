@@ -1,0 +1,9 @@
+2023-03-24T17:25:31.292026024Z 
+2023-03-24T17:25:31.711891944Z Launching defaultServer (WebSphere Application Server 20.0.0.6/wlp-1.0.41.cl200620200528-0414) on IBM J9 VM, version 8.0.6.16 - pxa6480sr6fp16-20200902_01(SR6 FP16) (en_US)
+2023-03-24T17:25:31.905833456Z [AUDIT   ] CWWKE0001I: The server defaultServer has been launched.
+2023-03-24T17:25:31.912363578Z [AUDIT   ] CWWKE0100I: This product is licensed for development, and limited production use. The full license terms can be viewed here: https://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/license/base_ilan/ilan/20.0.0.6/lafiles/en.html
+2023-03-24T17:25:33.275889746Z [AUDIT   ] CWWKG0093A: Processing configuration drop-ins resource: /opt/ibm/wlp/usr/servers/defaultServer/configDropins/defaults/keystore.xml
+2023-03-24T17:25:35.696493193Z [AUDIT   ] CWWKT0016I: Web application available (default_host): http://reviews-v1-5c6f68dd57-5fxp4:9080/
+2023-03-24T17:25:35.769880311Z [AUDIT   ] CWWKZ0001I: Application reviews-app started in 0.339 seconds.
+2023-03-24T17:25:35.861159886Z [AUDIT   ] CWWKF0012I: The server installed the following features: [jaxrs-2.0, jaxrsClient-2.0, json-1.0, jsonp-1.0, servlet-3.1].
+2023-03-24T17:25:35.861930171Z [AUDIT   ] CWWKF0011I: The defaultServer server is ready to run a smarter planet. The defaultServer server started in 4.276 seconds.

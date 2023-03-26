@@ -1,0 +1,47 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  annotations:
+    include.release.openshift.io/self-managed-high-availability: "true"
+    include.release.openshift.io/single-node-developer: "true"
+    service.beta.openshift.io/inject-cabundle: "true"
+  creationTimestamp: "2023-03-23T06:27:24Z"
+  generation: 2
+  labels:
+    app: csi-snapshot-webhook
+  name: snapshot.storage.k8s.io
+  resourceVersion: "4614"
+  uid: 6a56fa65-3f70-40fc-bf9d-7064a8a2a6dc
+webhooks:
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURVVENDQWptZ0F3SUJBZ0lJU2VCaVlGL2l4ZHN3RFFZSktvWklodmNOQVFFTEJRQXdOakUwTURJR0ExVUUKQXd3cmIzQmxibk5vYVdaMExYTmxjblpwWTJVdGMyVnlkbWx1WnkxemFXZHVaWEpBTVRZM09UVTFNamcwTmpBZQpGdzB5TXpBek1qTXdOakkzTWpWYUZ3MHlOVEExTWpFd05qSTNNalphTURZeE5EQXlCZ05WQkFNTUsyOXdaVzV6CmFHbG1kQzF6WlhKMmFXTmxMWE5sY25acGJtY3RjMmxuYm1WeVFERTJOemsxTlRJNE5EWXdnZ0VpTUEwR0NTcUcKU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRQ2VIN2tjNTFwYVE0dWRUdXpnZ0JlR0RDcW1PdWNxb2hOegpJamdtQUJuVlAwVGlVWkJHWlErcC9HRWYzMlF3YWw0b2VtWVdyL1MxM1BIUGlyQmhlMXY0cUFlSnh1Sjl6NTN0Cm0vUittMHFQc0NIY1YvVndEQ0ZxOTk0NUZ5aEhWcGxQUHA3MzlUMmtWdU11OEx2YmRsZGUxNEFLYTZOazJTdTUKejY3Z1lhVjM4NndkWG5KZFZjRWZMM0JGUTQzNnNycGhMUiszdCtVRDVyR3ZUdVd3TThPeThhSVhhWS9SRGxvTAo3KzNFeEFXNVFPMSs2VDIvRUZBRTNEZ25PTFFqMU1WL08yeVpOYi9LeUVyTlovMDBPanVlNzNkNGhJanlrVFFzCm1Yc0ZJQ25nbG92Kzk4cDlEM0F6U3U3NkVWMCtFbUNiT3FjMzVUd2ZaSG9xWkZicjRWdmRBZ01CQUFHall6QmgKTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlFEYUVzVgoxdEpWZTVlNXBvdDBWWHd3Skk5S2FqQWZCZ05WSFNNRUdEQVdnQlFEYUVzVjF0SlZlNWU1cG90MFZYd3dKSTlLCmFqQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFjNjZHMzFmcGhaeWVjYkZmZnpZa3hadURzS3g1bjdyOFJGSVMKbmZTZWZKcURQM1VqdDVaWEFmYXhHZ1pycFc2VmREb3JQMnNhUnlLSlBKNURQbjdvaTZlaFdEODFWWHhUcXUwLwp1MXY0bHhRRXpOTWMydVBFU2N6bFprTS9OSlNHWlBON3ZycndpS2xJU3RRUElyUnQyUlZCbWNibTgrb0NvZGIrCjFIRkYxMm5IL0dXSG5GVW1Iei9RbWJQMy8zcTk3UUV6ZVdDVDNSc3p4RnNtL3NEMmJlS3gxRHU2UkpCaFNVTXoKczZqU29udUFLV2tVV0Y4c0ttUDZqWkM2akFBbjgwMWdyL1VqNEk0TXowQ1phNjZxUkJpMVFDSVcxc1V6ZHhaSQpzUytreUc4cWlVL0M0aDExNExVb0pmWHJaWEJHZitiV1hENW41em5GU2Job0tXUUd2UT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    service:
+      name: csi-snapshot-webhook
+      namespace: openshift-cluster-storage-operator
+      path: /volumesnapshot
+      port: 443
+  failurePolicy: Ignore
+  matchPolicy: Equivalent
+  name: volumesnapshotclasses.snapshot.storage.k8s.io
+  namespaceSelector: {}
+  objectSelector: {}
+  rules:
+  - apiGroups:
+    - snapshot.storage.k8s.io
+    apiVersions:
+    - v1beta1
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - volumesnapshots
+    - volumesnapshotcontents
+    - volumesnapshotclasses
+    scope: '*'
+  sideEffects: None
+  timeoutSeconds: 10

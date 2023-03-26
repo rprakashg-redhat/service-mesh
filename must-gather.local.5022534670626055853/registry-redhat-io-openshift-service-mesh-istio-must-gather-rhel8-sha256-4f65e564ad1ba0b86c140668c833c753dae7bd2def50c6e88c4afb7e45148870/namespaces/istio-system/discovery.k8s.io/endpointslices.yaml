@@ -1,0 +1,761 @@
+---
+apiVersion: discovery.k8s.io/v1
+items:
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.131.0.63
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-189-49.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: elasticsearch-cdm-istiosystemjaeger-1-64b7c88b45-d9mbb
+      namespace: istio-system
+      uid: d522b994-607d-4e67-8017-21e380e5fb41
+    zone: us-west-2b
+  - addresses:
+    - 10.128.2.68
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: elasticsearch-cdm-istiosystemjaeger-3-5d89c85dff-76kl9
+      namespace: istio-system
+      uid: 7a2ebcfa-6fb8-4304-949e-289a1b6ae616
+    zone: us-west-2a
+  - addresses:
+    - 10.129.2.175
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-215-253.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: elasticsearch-cdm-istiosystemjaeger-2-7745b79d6-h629v
+      namespace: istio-system
+      uid: a72680eb-b3ba-4a58-9fad-f3d47594190d
+    zone: us-west-2c
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2023-03-24T17:29:16Z"
+    creationTimestamp: "2023-03-24T17:28:34Z"
+    generateName: elasticsearch-
+    generation: 7
+    labels:
+      cluster-name: elasticsearch
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: elasticsearch
+    name: elasticsearch-cjzsb
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: elasticsearch
+      uid: 13e973ca-09de-48ae-8bf5-21dc931a243d
+    resourceVersion: "859771"
+    uid: ad6962af-3da2-432a-ad52-4a99faa2748d
+  ports:
+  - name: elasticsearch
+    port: 60000
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.131.0.63
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-189-49.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: elasticsearch-cdm-istiosystemjaeger-1-64b7c88b45-d9mbb
+      namespace: istio-system
+      uid: d522b994-607d-4e67-8017-21e380e5fb41
+    zone: us-west-2b
+  - addresses:
+    - 10.128.2.68
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: elasticsearch-cdm-istiosystemjaeger-3-5d89c85dff-76kl9
+      namespace: istio-system
+      uid: 7a2ebcfa-6fb8-4304-949e-289a1b6ae616
+    zone: us-west-2a
+  - addresses:
+    - 10.129.2.175
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-215-253.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: elasticsearch-cdm-istiosystemjaeger-2-7745b79d6-h629v
+      namespace: istio-system
+      uid: a72680eb-b3ba-4a58-9fad-f3d47594190d
+    zone: us-west-2c
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2023-03-24T17:29:16Z"
+    creationTimestamp: "2023-03-24T17:28:34Z"
+    generateName: elasticsearch-cluster-
+    generation: 7
+    labels:
+      cluster-name: elasticsearch
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: elasticsearch-cluster
+    name: elasticsearch-cluster-qv8c9
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: elasticsearch-cluster
+      uid: c217f814-48f7-4758-ab6a-24d75a38dc70
+    resourceVersion: "859774"
+    uid: cf8daf7a-5b77-4a32-a87f-f2ae8d46f0ef
+  ports:
+  - name: elasticsearch
+    port: 9300
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.131.0.63
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-189-49.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: elasticsearch-cdm-istiosystemjaeger-1-64b7c88b45-d9mbb
+      namespace: istio-system
+      uid: d522b994-607d-4e67-8017-21e380e5fb41
+    zone: us-west-2b
+  - addresses:
+    - 10.128.2.68
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: elasticsearch-cdm-istiosystemjaeger-3-5d89c85dff-76kl9
+      namespace: istio-system
+      uid: 7a2ebcfa-6fb8-4304-949e-289a1b6ae616
+    zone: us-west-2a
+  - addresses:
+    - 10.129.2.175
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-215-253.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: elasticsearch-cdm-istiosystemjaeger-2-7745b79d6-h629v
+      namespace: istio-system
+      uid: a72680eb-b3ba-4a58-9fad-f3d47594190d
+    zone: us-west-2c
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2023-03-24T17:29:16Z"
+    creationTimestamp: "2023-03-24T17:28:34Z"
+    generateName: elasticsearch-metrics-
+    generation: 7
+    labels:
+      cluster-name: elasticsearch
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: elasticsearch-metrics
+      scrape-metrics: enabled
+    name: elasticsearch-metrics-ftt2s
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: elasticsearch-metrics
+      uid: b27d12a4-c85c-45ef-8960-eebe0f9836f7
+    resourceVersion: "859773"
+    uid: cd371143-605a-49f9-a0d4-dc6c7fec51c4
+  ports:
+  - name: elasticsearch
+    port: 60001
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.128.2.67
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: grafana-655cf7756-glfcp
+      namespace: istio-system
+      uid: 22b83b6f-965d-4d08-b489-e96f67274a4b
+    zone: us-west-2a
+  kind: EndpointSlice
+  metadata:
+    creationTimestamp: "2023-03-24T17:28:23Z"
+    generateName: grafana-
+    generation: 6
+    labels:
+      app: grafana
+      app.kubernetes.io/component: grafana
+      app.kubernetes.io/instance: istio-system
+      app.kubernetes.io/managed-by: maistra-istio-operator
+      app.kubernetes.io/name: grafana
+      app.kubernetes.io/part-of: istio
+      app.kubernetes.io/version: 2.3.2-1-5
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: grafana
+      maistra-version: 2.3.2
+      maistra.io/owner: istio-system
+      maistra.io/owner-name: basic
+      release: istio
+    name: grafana-hdvmm
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: grafana
+      uid: a16f916f-de41-48cf-b7da-0d4d5ffb36ae
+    resourceVersion: "885977"
+    uid: 160762fc-4a00-460f-bd1f-936259ff1126
+  ports:
+  - name: http
+    port: 3001
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.129.2.174
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-215-253.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: istio-egressgateway-74b6d5dd78-2tnlx
+      namespace: istio-system
+      uid: b1e097c1-42be-4675-8772-22bd0fb2225d
+    zone: us-west-2c
+  kind: EndpointSlice
+  metadata:
+    creationTimestamp: "2023-03-24T17:28:23Z"
+    generateName: istio-egressgateway-
+    generation: 15
+    labels:
+      app: istio-egressgateway
+      app.kubernetes.io/component: istio-egress
+      app.kubernetes.io/instance: istio-system
+      app.kubernetes.io/managed-by: maistra-istio-operator
+      app.kubernetes.io/name: istio-egress
+      app.kubernetes.io/part-of: istio
+      app.kubernetes.io/version: 2.3.2-1-5
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      istio: egressgateway
+      istio.io/rev: basic
+      kubernetes.io/service-name: istio-egressgateway
+      maistra-version: 2.3.2
+      maistra.io/owner: istio-system
+      maistra.io/owner-name: basic
+      release: istio
+    name: istio-egressgateway-g6dvt
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: istio-egressgateway
+      uid: 72aaf81d-d575-45b8-89cf-642b2ed416c5
+    resourceVersion: "886100"
+    uid: c3c41208-3d0e-4aee-9b63-49f8ea78da87
+  ports:
+  - name: http2
+    port: 8080
+    protocol: TCP
+  - name: https
+    port: 8443
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.131.0.222
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-189-49.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: istio-ingressgateway-678f8dbfc6-h778h
+      namespace: istio-system
+      uid: a4424184-d6e4-4fbf-8dc7-5a91268d77ff
+    zone: us-west-2b
+  kind: EndpointSlice
+  metadata:
+    creationTimestamp: "2023-03-24T17:28:23Z"
+    generateName: istio-ingressgateway-
+    generation: 36
+    labels:
+      app: istio-ingressgateway
+      app.kubernetes.io/component: istio-ingress
+      app.kubernetes.io/instance: istio-system
+      app.kubernetes.io/managed-by: maistra-istio-operator
+      app.kubernetes.io/name: istio-ingress
+      app.kubernetes.io/part-of: istio
+      app.kubernetes.io/version: 2.3.2-1-5
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      istio: ingressgateway
+      istio.io/rev: basic
+      kubernetes.io/service-name: istio-ingressgateway
+      maistra-version: 2.3.2
+      maistra.io/owner: istio-system
+      maistra.io/owner-name: basic
+      release: istio
+    name: istio-ingressgateway-kt6n4
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: istio-ingressgateway
+      uid: 04347d63-2ec4-4119-b26f-514e8ed5d458
+    resourceVersion: "1898520"
+    uid: e2b3065d-6e4d-4eec-b929-05e3f717243a
+  ports:
+  - name: http2
+    port: 8080
+    protocol: TCP
+  - name: https
+    port: 8443
+    protocol: TCP
+  - name: status-port
+    port: 15021
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.128.2.81
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: istiod-basic-6fc5ddbd5d-65slf
+      namespace: istio-system
+      uid: ba1e7d55-b51c-4adb-a6c9-9c00d31c43b9
+    zone: us-west-2a
+  kind: EndpointSlice
+  metadata:
+    creationTimestamp: "2023-03-24T17:28:10Z"
+    generateName: istiod-basic-
+    generation: 21
+    labels:
+      app: istiod
+      app.kubernetes.io/component: istio-discovery
+      app.kubernetes.io/instance: istio-system
+      app.kubernetes.io/managed-by: maistra-istio-operator
+      app.kubernetes.io/name: istio-discovery
+      app.kubernetes.io/part-of: istio
+      app.kubernetes.io/version: 2.3.2-1-5
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      istio: pilot
+      istio.io/rev: basic
+      kubernetes.io/service-name: istiod-basic
+      maistra-version: 2.3.2
+      maistra.io/owner: istio-system
+      maistra.io/owner-name: basic
+      release: istio
+    name: istiod-basic-5hxvr
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: istiod-basic
+      uid: bcf6bbf2-a497-44ca-90f9-34e628dbd48e
+    resourceVersion: "1896144"
+    uid: 2b4254c4-5148-453f-bd1f-808ed0377df8
+  ports:
+  - name: https-dns
+    port: 15012
+    protocol: TCP
+  - name: https-webhook
+    port: 15017
+    protocol: TCP
+  - name: http-discovery
+    port: 8188
+    protocol: TCP
+  - name: grpc-xds
+    port: 15010
+    protocol: TCP
+  - name: http-monitoring
+    port: 15014
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.129.2.176
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-215-253.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: jaeger-collector-6665599fc4-pxs52
+      namespace: istio-system
+      uid: 6f434a85-2f14-4432-affa-c0fc669c028d
+    zone: us-west-2c
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2023-03-24T17:29:19Z"
+    creationTimestamp: "2023-03-24T17:29:17Z"
+    generateName: jaeger-collector-headless-
+    generation: 3
+    labels:
+      app: jaeger
+      app.kubernetes.io/component: service-collector
+      app.kubernetes.io/instance: jaeger
+      app.kubernetes.io/managed-by: jaeger-operator
+      app.kubernetes.io/name: jaeger-collector
+      app.kubernetes.io/part-of: jaeger
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: jaeger-collector-headless
+      service.kubernetes.io/headless: ""
+    name: jaeger-collector-headless-7q2x7
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: jaeger-collector-headless
+      uid: b56481c9-09a7-4266-bf22-971f54573762
+    resourceVersion: "859905"
+    uid: e8201594-474f-40f2-8605-a27700801e6f
+  ports:
+  - name: tls-grpc-jaeger
+    port: 14250
+    protocol: TCP
+  - name: grpc-otlp
+    port: 4317
+    protocol: TCP
+  - name: http-otlp
+    port: 4318
+    protocol: TCP
+  - name: http-zipkin
+    port: 9411
+    protocol: TCP
+  - name: http-c-binary-trft
+    port: 14268
+    protocol: TCP
+  - name: http-c-tchan-trft
+    port: 14267
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.129.2.176
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-215-253.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: jaeger-collector-6665599fc4-pxs52
+      namespace: istio-system
+      uid: 6f434a85-2f14-4432-affa-c0fc669c028d
+    zone: us-west-2c
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2023-03-24T17:29:19Z"
+    creationTimestamp: "2023-03-24T17:29:17Z"
+    generateName: jaeger-collector-
+    generation: 3
+    labels:
+      app: jaeger
+      app.kubernetes.io/component: service-collector
+      app.kubernetes.io/instance: jaeger
+      app.kubernetes.io/managed-by: jaeger-operator
+      app.kubernetes.io/name: jaeger-collector
+      app.kubernetes.io/part-of: jaeger
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: jaeger-collector
+    name: jaeger-collector-pmdgj
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: jaeger-collector
+      uid: 35119d2a-cb90-4332-9a64-73bdaf19320c
+    resourceVersion: "859903"
+    uid: 5139f190-2b48-4fd7-b0d9-b756fa22d69a
+  ports:
+  - name: tls-grpc-jaeger
+    port: 14250
+    protocol: TCP
+  - name: grpc-otlp
+    port: 4317
+    protocol: TCP
+  - name: http-otlp
+    port: 4318
+    protocol: TCP
+  - name: http-zipkin
+    port: 9411
+    protocol: TCP
+  - name: http-c-binary-trft
+    port: 14268
+    protocol: TCP
+  - name: http-c-tchan-trft
+    port: 14267
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.129.2.177
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-215-253.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: jaeger-query-54c8d9c5b9-wq6hm
+      namespace: istio-system
+      uid: 688409a9-0c13-4026-9971-f82e6e15224c
+    zone: us-west-2c
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2023-03-24T17:29:20Z"
+    creationTimestamp: "2023-03-24T17:29:17Z"
+    generateName: jaeger-query-
+    generation: 3
+    labels:
+      app: jaeger
+      app.kubernetes.io/component: service-query
+      app.kubernetes.io/instance: jaeger
+      app.kubernetes.io/managed-by: jaeger-operator
+      app.kubernetes.io/name: jaeger-query
+      app.kubernetes.io/part-of: jaeger
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: jaeger-query
+    name: jaeger-query-hsp4c
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: jaeger-query
+      uid: 67ca8f1c-02ce-4f0c-a0e5-cf17fb6c2f28
+    resourceVersion: "859922"
+    uid: 8da4c5a3-7db8-471f-b28a-328430d5fc26
+  ports:
+  - name: grpc-query
+    port: 16685
+    protocol: TCP
+  - name: https-query
+    port: 8443
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.128.2.70
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: kiali-6c47d88b48-fhksv
+      namespace: istio-system
+      uid: 0de269b8-acf5-459a-9cb0-3857fd40a7f0
+    zone: us-west-2a
+  kind: EndpointSlice
+  metadata:
+    creationTimestamp: "2023-03-24T17:28:49Z"
+    generateName: kiali-
+    generation: 13
+    labels:
+      app: kiali
+      app.kubernetes.io/instance: kiali
+      app.kubernetes.io/name: kiali
+      app.kubernetes.io/part-of: kiali
+      app.kubernetes.io/version: b38ef0fd4444e449f7f6cf84f6aa7558d502c9e848181a936bc338cd0e4aXXX
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: kiali
+      version: b38ef0fd4444e449f7f6cf84f6aa7558d502c9e848181a936bc338cd0e4aXXX
+    name: kiali-vvbh9
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: kiali
+      uid: 30c41738-6718-462e-bf4c-6cefeb4a82bb
+    resourceVersion: "860658"
+    uid: fe363e4f-61de-47f1-a79e-5acc621cb568
+  ports:
+  - name: http-metrics
+    port: 9090
+    protocol: TCP
+  - name: tcp
+    port: 20001
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.128.2.64
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-156-53.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: prometheus-6fdb86d67b-rmxmk
+      namespace: istio-system
+      uid: f6e410dd-209b-438e-ac74-1da81d13b8f8
+    zone: us-west-2a
+  kind: EndpointSlice
+  metadata:
+    creationTimestamp: "2023-03-24T17:28:13Z"
+    generateName: prometheus-
+    generation: 6
+    labels:
+      app: prometheus
+      app.kubernetes.io/component: prometheus
+      app.kubernetes.io/instance: istio-system
+      app.kubernetes.io/managed-by: maistra-istio-operator
+      app.kubernetes.io/name: prometheus
+      app.kubernetes.io/part-of: istio
+      app.kubernetes.io/version: 2.3.2-1-5
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: prometheus
+      maistra-version: 2.3.2
+      maistra.io/owner: istio-system
+      maistra.io/owner-name: basic
+      release: istio
+    name: prometheus-gjcfr
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: prometheus
+      uid: 34a07251-e5fb-452b-99e3-c5a4dc453a64
+    resourceVersion: "885883"
+    uid: 6527946d-4e84-4fb8-8381-7eeac2e5b756
+  ports:
+  - name: http-prometheus
+    port: 3001
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.129.2.176
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: ip-10-0-215-253.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: jaeger-collector-6665599fc4-pxs52
+      namespace: istio-system
+      uid: 6f434a85-2f14-4432-affa-c0fc669c028d
+    zone: us-west-2c
+  kind: EndpointSlice
+  metadata:
+    creationTimestamp: "2023-03-24T17:28:22Z"
+    generateName: zipkin-
+    generation: 6
+    labels:
+      app: jaeger
+      app.kubernetes.io/component: tracing
+      app.kubernetes.io/instance: istio-system
+      app.kubernetes.io/managed-by: maistra-istio-operator
+      app.kubernetes.io/name: tracing
+      app.kubernetes.io/part-of: istio
+      app.kubernetes.io/version: 2.3.2-1-5
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: zipkin
+      maistra-version: 2.3.2
+      maistra.io/owner: istio-system
+      maistra.io/owner-name: basic
+      release: istio
+    name: zipkin-j5dh6
+    namespace: istio-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: zipkin
+      uid: 49b8a5fc-654a-4180-bd10-2b6332a324f3
+    resourceVersion: "885900"
+    uid: 0f79e0e8-f1f1-43a0-96fb-6382d8c0b951
+  ports:
+  - name: zipkin
+    port: 9411
+    protocol: TCP
+kind: EndpointSliceList
+metadata:
+  resourceVersion: "1903154"

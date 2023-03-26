@@ -28,31 +28,31 @@
         extensions:
           - yaml
 
-    - name: create openshift-operators-redhat namnespace
-      kubernetes.core.k8s:
-        name: "{{ operators.namespace }}"
-        api_version: v1
-        kind: Namespace
-        state: present
-        api_key: "{{ api_key }}"  
+    #- name: create openshift-operators-redhat namnespace
+    #  kubernetes.core.k8s:
+    #    name: "{{ operators.namespace }}"
+    #    api_version: v1
+    #    kind: Namespace
+    #    state: present
+    #    api_key: "{{ api_key }}"  
     
-    - name: create the operator group
-      kubernetes.core.k8s:
-        definition:
-          api_version: operators.coreos.com/v1
-          kind: OperatorGroup
-          metadata:
-            name: "{{ operators.namespace }}"
-            namespace: "{{ operators.namespace }}"
-          spec: {}
-        state: present
-        api_key: "{{ api_key }}"
+    #- name: create the operator group
+    #  kubernetes.core.k8s:
+    #    definition:
+    #      api_version: operators.coreos.com/v1
+    #      kind: OperatorGroup
+    #      metadata:
+    #        name: "{{ operators.namespace }}"
+    #        namespace: "{{ operators.namespace }}"
+    #      spec: {}
+    #    state: present
+    #    api_key: "{{ api_key }}"
 
-    - name: install elasticsearch operator
-      include: ./tasks/es/install-es.yaml
+    #- name: install elasticsearch operator
+    #  include: ./tasks/es/install-es.yaml
 
-    - name: install jaeger operator
-      include: ./tasks/jaeger/install-jaeger.yaml
+    #- name: install jaeger operator
+    #  include: ./tasks/jaeger/install-jaeger.yaml
 
     - name: install kiali operator
       include: ./tasks/kiali/install-kiali.yaml

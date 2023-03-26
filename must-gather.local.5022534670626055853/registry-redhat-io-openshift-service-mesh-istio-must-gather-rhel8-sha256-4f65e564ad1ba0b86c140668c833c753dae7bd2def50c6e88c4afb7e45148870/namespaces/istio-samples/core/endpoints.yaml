@@ -1,0 +1,139 @@
+---
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2023-03-24T11:34:25Z"
+    labels:
+      app: details
+      service: details
+    name: details
+    namespace: istio-samples
+    resourceVersion: "856038"
+    uid: 0adbe444-e8dd-4ebd-b94a-e704c6d39d1f
+  subsets:
+  - addresses:
+    - ip: 10.131.0.59
+      nodeName: ip-10-0-189-49.us-west-2.compute.internal
+      targetRef:
+        kind: Pod
+        name: details-v1-6c4cb8c8d6-hs9r4
+        namespace: istio-samples
+        uid: d9784696-87d0-4bd8-8e22-6afdab8c3fe0
+    ports:
+    - name: http
+      port: 9080
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2023-03-24T18:14:47Z"
+    labels:
+      app: nginx-echo-headers
+    name: nginx-echo-headers
+    namespace: istio-samples
+    resourceVersion: "892020"
+    uid: 2b91122c-149a-4dab-b390-35a80a1bc036
+  subsets:
+  - addresses:
+    - ip: 10.129.2.183
+      nodeName: ip-10-0-215-253.us-west-2.compute.internal
+      targetRef:
+        kind: Pod
+        name: nginx-echo-headers-5496b749b9-ldk2j
+        namespace: istio-samples
+        uid: 68649071-932f-4668-ae62-0bb6174fca68
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2023-03-24T11:34:34Z"
+    labels:
+      app: productpage
+      service: productpage
+    name: productpage
+    namespace: istio-samples
+    resourceVersion: "855878"
+    uid: c40bc45a-252e-4c52-9c73-b2ab09f093e0
+  subsets:
+  - addresses:
+    - ip: 10.131.0.58
+      nodeName: ip-10-0-189-49.us-west-2.compute.internal
+      targetRef:
+        kind: Pod
+        name: productpage-v1-5b595fb7b-tpwlh
+        namespace: istio-samples
+        uid: 9b122f9d-70f3-4f03-b03d-e768c5d827b0
+    ports:
+    - name: http
+      port: 9080
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2023-03-24T11:34:27Z"
+    labels:
+      app: ratings
+      service: ratings
+    name: ratings
+    namespace: istio-samples
+    resourceVersion: "856254"
+    uid: 605d6b41-a87c-4891-a253-7782828483df
+  subsets:
+  - addresses:
+    - ip: 10.131.0.60
+      nodeName: ip-10-0-189-49.us-west-2.compute.internal
+      targetRef:
+        kind: Pod
+        name: ratings-v1-5f5c47f6b6-7zxgd
+        namespace: istio-samples
+        uid: 9b97d544-fd73-423d-b59f-e7cc6b4e4fac
+    ports:
+    - name: http
+      port: 9080
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2023-03-24T11:34:30Z"
+    labels:
+      app: reviews
+      service: reviews
+    name: reviews
+    namespace: istio-samples
+    resourceVersion: "856547"
+    uid: 52bb1c27-b413-483c-99f6-d1873a9e171c
+  subsets:
+  - addresses:
+    - ip: 10.128.2.61
+      nodeName: ip-10-0-156-53.us-west-2.compute.internal
+      targetRef:
+        kind: Pod
+        name: reviews-v1-5c6f68dd57-5fxp4
+        namespace: istio-samples
+        uid: 122b7ae1-5044-4d7d-b19c-b85b9be58680
+    - ip: 10.128.2.62
+      nodeName: ip-10-0-156-53.us-west-2.compute.internal
+      targetRef:
+        kind: Pod
+        name: reviews-v3-6d5cf4f8d-l64gm
+        namespace: istio-samples
+        uid: 2cbbb227-43c8-4fe9-96d7-1abfa5d6d7a0
+    - ip: 10.129.2.172
+      nodeName: ip-10-0-215-253.us-west-2.compute.internal
+      targetRef:
+        kind: Pod
+        name: reviews-v2-85dc48554f-99dnj
+        namespace: istio-samples
+        uid: 1a5204ad-1680-49e0-83fa-492bcebe1a9f
+    ports:
+    - name: http
+      port: 9080
+      protocol: TCP
+kind: EndpointsList
+metadata:
+  resourceVersion: "1903160"

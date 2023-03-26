@@ -1,0 +1,104 @@
+2023-03-24T17:28:24.220439201Z {"level":"info","time":"2023-03-24T17:28:24.220362Z","scope":"citadelclient","msg":"Citadel client using custom root cert: var/run/secrets/istio/root-cert.pem"}
+2023-03-24T17:28:24.241292926Z {"level":"info","time":"2023-03-24T17:28:24.241215Z","scope":"ads","msg":"All caches have been synced up in 125.249186ms, marking server ready"}
+2023-03-24T17:28:24.241604631Z {"level":"info","time":"2023-03-24T17:28:24.241582Z","scope":"sds","msg":"SDS server for workload certificates started, listening on \"./var/run/secrets/workload-spiffe-uds/socket\""}
+2023-03-24T17:28:24.241620802Z {"level":"info","time":"2023-03-24T17:28:24.241613Z","scope":"xdsproxy","msg":"Initializing with upstream address \"istiod-basic.istio-system.svc:15012\" and cluster \"Kubernetes\""}
+2023-03-24T17:28:24.241717209Z {"level":"info","time":"2023-03-24T17:28:24.241660Z","scope":"sds","msg":"Starting SDS grpc server"}
+2023-03-24T17:28:24.325219441Z {"level":"info","time":"2023-03-24T17:28:24.325163Z","scope":"cache","msg":"generated new workload certificate","latency":83646369,"ttl":86399674845593}
+2023-03-24T17:28:24.325274770Z {"level":"info","time":"2023-03-24T17:28:24.325215Z","scope":"cache","msg":"Root cert has changed, start rotating root cert"}
+2023-03-24T17:28:24.325274770Z {"level":"info","time":"2023-03-24T17:28:24.325236Z","scope":"ads","msg":"XDS: Incremental Pushing:0 ConnectedEndpoints:0 Version:"}
+2023-03-24T17:28:24.325304487Z {"level":"info","time":"2023-03-24T17:28:24.325286Z","scope":"cache","msg":"returned workload trust anchor from cache","ttl":86399674715692}
+2023-03-24T17:28:24.325455984Z {"level":"info","time":"2023-03-24T17:28:24.325429Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T17:28:24.431199546Z {"level":"info","time":"2023-03-24T17:28:24.431148Z","scope":"ads","msg":"ADS: new connection for node:istio-egressgateway-74b6d5dd78-2tnlx.istio-system-1"}
+2023-03-24T17:28:24.431238412Z {"level":"info","time":"2023-03-24T17:28:24.431218Z","scope":"cache","msg":"returned workload trust anchor from cache","ttl":86399568784425}
+2023-03-24T17:28:24.431529422Z {"level":"info","time":"2023-03-24T17:28:24.431512Z","scope":"ads","msg":"SDS: PUSH request for node:istio-egressgateway-74b6d5dd78-2tnlx.istio-system resources:1 size:1.1kB resource:ROOTCA"}
+2023-03-24T17:28:24.472182145Z {"level":"info","time":"2023-03-24T17:28:24.472138Z","scope":"ads","msg":"ADS: new connection for node:istio-egressgateway-74b6d5dd78-2tnlx.istio-system-2"}
+2023-03-24T17:28:24.472255216Z {"level":"info","time":"2023-03-24T17:28:24.472236Z","scope":"cache","msg":"returned workload certificate from cache","ttl":86399527766961}
+2023-03-24T17:28:24.472398113Z {"level":"info","time":"2023-03-24T17:28:24.472384Z","scope":"ads","msg":"SDS: PUSH request for node:istio-egressgateway-74b6d5dd78-2tnlx.istio-system resources:1 size:4.0kB resource:default"}
+2023-03-24T17:31:51.855157381Z {"level":"info","time":"2023-03-24T17:31:51.855109Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T18:01:43.552931928Z {"level":"info","time":"2023-03-24T18:01:43.552886Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T18:22:59.958517080Z {"level":"info","time":"2023-03-24T18:22:59.958475Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T18:50:11.574942556Z {"level":"info","time":"2023-03-24T18:50:11.574896Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T19:22:18.884011955Z {"level":"info","time":"2023-03-24T19:22:18.883967Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T19:53:07.283436120Z {"level":"info","time":"2023-03-24T19:53:07.283386Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T20:23:23.401103484Z {"level":"info","time":"2023-03-24T20:23:23.401052Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T20:52:12.820942591Z {"level":"info","time":"2023-03-24T20:52:12.820894Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T21:20:24.885166382Z {"level":"info","time":"2023-03-24T21:20:24.885115Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T21:51:42.575190625Z {"level":"info","time":"2023-03-24T21:51:42.575146Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T22:23:47.007986434Z {"level":"info","time":"2023-03-24T22:23:47.007934Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T22:53:11.402524717Z {"level":"info","time":"2023-03-24T22:53:11.402478Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T23:21:41.303736378Z {"level":"info","time":"2023-03-24T23:21:41.303686Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-24T23:52:49.159227208Z {"level":"info","time":"2023-03-24T23:52:49.159174Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T00:21:16.422288145Z {"level":"info","time":"2023-03-25T00:21:16.422240Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T00:48:35.536418043Z {"level":"info","time":"2023-03-25T00:48:35.536364Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T01:17:30.995691881Z {"level":"info","time":"2023-03-25T01:17:30.995644Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T01:46:55.495017797Z {"level":"info","time":"2023-03-25T01:46:55.494969Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T02:18:12.478528014Z {"level":"info","time":"2023-03-25T02:18:12.478482Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T02:49:24.632760895Z {"level":"info","time":"2023-03-25T02:49:24.632712Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T03:17:45.430300525Z {"level":"info","time":"2023-03-25T03:17:45.430249Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T03:48:53.505072545Z {"level":"info","time":"2023-03-25T03:48:53.505028Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T04:19:59.971189199Z {"level":"info","time":"2023-03-25T04:19:59.971144Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T04:51:28.120998960Z {"level":"info","time":"2023-03-25T04:51:28.120950Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T05:24:10.040111579Z {"level":"info","time":"2023-03-25T05:24:10.040061Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T05:28:24.163757530Z {"level":"info","time":"2023-03-25T05:28:24.163707Z","scope":"ads","msg":"XDS: Incremental Pushing:0 ConnectedEndpoints:2 Version:"}
+2023-03-25T05:28:24.284183100Z {"level":"info","time":"2023-03-25T05:28:24.284134Z","scope":"cache","msg":"generated new workload certificate","latency":120292258,"ttl":86399715871384}
+2023-03-25T05:28:24.284231505Z {"level":"info","time":"2023-03-25T05:28:24.284218Z","scope":"ads","msg":"SDS: PUSH for node:istio-egressgateway-74b6d5dd78-2tnlx.istio-system resources:1 size:4.0kB resource:default"}
+2023-03-25T05:56:40.287407799Z {"level":"info","time":"2023-03-25T05:56:40.287361Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T06:29:43.496609116Z {"level":"info","time":"2023-03-25T06:29:43.496557Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T07:00:28.195093721Z {"level":"info","time":"2023-03-25T07:00:28.195043Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T07:27:40.433939527Z {"level":"info","time":"2023-03-25T07:27:40.433893Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T08:00:43.731092687Z {"level":"info","time":"2023-03-25T08:00:43.731045Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T08:28:38.731047984Z {"level":"info","time":"2023-03-25T08:28:38.731002Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T08:59:42.788356265Z {"level":"info","time":"2023-03-25T08:59:42.788295Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T09:27:00.349404402Z {"level":"info","time":"2023-03-25T09:27:00.349353Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T09:59:28.446150313Z {"level":"info","time":"2023-03-25T09:59:28.446105Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T10:27:43.462537691Z {"level":"info","time":"2023-03-25T10:27:43.462490Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T11:00:28.072378490Z {"level":"info","time":"2023-03-25T11:00:28.072332Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T11:27:42.419914390Z {"level":"info","time":"2023-03-25T11:27:42.419861Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T11:59:13.072998610Z {"level":"info","time":"2023-03-25T11:59:13.072950Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T12:26:39.049586289Z {"level":"info","time":"2023-03-25T12:26:39.049536Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T12:59:08.767663366Z {"level":"info","time":"2023-03-25T12:59:08.767618Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T13:29:52.531785542Z {"level":"info","time":"2023-03-25T13:29:52.531731Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T13:57:18.744277178Z {"level":"info","time":"2023-03-25T13:57:18.744228Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T14:29:43.878056225Z {"level":"info","time":"2023-03-25T14:29:43.878001Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T14:58:48.531565419Z {"level":"info","time":"2023-03-25T14:58:48.531516Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T15:27:03.522436457Z {"level":"info","time":"2023-03-25T15:27:03.522384Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T15:56:16.153638284Z {"level":"info","time":"2023-03-25T15:56:16.153592Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T16:25:37.902218373Z {"level":"info","time":"2023-03-25T16:25:37.902169Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T16:57:50.607596953Z {"level":"info","time":"2023-03-25T16:57:50.607550Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T17:26:56.093143547Z {"level":"info","time":"2023-03-25T17:26:56.093100Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T17:28:24.142733858Z {"level":"info","time":"2023-03-25T17:28:24.142684Z","scope":"ads","msg":"XDS: Incremental Pushing:0 ConnectedEndpoints:2 Version:"}
+2023-03-25T17:28:24.366062040Z {"level":"info","time":"2023-03-25T17:28:24.366010Z","scope":"cache","msg":"generated new workload certificate","latency":223204936,"ttl":86399633995372}
+2023-03-25T17:28:24.366106068Z {"level":"info","time":"2023-03-25T17:28:24.366095Z","scope":"ads","msg":"SDS: PUSH for node:istio-egressgateway-74b6d5dd78-2tnlx.istio-system resources:1 size:4.0kB resource:default"}
+2023-03-25T17:58:50.684752764Z {"level":"info","time":"2023-03-25T17:58:50.684705Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T18:26:53.211382164Z {"level":"info","time":"2023-03-25T18:26:53.211332Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T18:58:15.811296922Z {"level":"info","time":"2023-03-25T18:58:15.811244Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T19:29:05.874305157Z {"level":"info","time":"2023-03-25T19:29:05.874258Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T19:57:05.798270173Z {"level":"info","time":"2023-03-25T19:57:05.798224Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T20:28:24.458428365Z {"level":"info","time":"2023-03-25T20:28:24.458379Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T20:59:34.049782167Z {"level":"info","time":"2023-03-25T20:59:34.049738Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T21:30:35.073172639Z {"level":"info","time":"2023-03-25T21:30:35.073126Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T22:02:39.693858149Z {"level":"info","time":"2023-03-25T22:02:39.693813Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T22:30:02.389674552Z {"level":"info","time":"2023-03-25T22:30:02.389624Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T23:02:44.443433428Z {"level":"info","time":"2023-03-25T23:02:44.443387Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-25T23:33:33.026962656Z {"level":"info","time":"2023-03-25T23:33:33.026915Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T00:01:40.541432580Z {"level":"info","time":"2023-03-26T00:01:40.541378Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T00:28:51.470290126Z {"level":"info","time":"2023-03-26T00:28:51.470238Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T00:58:26.292081419Z {"level":"info","time":"2023-03-26T00:58:26.292025Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T01:28:37.136267896Z {"level":"info","time":"2023-03-26T01:28:37.136222Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T01:57:38.729647150Z {"level":"info","time":"2023-03-26T01:57:38.729604Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T02:25:02.049241056Z {"level":"info","time":"2023-03-26T02:25:02.049193Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T02:57:15.218697455Z {"level":"info","time":"2023-03-26T02:57:15.218652Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T03:29:41.885651303Z {"level":"info","time":"2023-03-26T03:29:41.885609Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T03:58:12.983798475Z {"level":"info","time":"2023-03-26T03:58:12.983751Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T04:27:07.846699865Z {"level":"info","time":"2023-03-26T04:27:07.846652Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T04:55:17.273800286Z {"level":"info","time":"2023-03-26T04:55:17.273756Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T05:23:03.343858350Z {"level":"info","time":"2023-03-26T05:23:03.343810Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T05:28:24.183425395Z {"level":"info","time":"2023-03-26T05:28:24.183378Z","scope":"ads","msg":"XDS: Incremental Pushing:0 ConnectedEndpoints:2 Version:"}
+2023-03-26T05:28:24.312119702Z {"level":"info","time":"2023-03-26T05:28:24.312073Z","scope":"cache","msg":"generated new workload certificate","latency":128573490,"ttl":86399687931907}
+2023-03-26T05:28:24.312155516Z {"level":"info","time":"2023-03-26T05:28:24.312144Z","scope":"ads","msg":"SDS: PUSH for node:istio-egressgateway-74b6d5dd78-2tnlx.istio-system resources:1 size:4.0kB resource:default"}
+2023-03-26T05:51:26.775787563Z {"level":"info","time":"2023-03-26T05:51:26.775716Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T06:23:45.473534225Z {"level":"info","time":"2023-03-26T06:23:45.473487Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T06:56:06.852215644Z {"level":"info","time":"2023-03-26T06:56:06.852168Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T07:29:04.441049594Z {"level":"info","time":"2023-03-26T07:29:04.441007Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T07:57:13.943201829Z {"level":"info","time":"2023-03-26T07:57:13.943157Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}
+2023-03-26T08:19:04.679263077Z {"level":"info","time":"2023-03-26T08:19:04.679221Z","scope":"xdsproxy","msg":"connected to upstream XDS server: istiod-basic.istio-system.svc:15012"}

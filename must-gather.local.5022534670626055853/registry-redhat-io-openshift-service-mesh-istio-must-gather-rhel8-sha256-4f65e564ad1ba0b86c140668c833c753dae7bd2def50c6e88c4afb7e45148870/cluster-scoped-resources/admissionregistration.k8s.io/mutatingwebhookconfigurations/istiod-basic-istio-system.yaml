@@ -1,0 +1,68 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"admissionregistration.k8s.io/v1","kind":"MutatingWebhookConfiguration","metadata":{"annotations":{"maistra.io/mesh-generation":"2.3.2-1-5"},"labels":{"app":"sidecar-injector","app.kubernetes.io/component":"istio-discovery","app.kubernetes.io/instance":"istio-system","app.kubernetes.io/managed-by":"maistra-istio-operator","app.kubernetes.io/name":"istio-discovery","app.kubernetes.io/part-of":"istio","app.kubernetes.io/version":"2.3.2-1-5","istio.io/rev":"basic","maistra-version":"2.3.2","maistra.io/owner":"istio-system","maistra.io/owner-name":"basic","release":"istio"},"name":"istiod-basic-istio-system"},"webhooks":[{"admissionReviewVersions":["v1beta1","v1"],"clientConfig":{"caBundle":"","service":{"name":"istiod-basic","namespace":"istio-system","path":"/inject","port":443}},"failurePolicy":"Fail","name":"sidecar-injector.istio.io","namespaceSelector":{"matchExpressions":[{"key":"maistra.io/member-of","operator":"In","values":["istio-system"]},{"key":"maistra.io/ignore-namespace","operator":"DoesNotExist"},{"key":"istio-injection","operator":"NotIn","values":["disabled"]},{"key":"istio-env","operator":"DoesNotExist"}]},"rules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}],"sideEffects":"None"}]}
+    maistra.io/mesh-generation: 2.3.2-1-5
+  creationTimestamp: "2023-03-24T17:28:10Z"
+  generation: 2
+  labels:
+    app: sidecar-injector
+    app.kubernetes.io/component: istio-discovery
+    app.kubernetes.io/instance: istio-system
+    app.kubernetes.io/managed-by: maistra-istio-operator
+    app.kubernetes.io/name: istio-discovery
+    app.kubernetes.io/part-of: istio
+    app.kubernetes.io/version: 2.3.2-1-5
+    istio.io/rev: basic
+    maistra-version: 2.3.2
+    maistra.io/owner: istio-system
+    maistra.io/owner-name: basic
+    release: istio
+  name: istiod-basic-istio-system
+  resourceVersion: "885830"
+  uid: f63fa697-4fca-492a-a881-bf209e3afb08
+webhooks:
+- admissionReviewVersions:
+  - v1beta1
+  - v1
+  clientConfig:
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvVENDQWVXZ0F3SUJBZ0lSQU1MdmZ6WktpL0VaT3dLMHdVZlJUeVF3RFFZSktvWklodmNOQVFFTEJRQXcKR0RFV01CUUdBMVVFQ2hNTlkyeDFjM1JsY2k1c2IyTmhiREFlRncweU16QXpNalF4TURFek1UWmFGdzB6TXpBegpNakV4TURFek1UWmFNQmd4RmpBVUJnTlZCQW9URFdOc2RYTjBaWEl1Ykc5allXd3dnZ0VpTUEwR0NTcUdTSWIzCkRRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRRFRRdktZUTlyWUIwQlVxR24xZnZ5TzkrUUpadzd6czdwRUlsMEgKdlRnSG1WdVJvc0pPMVRMTVVJUmhSNTBDVk1WcWIwd2lINVphQ1dUWmp4TUZxNDR4ZHNsSFJLN21FT2tUMXVZbApBUkpOTStaRlljMzF1TFZ0bThJeDZOdndHQlI2SXI2cU9GRE92TURGVXhPb3RhNlhsQldNRnEzUXBMaTVoblp6CjdxMlFLUGpwOWRhY2c4dDZkUzJuZU9BVDdaQmVYNDFrWWI0UGd6eGtNWEQwV2hxdW5HTnR2a1JOeFRXWUdXVjUKTmRMVE4zQkdaQXhiTjAzZW9YMEFJRDJ0bmVKdlIyaU9kMFFWVXRMdlV1TENNTFRvcWNMRlhzTmxxMHFzL1g3QgorOXE4djBhLzNjSjRUMERaN3d5YWxXNlVJV1doTGsydk5EVDhCd1ZVSDhlOEphekhBZ01CQUFHalFqQkFNQTRHCkExVWREd0VCL3dRRUF3SUNCREFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVdCQlFzN2NTcnpkZ0UKWGZOMDVXOWxmbEVuOFRGRUxqQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFGU2N4ZU1kM0RJYnFRc1NidGVHcAplZUprTTcvdW1jV3pwRkdML2NobzZLRitJN3BNUTg4REVHcHh2a3ZGb3llaTlwR09JTU8vQkVEc1Zxd3JXYXQzCkI4dzRNMU5xdk1FZkY4NlhZWWt1N09ObHdjY0ZQSUkzbFpRUE5GdzNzN3pNT2pmN0JJVFVtR2tqcm1SNHFrL3EKS0tJVWRjSmRabFhSS2lkOWRDMzVxakVzVGRTRldic1hMR1pMTUhnRm5QZDVDSDhtOFN3TWUrRXRvbHpnNWROeAplOVNvVnBFSlU5ZE9iL3d0MVdXWkV3OHoyL21obHd5cUZyWnh4YzJqd1RVSVNvbXdaaS9sOTJwTXZaclVKdkpXCmVlNEd3KzhQUi8rVkFUVlVkRmJoZGlHMGEwRmIzcnc4Q1E4dUVoaHowbGlFYTUyNzdzdTlBUldOZlMzRzlXZWkKd2c9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    service:
+      name: istiod-basic
+      namespace: istio-system
+      path: /inject
+      port: 443
+  failurePolicy: Fail
+  matchPolicy: Equivalent
+  name: sidecar-injector.istio.io
+  namespaceSelector:
+    matchExpressions:
+    - key: maistra.io/member-of
+      operator: In
+      values:
+      - istio-system
+    - key: maistra.io/ignore-namespace
+      operator: DoesNotExist
+    - key: istio-injection
+      operator: NotIn
+      values:
+      - disabled
+    - key: istio-env
+      operator: DoesNotExist
+  objectSelector: {}
+  reinvocationPolicy: Never
+  rules:
+  - apiGroups:
+    - ""
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    resources:
+    - pods
+    scope: '*'
+  sideEffects: None
+  timeoutSeconds: 10

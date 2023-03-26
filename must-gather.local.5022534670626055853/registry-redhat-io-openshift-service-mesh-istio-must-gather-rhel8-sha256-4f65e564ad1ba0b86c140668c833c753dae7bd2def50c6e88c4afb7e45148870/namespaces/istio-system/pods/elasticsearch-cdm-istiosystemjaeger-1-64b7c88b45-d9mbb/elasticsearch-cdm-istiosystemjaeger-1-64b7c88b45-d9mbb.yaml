@@ -1,0 +1,334 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.131.0.63/23"],"mac_address":"0a:58:0a:83:00:3f","gateway_ips":["10.131.0.1"],"ip_address":"10.131.0.63/23","gateway_ip":"10.131.0.1"}}'
+    k8s.v1.cni.cncf.io/network-status: |-
+      [{
+          "name": "ovn-kubernetes",
+          "interface": "eth0",
+          "ips": [
+              "10.131.0.63"
+          ],
+          "mac": "0a:58:0a:83:00:3f",
+          "default": true,
+          "dns": {}
+      }]
+    k8s.v1.cni.cncf.io/networks-status: |-
+      [{
+          "name": "ovn-kubernetes",
+          "interface": "eth0",
+          "ips": [
+              "10.131.0.63"
+          ],
+          "mac": "0a:58:0a:83:00:3f",
+          "default": true,
+          "dns": {}
+      }]
+    openshift.io/scc: restricted-v2
+    seccomp.security.alpha.kubernetes.io/pod: runtime/default
+  creationTimestamp: "2023-03-24T17:28:34Z"
+  generateName: elasticsearch-cdm-istiosystemjaeger-1-64b7c88b45-
+  labels:
+    cluster-name: elasticsearch
+    component: elasticsearch
+    es-node-client: "true"
+    es-node-data: "true"
+    es-node-master: "true"
+    node-name: elasticsearch-cdm-istiosystemjaeger-1
+    pod-template-hash: 64b7c88b45
+  name: elasticsearch-cdm-istiosystemjaeger-1-64b7c88b45-d9mbb
+  namespace: istio-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: elasticsearch-cdm-istiosystemjaeger-1-64b7c88b45
+    uid: 15a4fa2d-84fb-4e3a-bf8b-7db736bb81e5
+  resourceVersion: "859740"
+  uid: d522b994-607d-4e67-8017-21e380e5fb41
+spec:
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: es-node-client
+              operator: In
+              values:
+              - "true"
+            - key: es-node-data
+              operator: In
+              values:
+              - "true"
+            - key: es-node-master
+              operator: In
+              values:
+              - "true"
+          topologyKey: kubernetes.io/hostname
+        weight: 100
+  containers:
+  - env:
+    - name: DC_NAME
+      value: elasticsearch-cdm-istiosystemjaeger-1
+    - name: NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: KUBERNETES_MASTER
+      value: https://kubernetes.default.svc
+    - name: KUBERNETES_TRUST_CERT
+      value: "true"
+    - name: SERVICE_DNS
+      value: elasticsearch-cluster
+    - name: CLUSTER_NAME
+      value: elasticsearch
+    - name: INSTANCE_RAM
+      value: 4Gi
+    - name: HEAP_DUMP_LOCATION
+      value: /elasticsearch/persistent/heapdump.hprof
+    - name: RECOVER_AFTER_TIME
+      value: 5m
+    - name: READINESS_PROBE_TIMEOUT
+      value: "30"
+    - name: POD_LABEL
+      value: cluster=elasticsearch
+    - name: IS_MASTER
+      value: "true"
+    - name: HAS_DATA
+      value: "true"
+    image: registry.redhat.io/openshift-logging/elasticsearch6-rhel8@sha256:83d264250d555aeaf58c1011a9caf04351ba8cd445a444ca52e6162f3c603e43
+    imagePullPolicy: IfNotPresent
+    name: elasticsearch
+    ports:
+    - containerPort: 9300
+      name: cluster
+      protocol: TCP
+    - containerPort: 9200
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - /usr/share/elasticsearch/probe/readiness.sh
+      failureThreshold: 3
+      initialDelaySeconds: 10
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 30
+    resources:
+      limits:
+        cpu: "1"
+        memory: 4Gi
+      requests:
+        cpu: "1"
+        memory: 4Gi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsUser: 1000720000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /elasticsearch/persistent
+      name: elasticsearch-storage
+    - mountPath: /usr/share/java/elasticsearch/config
+      name: elasticsearch-config
+    - mountPath: /etc/openshift/elasticsearch/secret
+      name: certificates
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-d9vhh
+      readOnly: true
+  - args:
+    - --listening-address=:60000
+    - --tls-cert=/etc/proxy/elasticsearch/logging-es.crt
+    - --tls-key=/etc/proxy/elasticsearch/logging-es.key
+    - --tls-client-ca=/etc/proxy/elasticsearch/admin-ca
+    - --metrics-listening-address=:60001
+    - --metrics-tls-cert=/etc/proxy/secrets/tls.crt
+    - --metrics-tls-key=/etc/proxy/secrets/tls.key
+    - --upstream-ca=/etc/proxy/elasticsearch/admin-ca
+    - --cache-expiry=60s
+    - '--auth-backend-role=admin_reader={"namespace": "default", "verb": "get", "resource":
+      "pods/log"}'
+    - '--auth-backend-role=prometheus={"namespace":"istio-system", "verb": "get",
+      "resource": "metrics", "resourceAPIGroup": "elasticsearch.openshift.io"}'
+    - '--auth-backend-role=jaeger={"verb": "get", "resource": "/jaeger", "resourceAPIGroup":
+      "elasticsearch.jaegertracing.io"}'
+    - '--auth-backend-role=elasticsearch-operator={"namespace": "*", "verb": "*",
+      "resource": "*", "resourceAPIGroup": "logging.openshift.io"}'
+    - '--auth-backend-role=index-management={"namespace":"istio-system", "verb": "*",
+      "resource": "indices", "resourceAPIGroup": "elasticsearch.openshift.io"}'
+    - --auth-admin-role=admin_reader
+    - --auth-default-role=project_user
+    env:
+    - name: LOG_LEVEL
+      value: info
+    image: registry.redhat.io/openshift-logging/elasticsearch-proxy-rhel8@sha256:9fe71dcfa955ca396e85619f4fe72be76045b61f1bbb983a84cdf6f6b6783292
+    imagePullPolicy: IfNotPresent
+    name: proxy
+    ports:
+    - containerPort: 60000
+      name: restapi
+      protocol: TCP
+    - containerPort: 60001
+      name: metrics
+      protocol: TCP
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsUser: 1000720000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/proxy/secrets
+      name: elasticsearch-metrics
+      readOnly: true
+    - mountPath: /etc/proxy/elasticsearch
+      name: certificates
+      readOnly: true
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-d9vhh
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  imagePullSecrets:
+  - name: elasticsearch-dockercfg-lbxlp
+  nodeName: ip-10-0-189-49.us-west-2.compute.internal
+  nodeSelector:
+    kubernetes.io/os: linux
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1000720000
+    runAsNonRoot: true
+    seLinuxOptions:
+      level: s0:c27,c9
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount: elasticsearch
+  serviceAccountName: elasticsearch
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoSchedule
+    key: node.kubernetes.io/disk-pressure
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  volumes:
+  - configMap:
+      defaultMode: 420
+      name: elasticsearch
+    name: elasticsearch-config
+  - name: elasticsearch-storage
+    persistentVolumeClaim:
+      claimName: elasticsearch-elasticsearch-cdm-istiosystemjaeger-1
+  - name: certificates
+    secret:
+      defaultMode: 420
+      secretName: elasticsearch
+  - name: elasticsearch-metrics
+    secret:
+      defaultMode: 420
+      secretName: elasticsearch-metrics
+  - name: kube-api-access-d9vhh
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+      - configMap:
+          items:
+          - key: service-ca.crt
+            path: service-ca.crt
+          name: openshift-service-ca.crt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-03-24T17:28:34Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-03-24T17:29:14Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-03-24T17:29:14Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-03-24T17:28:34Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: cri-o://040ecfbed2bfd3f36280d8fc0ad46b13465296a1514378c636769473dfebaff6
+    image: registry.redhat.io/openshift-logging/elasticsearch6-rhel8@sha256:83d264250d555aeaf58c1011a9caf04351ba8cd445a444ca52e6162f3c603e43
+    imageID: registry.redhat.io/openshift-logging/elasticsearch6-rhel8@sha256:83d264250d555aeaf58c1011a9caf04351ba8cd445a444ca52e6162f3c603e43
+    lastState: {}
+    name: elasticsearch
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-03-24T17:28:37Z"
+  - containerID: cri-o://e4213a1cb140a54f6ad86148e1560156a60a7c0064864da80e8d529993668ab0
+    image: registry.redhat.io/openshift-logging/elasticsearch-proxy-rhel8@sha256:9fe71dcfa955ca396e85619f4fe72be76045b61f1bbb983a84cdf6f6b6783292
+    imageID: registry.redhat.io/openshift-logging/elasticsearch-proxy-rhel8@sha256:9fe71dcfa955ca396e85619f4fe72be76045b61f1bbb983a84cdf6f6b6783292
+    lastState: {}
+    name: proxy
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-03-24T17:28:37Z"
+  hostIP: 10.0.189.49
+  phase: Running
+  podIP: 10.131.0.63
+  podIPs:
+  - ip: 10.131.0.63
+  qosClass: Burstable
+  startTime: "2023-03-24T17:28:34Z"

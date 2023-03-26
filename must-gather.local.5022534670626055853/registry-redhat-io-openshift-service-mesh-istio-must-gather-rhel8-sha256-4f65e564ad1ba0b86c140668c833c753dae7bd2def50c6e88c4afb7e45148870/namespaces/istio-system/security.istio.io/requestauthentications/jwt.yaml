@@ -1,0 +1,27 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"security.istio.io/v1beta1","kind":"RequestAuthentication","metadata":{"annotations":{},"name":"jwt","namespace":"istio-system"},"spec":{"jwtRules":[{"issuer":"https://keycloak-sso.apps.demos.sandbox686.opentlc.com/auth/realms/istio-samples","jwksUri":"https://keycloak-sso.apps.demos.sandbox686.opentlc.com/auth/realms/istio-samples/protocol/openid-connect/certs"}],"principalBinding":"USE_ORIGIN","selector":{"matchLabels":{"istio":"ingressgateway"}}}}
+  creationTimestamp: "2023-03-24T11:46:25Z"
+  generation: 2
+  name: jwt
+  namespace: istio-system
+  resourceVersion: "1900228"
+  uid: af1333db-a990-4f48-bedd-f5b9ebc60be4
+spec:
+  jwtRules:
+  - issuer: https://keycloak-sso.apps.demos.sandbox686.opentlc.com/auth/realms/istio-samples
+    jwksUri: https://keycloak-sso.apps.demos.sandbox686.opentlc.com/auth/realms/istio-samples/protocol/openid-connect/certs
+  selector:
+    matchLabels:
+      istio: ingressgateway
+status:
+  conditions:
+  - lastProbeTime: "2023-03-26T08:19:16.890340281Z"
+    lastTransitionTime: "2023-03-26T08:19:16.890340428Z"
+    message: 36/36 proxies up to date.
+    status: "True"
+    type: Reconciled
+  observedGeneration: "2"

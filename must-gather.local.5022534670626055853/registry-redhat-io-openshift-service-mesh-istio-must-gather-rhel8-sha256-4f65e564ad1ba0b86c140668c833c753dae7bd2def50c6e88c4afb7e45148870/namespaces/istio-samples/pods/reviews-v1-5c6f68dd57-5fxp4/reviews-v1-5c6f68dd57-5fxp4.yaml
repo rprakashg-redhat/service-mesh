@@ -1,0 +1,357 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    k8s.ovn.org/pod-networks: '{"default":{"ip_addresses":["10.128.2.61/23"],"mac_address":"0a:58:0a:80:02:3d","gateway_ips":["10.128.2.1"],"ip_address":"10.128.2.61/23","gateway_ip":"10.128.2.1"}}'
+    k8s.v1.cni.cncf.io/network-status: |-
+      [{
+          "name": "ovn-kubernetes",
+          "interface": "eth0",
+          "ips": [
+              "10.128.2.61"
+          ],
+          "mac": "0a:58:0a:80:02:3d",
+          "default": true,
+          "dns": {}
+      },{
+          "name": "istio-samples/v2-3-istio-cni",
+          "dns": {}
+      }]
+    k8s.v1.cni.cncf.io/networks: v2-3-istio-cni
+    k8s.v1.cni.cncf.io/networks-status: |-
+      [{
+          "name": "ovn-kubernetes",
+          "interface": "eth0",
+          "ips": [
+              "10.128.2.61"
+          ],
+          "mac": "0a:58:0a:80:02:3d",
+          "default": true,
+          "dns": {}
+      },{
+          "name": "istio-samples/v2-3-istio-cni",
+          "dns": {}
+      }]
+    kubectl.kubernetes.io/default-container: reviews
+    kubectl.kubernetes.io/default-logs-container: reviews
+    openshift.io/scc: restricted-v2
+    openshift.openshift.io/restartedAt: "2023-03-24T17:25:29.951Z"
+    prometheus.io/path: /stats/prometheus
+    prometheus.io/port: "15020"
+    prometheus.io/scrape: "true"
+    seccomp.security.alpha.kubernetes.io/pod: runtime/default
+    sidecar.istio.io/inject: "true"
+    sidecar.istio.io/interceptionMode: REDIRECT
+    sidecar.istio.io/status: '{"initContainers":null,"containers":["istio-proxy"],"volumes":["workload-socket","workload-certs","istio-envoy","istio-data","istio-podinfo","istiod-ca-cert"],"imagePullSecrets":null,"revision":"basic"}'
+    traffic.sidecar.istio.io/excludeInboundPorts: 15090,15021
+    traffic.sidecar.istio.io/includeInboundPorts: '*'
+    traffic.sidecar.istio.io/includeOutboundIPRanges: '*'
+  creationTimestamp: "2023-03-24T17:25:30Z"
+  generateName: reviews-v1-5c6f68dd57-
+  labels:
+    app: reviews
+    maistra-version: 2.3.2
+    pod-template-hash: 5c6f68dd57
+    security.istio.io/tlsMode: istio
+    service.istio.io/canonical-name: reviews
+    service.istio.io/canonical-revision: v1
+    version: v1
+  name: reviews-v1-5c6f68dd57-5fxp4
+  namespace: istio-samples
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: reviews-v1-5c6f68dd57
+    uid: b6f60945-6a48-435e-b198-9972c1e43706
+  resourceVersion: "856132"
+  uid: 122b7ae1-5044-4d7d-b19c-b85b9be58680
+spec:
+  containers:
+  - env:
+    - name: LOG_DIR
+      value: /tmp/logs
+    image: quay.io/maistra/examples-bookinfo-reviews-v1:2.3.0
+    imagePullPolicy: IfNotPresent
+    name: reviews
+    ports:
+    - containerPort: 9080
+      protocol: TCP
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 1000730000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /tmp
+      name: tmp
+    - mountPath: /opt/ibm/wlp/output
+      name: wlp-output
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rc97m
+      readOnly: true
+  - args:
+    - proxy
+    - sidecar
+    - --domain
+    - $(POD_NAMESPACE).svc.cluster.local
+    - --proxyLogLevel=warning
+    - --proxyComponentLogLevel=misc:error
+    - --log_output_level=default:warn
+    - --log_as_json
+    - --concurrency
+    - "2"
+    env:
+    - name: JWT_POLICY
+      value: first-party-jwt
+    - name: PILOT_CERT_PROVIDER
+      value: istiod
+    - name: CA_ADDR
+      value: istiod-basic.istio-system.svc:15012
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: INSTANCE_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    - name: SERVICE_ACCOUNT
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.serviceAccountName
+    - name: HOST_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.hostIP
+    - name: PROXY_CONFIG
+      value: |
+        {"discoveryAddress":"istiod-basic.istio-system.svc:15012","tracing":{"zipkin":{"address":"jaeger-collector.istio-system.svc:9411"}},"proxyMetadata":{"ISTIO_META_DNS_AUTO_ALLOCATE":"true","ISTIO_META_DNS_CAPTURE":"true","PROXY_XDS_VIA_AGENT":"true"}}
+    - name: ISTIO_META_POD_PORTS
+      value: |-
+        [
+            {"containerPort":9080,"protocol":"TCP"}
+        ]
+    - name: ISTIO_META_APP_CONTAINERS
+      value: reviews
+    - name: ISTIO_META_CLUSTER_ID
+      value: Kubernetes
+    - name: ISTIO_META_INTERCEPTION_MODE
+      value: REDIRECT
+    - name: ISTIO_META_WORKLOAD_NAME
+      value: reviews-v1
+    - name: ISTIO_META_OWNER
+      value: kubernetes://apis/apps/v1/namespaces/istio-samples/deployments/reviews-v1
+    - name: ISTIO_META_MESH_ID
+      value: cluster.local
+    - name: TRUST_DOMAIN
+      value: cluster.local
+    - name: ISTIO_META_DNS_AUTO_ALLOCATE
+      value: "true"
+    - name: ISTIO_META_DNS_CAPTURE
+      value: "true"
+    - name: PROXY_XDS_VIA_AGENT
+      value: "true"
+    image: registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:15444e6b93a05d88c6fc6ce1d1e7744635141291b86a7c3abb57758849a5d19e
+    imagePullPolicy: IfNotPresent
+    name: istio-proxy
+    ports:
+    - containerPort: 15090
+      name: http-envoy-prom
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 30
+      httpGet:
+        path: /healthz/ready
+        port: 15021
+        scheme: HTTP
+      initialDelaySeconds: 1
+      periodSeconds: 2
+      successThreshold: 1
+      timeoutSeconds: 3
+    resources:
+      limits:
+        cpu: "2"
+        memory: 1Gi
+      requests:
+        cpu: 50m
+        memory: 50Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+        - KILL
+        - MKNOD
+        - SETGID
+        - SETUID
+      privileged: false
+      readOnlyRootFilesystem: true
+      runAsGroup: 1000730001
+      runAsNonRoot: true
+      runAsUser: 1000730001
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/workload-spiffe-uds
+      name: workload-socket
+    - mountPath: /var/run/secrets/workload-spiffe-credentials
+      name: workload-certs
+    - mountPath: /var/run/secrets/istio
+      name: istiod-ca-cert
+    - mountPath: /var/lib/istio/data
+      name: istio-data
+    - mountPath: /etc/istio/proxy
+      name: istio-envoy
+    - mountPath: /etc/istio/pod
+      name: istio-podinfo
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rc97m
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  imagePullSecrets:
+  - name: bookinfo-reviews-dockercfg-chhq8
+  nodeName: ip-10-0-156-53.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1000730000
+    seLinuxOptions:
+      level: s0:c27,c14
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount: bookinfo-reviews
+  serviceAccountName: bookinfo-reviews
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  volumes:
+  - emptyDir: {}
+    name: workload-socket
+  - emptyDir: {}
+    name: workload-certs
+  - emptyDir:
+      medium: Memory
+    name: istio-envoy
+  - emptyDir: {}
+    name: istio-data
+  - downwardAPI:
+      defaultMode: 420
+      items:
+      - fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.labels
+        path: labels
+      - fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.annotations
+        path: annotations
+    name: istio-podinfo
+  - configMap:
+      defaultMode: 420
+      name: istio-ca-root-cert
+    name: istiod-ca-cert
+  - emptyDir: {}
+    name: wlp-output
+  - emptyDir: {}
+    name: tmp
+  - name: kube-api-access-rc97m
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+      - configMap:
+          items:
+          - key: service-ca.crt
+            path: service-ca.crt
+          name: openshift-service-ca.crt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-03-24T17:25:30Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-03-24T17:25:32Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-03-24T17:25:32Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-03-24T17:25:30Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: cri-o://b33b16a177953f4ea9c0cf94578a4f95682cfedd0d8357621f91a4f44b9acb57
+    image: registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:15444e6b93a05d88c6fc6ce1d1e7744635141291b86a7c3abb57758849a5d19e
+    imageID: registry.redhat.io/openshift-service-mesh/proxyv2-rhel8@sha256:15444e6b93a05d88c6fc6ce1d1e7744635141291b86a7c3abb57758849a5d19e
+    lastState: {}
+    name: istio-proxy
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-03-24T17:25:31Z"
+  - containerID: cri-o://f987f24aae8760528cb643e10a5aaa6cf78c31891edb4758576bb41afa83425a
+    image: quay.io/maistra/examples-bookinfo-reviews-v1:2.3.0
+    imageID: quay.io/maistra/examples-bookinfo-reviews-v1@sha256:1751bfd9a159dbbe44c7c14fd1d40faf779fa6363c987c3cb12a2f112babaee8
+    lastState: {}
+    name: reviews
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-03-24T17:25:31Z"
+  hostIP: 10.0.156.53
+  phase: Running
+  podIP: 10.128.2.61
+  podIPs:
+  - ip: 10.128.2.61
+  qosClass: Burstable
+  startTime: "2023-03-24T17:25:30Z"

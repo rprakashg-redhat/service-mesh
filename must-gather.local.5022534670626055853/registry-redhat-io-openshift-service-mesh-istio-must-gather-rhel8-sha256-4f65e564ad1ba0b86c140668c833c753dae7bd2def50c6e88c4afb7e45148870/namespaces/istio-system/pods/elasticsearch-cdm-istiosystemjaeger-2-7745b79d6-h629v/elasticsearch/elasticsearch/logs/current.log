@@ -1,0 +1,243 @@
+2023-03-24T17:28:39.647608592Z [2023-03-24 17:28:39,647][INFO ][container.run            ] Begin Elasticsearch startup script
+2023-03-24T17:28:39.651532200Z [2023-03-24 17:28:39,651][INFO ][container.run            ] Comparing the specified RAM to the maximum recommended for Elasticsearch...
+2023-03-24T17:28:39.653346826Z [2023-03-24 17:28:39,653][INFO ][container.run            ] Inspecting cgroup version...
+2023-03-24T17:28:39.655036048Z [2023-03-24 17:28:39,654][INFO ][container.run            ] Detected cgroup v1
+2023-03-24T17:28:39.656734790Z [2023-03-24 17:28:39,656][INFO ][container.run            ] Inspecting the maximum RAM available...
+2023-03-24T17:28:39.660171268Z [2023-03-24 17:28:39,659][INFO ][container.run            ] ES_JAVA_OPTS: ' -Xms2048m -Xmx2048m'
+2023-03-24T17:28:39.661887970Z [2023-03-24 17:28:39,661][INFO ][container.run            ] Copying certs from /etc/openshift/elasticsearch/secret to /etc/elasticsearch//secret
+2023-03-24T17:28:39.667348416Z [2023-03-24 17:28:39,667][INFO ][container.run            ] Building required p12 files and truststore
+2023-03-24T17:28:47.262545885Z Picked up _JAVA_OPTIONS: -Dcom.redhat.fips=false
+2023-03-24T17:28:47.633971199Z Certificate was added to keystore
+2023-03-24T17:28:47.965886606Z Picked up _JAVA_OPTIONS: -Dcom.redhat.fips=false
+2023-03-24T17:28:48.341052802Z Certificate was added to keystore
+2023-03-24T17:28:48.653219988Z [2023-03-24 17:28:48,652][INFO ][container.run            ] Removing unnecessary JKS files
+2023-03-24T17:28:48.660581491Z [2023-03-24 17:28:48,660][INFO ][container.run            ] Setting heap dump location /elasticsearch/persistent/heapdump.hprof
+2023-03-24T17:28:48.661093847Z [2023-03-24 17:28:48,660][INFO ][container.run            ] Checking if Elasticsearch is ready
+2023-03-24T17:28:48.662473103Z [2023-03-24 17:28:48,662][INFO ][container.run            ] ES_JAVA_OPTS: ' -Xms2048m -Xmx2048m -XX:HeapDumpPath=/elasticsearch/persistent/heapdump.hprof -Xlog:gc*,gc+age=trace,safepoint:file=/elasticsearch/persistent/elasticsearch/logs/gc.log:utctime,pid,tags:filecount=8,filesize=64m -XX:ErrorFile=/elasticsearch/persistent/elasticsearch/logs/error.log -Djdk.tls.ephemeralDHKeySize=2048 -Des.cgroups.hierarchy.override=/ -Dlog4j2.configurationFile=/usr/share/java/elasticsearch/config/log4j2.properties'
+2023-03-24T17:28:48.675720281Z Picked up _JAVA_OPTIONS: -Dcom.redhat.fips=false
+2023-03-24T17:28:48.775171409Z Picked up _JAVA_OPTIONS: -Dcom.redhat.fips=false
+2023-03-24T17:28:48.878385689Z Picked up _JAVA_OPTIONS: -Dcom.redhat.fips=false
+2023-03-24T17:28:49.044662329Z Picked up _JAVA_OPTIONS: -Dcom.redhat.fips=false
+2023-03-24T17:28:49.044798291Z OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+2023-03-24T17:28:49.044900891Z OpenJDK 64-Bit Server VM warning: Option MaxRAMFraction was deprecated in version 10.0 and will likely be removed in a future release.
+2023-03-24T17:28:49.044918213Z OpenJDK 64-Bit Server VM warning: Option InitialRAMFraction was deprecated in version 10.0 and will likely be removed in a future release.
+2023-03-24T17:28:49.044929602Z OpenJDK 64-Bit Server VM warning: Option MinRAMFraction was deprecated in version 10.0 and will likely be removed in a future release.
+2023-03-24T17:28:51.244250411Z [2023-03-24T17:28:51,242][WARN ][o.e.c.l.LogConfigurator  ] [elasticsearch-cdm-istiosystemjaeger-2] Some logging configurations have %marker but don't have %node_name. We will automatically add %node_name to the pattern to ease the migration for users who customize log4j2.properties but will stop this behavior in 7.0. You should manually replace `%node_name` with `[%node_name]%marker ` in these locations:
+2023-03-24T17:28:51.244250411Z   /etc/elasticsearch/log4j2.properties
+2023-03-24T17:28:51.978283066Z [2023-03-24T17:28:51,978][INFO ][o.e.e.NodeEnvironment    ] [elasticsearch-cdm-istiosystemjaeger-2] using [1] data paths, mounts [[/elasticsearch/persistent (/dev/nvme1n1)]], net usable_space [48.8gb], net total_space [48.9gb], types [ext4]
+2023-03-24T17:28:51.978593415Z [2023-03-24T17:28:51,978][INFO ][o.e.e.NodeEnvironment    ] [elasticsearch-cdm-istiosystemjaeger-2] heap size [1.9gb], compressed ordinary object pointers [true]
+2023-03-24T17:28:52.035442333Z [2023-03-24T17:28:52,035][INFO ][o.e.n.Node               ] [elasticsearch-cdm-istiosystemjaeger-2] node name [elasticsearch-cdm-istiosystemjaeger-2], node ID [v3NZE37RRryZi8-X0zu6Vw]
+2023-03-24T17:28:52.035808247Z [2023-03-24T17:28:52,035][INFO ][o.e.n.Node               ] [elasticsearch-cdm-istiosystemjaeger-2] version[6.8.1], pid[1], build[oss/zip/d3b8715/2022-11-02T18:45:02.617053Z], OS[Linux/4.18.0-372.43.1.el8_6.x86_64/amd64], JVM[Red Hat, Inc./OpenJDK 64-Bit Server VM/11.0.18/11.0.18+10-LTS]
+2023-03-24T17:28:52.036053309Z [2023-03-24T17:28:52,035][INFO ][o.e.n.Node               ] [elasticsearch-cdm-istiosystemjaeger-2] JVM arguments [-XX:+UseConcMarkSweepGC, -XX:CMSInitiatingOccupancyFraction=75, -XX:+UseCMSInitiatingOccupancyOnly, -Des.networkaddress.cache.ttl=60, -Des.networkaddress.cache.negative.ttl=10, -XX:+AlwaysPreTouch, -Xss1m, -Djava.awt.headless=true, -Dfile.encoding=UTF-8, -Djna.nosys=true, -XX:-OmitStackTraceInFastThrow, -Dio.netty.noUnsafe=true, -Dio.netty.noKeySetOptimization=true, -Dio.netty.recycler.maxCapacityPerThread=0, -Dlog4j.shutdownHookEnabled=false, -Dlog4j2.disable.jmx=true, -Djava.io.tmpdir=/tmp/elasticsearch-5485623935700524434, -XX:+HeapDumpOnOutOfMemoryError, -XX:HeapDumpPath=data, -XX:ErrorFile=logs/hs_err_pid%p.log, -Djava.locale.providers=COMPAT, -XX:UseAVX=2, -XX:+UnlockExperimentalVMOptions, -XX:MaxRAMFraction=2, -XX:InitialRAMFraction=2, -XX:MinRAMFraction=2, -Xms2048m, -Xmx2048m, -XX:HeapDumpPath=/elasticsearch/persistent/heapdump.hprof, -Xlog:gc*,gc+age=trace,safepoint:file=/elasticsearch/persistent/elasticsearch/logs/gc.log:utctime,pid,tags:filecount=8,filesize=64m, -XX:ErrorFile=/elasticsearch/persistent/elasticsearch/logs/error.log, -Djdk.tls.ephemeralDHKeySize=2048, -Des.cgroups.hierarchy.override=/, -Dlog4j2.configurationFile=/usr/share/java/elasticsearch/config/log4j2.properties, -Des.path.home=/usr/share/elasticsearch, -Des.path.conf=/etc/elasticsearch, -Des.distribution.flavor=oss, -Des.distribution.type=zip, -Dcom.redhat.fips=false]
+2023-03-24T17:28:53.660155262Z [2023-03-24T17:28:53,660][INFO ][o.e.p.p.PrometheusExporterPlugin] [elasticsearch-cdm-istiosystemjaeger-2] starting Prometheus exporter plugin
+2023-03-24T17:28:54.067577878Z [2023-03-24T17:28:54,067][INFO ][c.a.o.s.s.t.OpenDistroSSLConfig] [elasticsearch-cdm-istiosystemjaeger-2] SSL dual mode is disabled
+2023-03-24T17:28:54.067669824Z [2023-03-24T17:28:54,067][INFO ][c.a.o.s.OpenDistroSecurityPlugin] [elasticsearch-cdm-istiosystemjaeger-2] ES Config path is /etc/elasticsearch
+2023-03-24T17:28:54.441866855Z [2023-03-24T17:28:54,441][INFO ][c.a.o.s.s.DefaultOpenDistroSecurityKeyStore] [elasticsearch-cdm-istiosystemjaeger-2] OpenSSL not available (this is not an error, we simply fallback to built-in JDK SSL) because of java.lang.ClassNotFoundException: io.netty.internal.tcnative.SSLContext
+2023-03-24T17:28:54.650939329Z [2023-03-24T17:28:54,650][INFO ][c.a.o.s.s.DefaultOpenDistroSecurityKeyStore] [elasticsearch-cdm-istiosystemjaeger-2] JVM supports TLSv1.3
+2023-03-24T17:28:54.652468835Z [2023-03-24T17:28:54,652][INFO ][c.a.o.s.s.DefaultOpenDistroSecurityKeyStore] [elasticsearch-cdm-istiosystemjaeger-2] Config directory is /etc/elasticsearch/, from there the key- and truststore files are resolved relatively
+2023-03-24T17:28:54.858353793Z [2023-03-24T17:28:54,858][INFO ][c.a.o.s.s.u.SSLCertificateHelper] [elasticsearch-cdm-istiosystemjaeger-2] No alias given, use the first one: elasticsearch
+2023-03-24T17:28:54.858556078Z [2023-03-24T17:28:54,858][WARN ][c.a.o.s.s.u.SSLCertificateHelper] [elasticsearch-cdm-istiosystemjaeger-2] Certificate chain for alias elasticsearch contains a root certificate
+2023-03-24T17:28:55.272087913Z [2023-03-24T17:28:55,271][INFO ][c.a.o.s.s.DefaultOpenDistroSecurityKeyStore] [elasticsearch-cdm-istiosystemjaeger-2] HTTPS client auth mode OPTIONAL
+2023-03-24T17:28:55.351961468Z [2023-03-24T17:28:55,351][INFO ][c.a.o.s.s.u.SSLCertificateHelper] [elasticsearch-cdm-istiosystemjaeger-2] No alias given, use the first one: logging-es
+2023-03-24T17:28:55.352037059Z [2023-03-24T17:28:55,351][WARN ][c.a.o.s.s.u.SSLCertificateHelper] [elasticsearch-cdm-istiosystemjaeger-2] Certificate chain for alias logging-es contains a root certificate
+2023-03-24T17:28:55.448348640Z [2023-03-24T17:28:55,448][INFO ][c.a.o.s.s.DefaultOpenDistroSecurityKeyStore] [elasticsearch-cdm-istiosystemjaeger-2] TLS Transport Client Provider : JDK
+2023-03-24T17:28:55.448423262Z [2023-03-24T17:28:55,448][INFO ][c.a.o.s.s.DefaultOpenDistroSecurityKeyStore] [elasticsearch-cdm-istiosystemjaeger-2] TLS Transport Server Provider : JDK
+2023-03-24T17:28:55.448485109Z [2023-03-24T17:28:55,448][INFO ][c.a.o.s.s.DefaultOpenDistroSecurityKeyStore] [elasticsearch-cdm-istiosystemjaeger-2] TLS HTTP Provider             : JDK
+2023-03-24T17:28:55.448572946Z [2023-03-24T17:28:55,448][INFO ][c.a.o.s.s.DefaultOpenDistroSecurityKeyStore] [elasticsearch-cdm-istiosystemjaeger-2] Enabled TLS protocols for transport layer : [TLSv1.3, TLSv1.2]
+2023-03-24T17:28:55.448635483Z [2023-03-24T17:28:55,448][INFO ][c.a.o.s.s.DefaultOpenDistroSecurityKeyStore] [elasticsearch-cdm-istiosystemjaeger-2] Enabled TLS protocols for HTTP layer      : [TLSv1.3, TLSv1.2]
+2023-03-24T17:28:55.746414831Z [2023-03-24T17:28:55,746][INFO ][c.a.o.s.OpenDistroSecurityPlugin] [elasticsearch-cdm-istiosystemjaeger-2] Clustername: elasticsearch
+2023-03-24T17:28:55.750203187Z [2023-03-24T17:28:55,750][WARN ][c.a.o.s.OpenDistroSecurityPlugin] [elasticsearch-cdm-istiosystemjaeger-2] Directory /etc/elasticsearch has insecure file permissions (should be 0700)
+2023-03-24T17:28:55.750291185Z [2023-03-24T17:28:55,750][WARN ][c.a.o.s.OpenDistroSecurityPlugin] [elasticsearch-cdm-istiosystemjaeger-2] Directory /etc/elasticsearch/scripts has insecure file permissions (should be 0700)
+2023-03-24T17:28:55.853532400Z [2023-03-24T17:28:55,853][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [aggs-matrix-stats]
+2023-03-24T17:28:55.853570637Z [2023-03-24T17:28:55,853][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [analysis-common]
+2023-03-24T17:28:55.853617515Z [2023-03-24T17:28:55,853][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [ingest-common]
+2023-03-24T17:28:55.853665163Z [2023-03-24T17:28:55,853][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [ingest-user-agent]
+2023-03-24T17:28:55.853712583Z [2023-03-24T17:28:55,853][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [lang-expression]
+2023-03-24T17:28:55.853760807Z [2023-03-24T17:28:55,853][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [lang-mustache]
+2023-03-24T17:28:55.853823362Z [2023-03-24T17:28:55,853][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [lang-painless]
+2023-03-24T17:28:55.853872071Z [2023-03-24T17:28:55,853][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [mapper-extras]
+2023-03-24T17:28:55.853918222Z [2023-03-24T17:28:55,853][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [parent-join]
+2023-03-24T17:28:55.853966282Z [2023-03-24T17:28:55,853][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [percolator]
+2023-03-24T17:28:55.854013654Z [2023-03-24T17:28:55,853][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [rank-eval]
+2023-03-24T17:28:55.854064795Z [2023-03-24T17:28:55,854][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [reindex]
+2023-03-24T17:28:55.854112237Z [2023-03-24T17:28:55,854][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [repository-url]
+2023-03-24T17:28:55.854160889Z [2023-03-24T17:28:55,854][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [transport-netty4]
+2023-03-24T17:28:55.854208548Z [2023-03-24T17:28:55,854][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded module [tribe]
+2023-03-24T17:28:55.854564786Z [2023-03-24T17:28:55,854][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded plugin [opendistro_security]
+2023-03-24T17:28:55.854609407Z [2023-03-24T17:28:55,854][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded plugin [openshift-ingest-plugin]
+2023-03-24T17:28:55.854669459Z [2023-03-24T17:28:55,854][INFO ][o.e.p.PluginsService     ] [elasticsearch-cdm-istiosystemjaeger-2] loaded plugin [prometheus-exporter]
+2023-03-24T17:28:55.961891506Z [2023-03-24T17:28:55,961][INFO ][c.a.o.s.OpenDistroSecurityPlugin] [elasticsearch-cdm-istiosystemjaeger-2] Disabled https compression by default to mitigate BREACH attacks. You can enable it by setting 'http.compression: true' in elasticsearch.yml
+2023-03-24T17:29:00.046032252Z [2023-03-24T17:29:00,045][WARN ][c.a.o.s.c.Salt           ] [elasticsearch-cdm-istiosystemjaeger-2] If you plan to use field masking pls configure compliance salt e1ukloTsQlOgPquJ to be a random string of 16 chars length identical on all nodes
+2023-03-24T17:29:00.061071251Z [2023-03-24T17:29:00,060][ERROR][c.a.o.s.a.s.SinkProvider ] [elasticsearch-cdm-istiosystemjaeger-2] Default endpoint could not be created, auditlog will not work properly.
+2023-03-24T17:29:00.061946551Z [2023-03-24T17:29:00,061][WARN ][c.a.o.s.a.r.AuditMessageRouter] [elasticsearch-cdm-istiosystemjaeger-2] No default storage available, audit log may not work properly. Please check configuration.
+2023-03-24T17:29:00.062058295Z [2023-03-24T17:29:00,061][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Message routing enabled: false
+2023-03-24T17:29:00.181760340Z [2023-03-24T17:29:00,181][INFO ][c.a.o.s.f.OpenDistroSecurityFilter] [elasticsearch-cdm-istiosystemjaeger-2] <NONE> indices are made immutable.
+2023-03-24T17:29:00.367119831Z [2023-03-24T17:29:00,366][DEBUG][o.e.a.ActionModule       ] [elasticsearch-cdm-istiosystemjaeger-2] Using REST wrapper from plugin com.amazon.opendistroforelasticsearch.security.OpenDistroSecurityPlugin
+2023-03-24T17:29:00.648729965Z [2023-03-24T17:29:00,648][INFO ][o.e.d.DiscoveryModule    ] [elasticsearch-cdm-istiosystemjaeger-2] using discovery type [zen] and host providers [settings]
+2023-03-24T17:29:01.645257564Z Registering Handler
+2023-03-24T17:29:01.836394795Z [2023-03-24T17:29:01,836][INFO ][o.e.n.Node               ] [elasticsearch-cdm-istiosystemjaeger-2] initialized
+2023-03-24T17:29:01.836495157Z [2023-03-24T17:29:01,836][INFO ][o.e.n.Node               ] [elasticsearch-cdm-istiosystemjaeger-2] starting ...
+2023-03-24T17:29:02.162890857Z [2023-03-24T17:29:02,162][INFO ][o.e.t.TransportService   ] [elasticsearch-cdm-istiosystemjaeger-2] publish_address {10.129.2.175:9300}, bound_addresses {[::1]:9300}, {127.0.0.1:9300}, {10.129.2.175:9300}
+2023-03-24T17:29:02.247897119Z [2023-03-24T17:29:02,247][INFO ][o.e.b.BootstrapChecks    ] [elasticsearch-cdm-istiosystemjaeger-2] bound or publishing to a non-loopback address, enforcing bootstrap checks
+2023-03-24T17:29:02.256842196Z [2023-03-24T17:29:02,256][INFO ][c.a.o.s.c.IndexBaseConfigurationRepository] [elasticsearch-cdm-istiosystemjaeger-2] Will not attempt to create index .security and default configs if they are absent. Use securityadmin to initialize cluster
+2023-03-24T17:29:02.371455963Z [2023-03-24T17:29:02,370][DEBUG][o.e.a.a.c.h.TransportClusterHealthAction] [elasticsearch-cdm-istiosystemjaeger-2] no known master node, scheduling a retry
+2023-03-24T17:29:07.227653340Z [2023-03-24T17:29:07,227][INFO ][o.e.d.z.ZenDiscovery     ] [elasticsearch-cdm-istiosystemjaeger-2] failed to send join request to master [{elasticsearch-cdm-istiosystemjaeger-3}{GI1ThIhyR2iwj9xBCivZlw}{rXyFdoLTQ2-5wbcEBHtuXg}{10.128.2.68}{10.128.2.68:9300}], reason [RemoteTransportException[[elasticsearch-cdm-istiosystemjaeger-3][10.128.2.68:9300][internal:discovery/zen/join]]; nested: NotMasterException[Node [{elasticsearch-cdm-istiosystemjaeger-3}{GI1ThIhyR2iwj9xBCivZlw}{rXyFdoLTQ2-5wbcEBHtuXg}{10.128.2.68}{10.128.2.68:9300}] not master for join request]; ], tried [3] times
+2023-03-24T17:29:10.960443964Z [2023-03-24T17:29:10,960][INFO ][o.e.c.s.ClusterApplierService] [elasticsearch-cdm-istiosystemjaeger-2] detected_master {elasticsearch-cdm-istiosystemjaeger-1}{3Smzpp6pSw-BbWaOBIkBvg}{VXwvi_cUSyOjubLYcAWZlg}{10.131.0.63}{10.131.0.63:9300}, added {{elasticsearch-cdm-istiosystemjaeger-1}{3Smzpp6pSw-BbWaOBIkBvg}{VXwvi_cUSyOjubLYcAWZlg}{10.131.0.63}{10.131.0.63:9300},{elasticsearch-cdm-istiosystemjaeger-3}{GI1ThIhyR2iwj9xBCivZlw}{rXyFdoLTQ2-5wbcEBHtuXg}{10.128.2.68}{10.128.2.68:9300},}, reason: apply cluster state (from master [master {elasticsearch-cdm-istiosystemjaeger-1}{3Smzpp6pSw-BbWaOBIkBvg}{VXwvi_cUSyOjubLYcAWZlg}{10.131.0.63}{10.131.0.63:9300} committed version [2]])
+2023-03-24T17:29:10.970996571Z [2023-03-24T17:29:10,970][INFO ][o.e.h.n.Netty4HttpServerTransport] [elasticsearch-cdm-istiosystemjaeger-2] publish_address {10.129.2.175:9200}, bound_addresses {[::1]:9200}, {127.0.0.1:9200}, {10.129.2.175:9200}
+2023-03-24T17:29:10.971055143Z [2023-03-24T17:29:10,971][INFO ][o.e.n.Node               ] [elasticsearch-cdm-istiosystemjaeger-2] started
+2023-03-24T17:29:10.971526784Z [2023-03-24T17:29:10,971][INFO ][c.a.o.s.OpenDistroSecurityPlugin] [elasticsearch-cdm-istiosystemjaeger-2] 3 Open Distro Security modules loaded so far: [Module [type=AUDITLOG, implementing class=com.amazon.opendistroforelasticsearch.security.auditlog.impl.AuditLogImpl], Module [type=MULTITENANCY, implementing class=com.amazon.opendistroforelasticsearch.security.configuration.PrivilegesInterceptorImpl], Module [type=REST_MANAGEMENT_API, implementing class=com.amazon.opendistroforelasticsearch.security.dlic.rest.api.OpenDistroSecurityRestApiActions]]
+2023-03-24T17:29:12.440800308Z [2023-03-24 17:29:12,440][INFO ][container.run            ] Elasticsearch is ready and listening
+2023-03-24T17:29:12.442522572Z /usr/share/elasticsearch/init ~
+2023-03-24T17:29:12.450843250Z [2023-03-24 17:29:12,450][INFO ][container.run            ] Starting init script: 0001-jaeger
+2023-03-24T17:29:12.454053150Z [2023-03-24 17:29:12,453][INFO ][container.run            ] Completed init script: 0001-jaeger
+2023-03-24T17:29:12.632733823Z [2023-03-24 17:29:12,632][INFO ][container.run            ] Forcing the seeding of ACL documents
+2023-03-24T17:29:12.873587839Z [2023-03-24 17:29:12,873][INFO ][container.run            ] Seeding the security ACL index.  Will wait up to 604800 seconds.
+2023-03-24T17:29:12.932800526Z [2023-03-24 17:29:12,932][INFO ][container.run            ] Seeding the security ACL index.  Will wait up to 604800 seconds.
+2023-03-24T17:29:12.971491906Z [2023-03-24T17:29:12,971][WARN ][c.a.o.s.c.ConfigurationLoader] [elasticsearch-cdm-istiosystemjaeger-2] No data for audit while retrieving configuration for [config, roles, rolesmapping, internalusers, actiongroups, nodesdn, audit]  (index=.security)
+2023-03-24T17:29:13.046227640Z [2023-03-24T17:29:13,046][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing on REST API is enabled.
+2023-03-24T17:29:13.046459276Z [2023-03-24T17:29:13,046][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] [AUTHENTICATED, GRANTED_PRIVILEGES] are excluded from REST API auditing.
+2023-03-24T17:29:13.046540010Z [2023-03-24T17:29:13,046][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing on Transport API is enabled.
+2023-03-24T17:29:13.046651782Z [2023-03-24T17:29:13,046][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] [AUTHENTICATED, GRANTED_PRIVILEGES] are excluded from Transport API auditing.
+2023-03-24T17:29:13.046741946Z [2023-03-24T17:29:13,046][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of request body is enabled.
+2023-03-24T17:29:13.046823324Z [2023-03-24T17:29:13,046][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Bulk requests resolution is disabled during request auditing.
+2023-03-24T17:29:13.046902911Z [2023-03-24T17:29:13,046][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Index resolution is enabled during request auditing.
+2023-03-24T17:29:13.047001743Z [2023-03-24T17:29:13,046][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Sensitive headers auditing is enabled.
+2023-03-24T17:29:13.047076278Z [2023-03-24T17:29:13,047][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing requests from kibanaserver users is disabled.
+2023-03-24T17:29:13.047187135Z [2023-03-24T17:29:13,047][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of external configuration is disabled.
+2023-03-24T17:29:13.047263875Z [2023-03-24T17:29:13,047][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of internal configuration is disabled.
+2023-03-24T17:29:13.047359191Z [2023-03-24T17:29:13,047][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing only metadata information for read request is disabled.
+2023-03-24T17:29:13.047480233Z [2023-03-24T17:29:13,047][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing will watch {} for read requests.
+2023-03-24T17:29:13.047584882Z [2023-03-24T17:29:13,047][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing read operation requests from kibanaserver users is disabled.
+2023-03-24T17:29:13.047670525Z [2023-03-24T17:29:13,047][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing only metadata information for write request is disabled.
+2023-03-24T17:29:13.047753647Z [2023-03-24T17:29:13,047][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing diffs for write requests is disabled.
+2023-03-24T17:29:13.047831072Z [2023-03-24T17:29:13,047][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing write operation requests from kibanaserver users is disabled.
+2023-03-24T17:29:13.048025821Z [2023-03-24T17:29:13,047][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing will watch <NONE> for write requests.
+2023-03-24T17:29:13.048102099Z [2023-03-24T17:29:13,048][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] .security is used as internal security index.
+2023-03-24T17:29:13.048182501Z [2023-03-24T17:29:13,048][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Internal index used for posting audit logs is null
+2023-03-24T17:29:13.051432926Z Picked up _JAVA_OPTIONS: -Dcom.redhat.fips=false
+2023-03-24T17:29:13.136309071Z [2023-03-24T17:29:13,136][INFO ][c.a.o.s.c.IndexBaseConfigurationRepository] [elasticsearch-cdm-istiosystemjaeger-2] Hot-reloading of audit configuration is disabled. Using configuration with defaults from elasticsearch settings.  Populate the configuration in index using audit.yml or securityadmin to enable it.
+2023-03-24T17:29:13.136586495Z [2023-03-24T17:29:13,136][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing on REST API is enabled.
+2023-03-24T17:29:13.136651304Z [2023-03-24T17:29:13,136][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] [AUTHENTICATED, GRANTED_PRIVILEGES] are excluded from REST API auditing.
+2023-03-24T17:29:13.136705524Z [2023-03-24T17:29:13,136][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing on Transport API is enabled.
+2023-03-24T17:29:13.136767658Z [2023-03-24T17:29:13,136][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] [AUTHENTICATED, GRANTED_PRIVILEGES] are excluded from Transport API auditing.
+2023-03-24T17:29:13.136810947Z [2023-03-24T17:29:13,136][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of request body is enabled.
+2023-03-24T17:29:13.136893430Z [2023-03-24T17:29:13,136][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Bulk requests resolution is disabled during request auditing.
+2023-03-24T17:29:13.136935671Z [2023-03-24T17:29:13,136][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Index resolution is enabled during request auditing.
+2023-03-24T17:29:13.136979960Z [2023-03-24T17:29:13,136][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Sensitive headers auditing is enabled.
+2023-03-24T17:29:13.137027189Z [2023-03-24T17:29:13,136][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing requests from kibanaserver users is disabled.
+2023-03-24T17:29:13.137078101Z [2023-03-24T17:29:13,137][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of external configuration is disabled.
+2023-03-24T17:29:13.137121661Z [2023-03-24T17:29:13,137][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of internal configuration is disabled.
+2023-03-24T17:29:13.137165911Z [2023-03-24T17:29:13,137][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing only metadata information for read request is disabled.
+2023-03-24T17:29:13.137217185Z [2023-03-24T17:29:13,137][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing will watch {} for read requests.
+2023-03-24T17:29:13.137263104Z [2023-03-24T17:29:13,137][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing read operation requests from kibanaserver users is disabled.
+2023-03-24T17:29:13.137307752Z [2023-03-24T17:29:13,137][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing only metadata information for write request is disabled.
+2023-03-24T17:29:13.137367616Z [2023-03-24T17:29:13,137][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing diffs for write requests is disabled.
+2023-03-24T17:29:13.137414137Z [2023-03-24T17:29:13,137][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing write operation requests from kibanaserver users is disabled.
+2023-03-24T17:29:13.137460250Z [2023-03-24T17:29:13,137][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing will watch <NONE> for write requests.
+2023-03-24T17:29:13.137503142Z [2023-03-24T17:29:13,137][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] .security is used as internal security index.
+2023-03-24T17:29:13.137546620Z [2023-03-24T17:29:13,137][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Internal index used for posting audit logs is null
+2023-03-24T17:29:13.137619574Z [2023-03-24T17:29:13,137][INFO ][c.a.o.s.c.IndexBaseConfigurationRepository] [elasticsearch-cdm-istiosystemjaeger-2] Node 'elasticsearch-cdm-istiosystemjaeger-2' initialized
+2023-03-24T17:29:14.135164250Z Open Distro Security Admin v6
+2023-03-24T17:29:14.142677823Z Will connect to localhost:9300 ... done
+2023-03-24T17:29:22.033307947Z Elasticsearch Version: 6.8.1
+2023-03-24T17:29:22.033721235Z Open Distro Security Version: 0.10.1.2
+2023-03-24T17:29:22.037313806Z Connected as CN=system.admin,OU=OpenShift,O=Logging
+2023-03-24T17:29:22.037353374Z Contacting elasticsearch cluster 'elasticsearch' ...
+2023-03-24T17:29:22.066009835Z Clustername: elasticsearch
+2023-03-24T17:29:22.066044439Z Clusterstate: GREEN
+2023-03-24T17:29:22.066044439Z Number of nodes: 3
+2023-03-24T17:29:22.066073216Z Number of data nodes: 3
+2023-03-24T17:29:22.213444998Z .security index already exists, so we do not need to create one.
+2023-03-24T17:29:22.257846184Z Populate config from /opt/app-root/src/sgconfig/
+2023-03-24T17:29:22.257883404Z Will update 'security/config' with /opt/app-root/src/sgconfig/config.yml 
+2023-03-24T17:29:23.465546087Z    SUCC: Configuration for 'config' created or updated
+2023-03-24T17:29:23.465585952Z Will update 'security/roles' with /opt/app-root/src/sgconfig/roles.yml 
+2023-03-24T17:29:23.906182890Z    SUCC: Configuration for 'roles' created or updated
+2023-03-24T17:29:23.906221393Z Will update 'security/rolesmapping' with /opt/app-root/src/sgconfig/roles_mapping.yml 
+2023-03-24T17:29:24.106499935Z    SUCC: Configuration for 'rolesmapping' created or updated
+2023-03-24T17:29:24.106539151Z Will update 'security/internalusers' with /opt/app-root/src/sgconfig/internal_users.yml 
+2023-03-24T17:29:24.332667381Z    SUCC: Configuration for 'internalusers' created or updated
+2023-03-24T17:29:24.332706081Z Will update 'security/actiongroups' with /opt/app-root/src/sgconfig/action_groups.yml 
+2023-03-24T17:29:24.433602519Z    SUCC: Configuration for 'actiongroups' created or updated
+2023-03-24T17:29:24.433720976Z Will update 'security/nodesdn' with /opt/app-root/src/sgconfig/nodes_dn.yml 
+2023-03-24T17:29:24.534665902Z [2023-03-24T17:29:24,534][WARN ][c.a.o.s.c.ConfigurationLoader] [elasticsearch-cdm-istiosystemjaeger-2] No data for audit while retrieving configuration for [config, roles, rolesmapping, internalusers, actiongroups, nodesdn, audit]  (index=.security)
+2023-03-24T17:29:24.539452991Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing on REST API is enabled.
+2023-03-24T17:29:24.539544391Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] [AUTHENTICATED, GRANTED_PRIVILEGES] are excluded from REST API auditing.
+2023-03-24T17:29:24.539585010Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing on Transport API is enabled.
+2023-03-24T17:29:24.539645278Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] [AUTHENTICATED, GRANTED_PRIVILEGES] are excluded from Transport API auditing.
+2023-03-24T17:29:24.539684774Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of request body is enabled.
+2023-03-24T17:29:24.539734845Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Bulk requests resolution is disabled during request auditing.
+2023-03-24T17:29:24.539777454Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Index resolution is enabled during request auditing.
+2023-03-24T17:29:24.539815759Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Sensitive headers auditing is enabled.
+2023-03-24T17:29:24.539855559Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing requests from kibanaserver users is disabled.
+2023-03-24T17:29:24.539896798Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of external configuration is disabled.
+2023-03-24T17:29:24.539934809Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of internal configuration is disabled.
+2023-03-24T17:29:24.539974985Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing only metadata information for read request is disabled.
+2023-03-24T17:29:24.540025582Z [2023-03-24T17:29:24,539][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing will watch {} for read requests.
+2023-03-24T17:29:24.540100061Z [2023-03-24T17:29:24,540][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing read operation requests from kibanaserver users is disabled.
+2023-03-24T17:29:24.540142488Z [2023-03-24T17:29:24,540][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing only metadata information for write request is disabled.
+2023-03-24T17:29:24.540180484Z [2023-03-24T17:29:24,540][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing diffs for write requests is disabled.
+2023-03-24T17:29:24.540220395Z [2023-03-24T17:29:24,540][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing write operation requests from kibanaserver users is disabled.
+2023-03-24T17:29:24.540260877Z [2023-03-24T17:29:24,540][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing will watch <NONE> for write requests.
+2023-03-24T17:29:24.540299090Z [2023-03-24T17:29:24,540][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] .security is used as internal security index.
+2023-03-24T17:29:24.540371913Z [2023-03-24T17:29:24,540][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Internal index used for posting audit logs is null
+2023-03-24T17:29:24.609833712Z    SUCC: Configuration for 'nodesdn' created or updated
+2023-03-24T17:29:24.663945904Z [2023-03-24T17:29:24,663][WARN ][c.a.o.s.c.ConfigurationLoader] [elasticsearch-cdm-istiosystemjaeger-2] No data for audit while retrieving configuration for [config, roles, rolesmapping, internalusers, actiongroups, nodesdn, audit]  (index=.security)
+2023-03-24T17:29:24.734311802Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing on REST API is enabled.
+2023-03-24T17:29:24.734410709Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] [AUTHENTICATED, GRANTED_PRIVILEGES] are excluded from REST API auditing.
+2023-03-24T17:29:24.734451369Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing on Transport API is enabled.
+2023-03-24T17:29:24.734505726Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] [AUTHENTICATED, GRANTED_PRIVILEGES] are excluded from Transport API auditing.
+2023-03-24T17:29:24.734543067Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of request body is enabled.
+2023-03-24T17:29:24.734583098Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Bulk requests resolution is disabled during request auditing.
+2023-03-24T17:29:24.734620371Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Index resolution is enabled during request auditing.
+2023-03-24T17:29:24.734659312Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Sensitive headers auditing is enabled.
+2023-03-24T17:29:24.734698146Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing requests from kibanaserver users is disabled.
+2023-03-24T17:29:24.734737483Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of external configuration is disabled.
+2023-03-24T17:29:24.734774897Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of internal configuration is disabled.
+2023-03-24T17:29:24.734815355Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing only metadata information for read request is disabled.
+2023-03-24T17:29:24.734860416Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing will watch {} for read requests.
+2023-03-24T17:29:24.734901068Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing read operation requests from kibanaserver users is disabled.
+2023-03-24T17:29:24.734940346Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing only metadata information for write request is disabled.
+2023-03-24T17:29:24.734977359Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing diffs for write requests is disabled.
+2023-03-24T17:29:24.735016034Z [2023-03-24T17:29:24,734][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing write operation requests from kibanaserver users is disabled.
+2023-03-24T17:29:24.735058616Z [2023-03-24T17:29:24,735][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing will watch <NONE> for write requests.
+2023-03-24T17:29:24.735095599Z [2023-03-24T17:29:24,735][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] .security is used as internal security index.
+2023-03-24T17:29:24.735133355Z [2023-03-24T17:29:24,735][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Internal index used for posting audit logs is null
+2023-03-24T17:29:24.832599739Z Done with success
+2023-03-24T17:29:24.938877343Z [2023-03-24 17:29:24,938][INFO ][container.run            ] Seeded the security ACL index
+2023-03-24T17:29:24.943828520Z [2023-03-24 17:29:24,943][INFO ][container.run            ] Adding ingest pipelines
+2023-03-24T17:29:25.046199748Z [2023-03-24 17:29:25,045][INFO ][container.run            ] Create ingest pipeline 'openshift_schema.json'
+2023-03-24T17:29:25.260796572Z {"acknowledged":true}[2023-03-24 17:29:25,264][INFO ][container.run            ] Finished adding ingest pipelines
+2023-03-24T17:29:25.269491997Z [2023-03-24 17:29:25,269][INFO ][container.run            ] Deleting deprecated index templates
+2023-03-24T17:29:25.366875962Z [2023-03-24 17:29:25,366][INFO ][container.run            ] Finished deleting deprecated index templates
+2023-03-24T17:29:25.368687467Z [2023-03-24 17:29:25,368][INFO ][container.run            ] Adding index templates
+2023-03-24T17:29:25.460226622Z [2023-03-24T17:29:25,460][WARN ][c.a.o.s.c.ConfigurationLoader] [elasticsearch-cdm-istiosystemjaeger-2] No data for audit while retrieving configuration for [config, roles, rolesmapping, internalusers, actiongroups, nodesdn, audit]  (index=.security)
+2023-03-24T17:29:25.463398351Z [2023-03-24 17:29:25,463][INFO ][container.run            ] Index template 'com.redhat.viaq-openshift-operations.template.json' found in the cluster, overriding it
+2023-03-24T17:29:25.465578591Z [2023-03-24T17:29:25,465][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing on REST API is enabled.
+2023-03-24T17:29:25.465702515Z [2023-03-24T17:29:25,465][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] [AUTHENTICATED, GRANTED_PRIVILEGES] are excluded from REST API auditing.
+2023-03-24T17:29:25.465765585Z [2023-03-24T17:29:25,465][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing on Transport API is enabled.
+2023-03-24T17:29:25.465857490Z [2023-03-24T17:29:25,465][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] [AUTHENTICATED, GRANTED_PRIVILEGES] are excluded from Transport API auditing.
+2023-03-24T17:29:25.465918215Z [2023-03-24T17:29:25,465][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of request body is enabled.
+2023-03-24T17:29:25.465985802Z [2023-03-24T17:29:25,465][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Bulk requests resolution is disabled during request auditing.
+2023-03-24T17:29:25.466042935Z [2023-03-24T17:29:25,465][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Index resolution is enabled during request auditing.
+2023-03-24T17:29:25.466103699Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Sensitive headers auditing is enabled.
+2023-03-24T17:29:25.466161215Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing requests from kibanaserver users is disabled.
+2023-03-24T17:29:25.466225355Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of external configuration is disabled.
+2023-03-24T17:29:25.466282565Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing of internal configuration is disabled.
+2023-03-24T17:29:25.466359976Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing only metadata information for read request is disabled.
+2023-03-24T17:29:25.466436571Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing will watch {} for read requests.
+2023-03-24T17:29:25.466495625Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing read operation requests from kibanaserver users is disabled.
+2023-03-24T17:29:25.466603398Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing only metadata information for write request is disabled.
+2023-03-24T17:29:25.466664435Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing diffs for write requests is disabled.
+2023-03-24T17:29:25.466726680Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing write operation requests from kibanaserver users is disabled.
+2023-03-24T17:29:25.466790240Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Auditing will watch <NONE> for write requests.
+2023-03-24T17:29:25.466844635Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] .security is used as internal security index.
+2023-03-24T17:29:25.466902528Z [2023-03-24T17:29:25,466][INFO ][c.a.o.s.a.i.AuditLogImpl ] [elasticsearch-cdm-istiosystemjaeger-2] Internal index used for posting audit logs is null
+2023-03-24T17:29:25.598581049Z {"acknowledged":true}[2023-03-24 17:29:25,684][INFO ][container.run            ] Index template 'com.redhat.viaq-openshift-project.template.json' found in the cluster, overriding it
+2023-03-24T17:29:25.783852867Z {"acknowledged":true}[2023-03-24 17:29:25,934][INFO ][container.run            ] Index template 'common.settings.kibana.template.json' found in the cluster, overriding it
+2023-03-24T17:29:26.059277242Z {"acknowledged":true}[2023-03-24 17:29:26,152][INFO ][container.run            ] Index template 'common.settings.operations.template.json' found in the cluster, overriding it
+2023-03-24T17:29:26.236133708Z {"acknowledged":true}[2023-03-24 17:29:26,283][INFO ][container.run            ] Index template 'common.settings.project.template.json' found in the cluster, overriding it
+2023-03-24T17:29:26.396091017Z {"acknowledged":true}[2023-03-24 17:29:26,444][INFO ][container.run            ] Index template 'jaeger-service.json' found in the cluster, overriding it
+2023-03-24T17:29:26.559388805Z {"acknowledged":true}[2023-03-24 17:29:26,608][INFO ][container.run            ] Index template 'jaeger-span.json' found in the cluster, overriding it
+2023-03-24T17:29:26.671797737Z {"acknowledged":true}[2023-03-24 17:29:26,675][INFO ][container.run            ] Finished adding index templates
+2023-03-24T17:29:26.676262992Z ~

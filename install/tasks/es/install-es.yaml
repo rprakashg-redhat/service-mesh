@@ -10,7 +10,7 @@
   kubernetes.core.k8s_info:
     api_key: "{{ api_key }}"
     kind: ClusterServiceVersion
-    name: elasticsearch-operator.v5.6.2
+    name: elasticsearch-operator.v5.6.3
     api_version: operators.coreos.com/v1alpha1
     namespace: "{{ operators.es.namespace }}"
   register: __es_operator_install_result
