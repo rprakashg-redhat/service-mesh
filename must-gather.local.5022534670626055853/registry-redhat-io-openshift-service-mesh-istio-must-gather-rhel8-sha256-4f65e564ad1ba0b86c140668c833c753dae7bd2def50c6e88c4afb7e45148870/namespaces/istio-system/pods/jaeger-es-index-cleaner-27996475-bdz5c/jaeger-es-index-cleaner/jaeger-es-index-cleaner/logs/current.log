@@ -1,3 +1,0 @@
-2023-03-25T23:55:07.927956632Z {"level":"info","ts":1679788507.9278743,"caller":"es-index-cleaner/main.go:89","msg":"Indices before this date will be deleted","date":"2023-03-24T00:00:00Z"}
-2023-03-25T23:55:07.928092423Z {"level":"info","ts":1679788507.9279265,"caller":"es-index-cleaner/main.go:98","msg":"Queried indices","indices":[{"Index":"jaeger-service-2023-03-24","CreationTime":"2023-03-24T11:40:23.253Z","Aliases":{}},{"Index":"jaeger-span-2023-03-24","CreationTime":"2023-03-24T11:40:22.994Z","Aliases":{}}]}
-2023-03-25T23:55:07.928158860Z {"level":"info","ts":1679788507.9281394,"caller":"es-index-cleaner/main.go:102","msg":"No indices to delete"}
