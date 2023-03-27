@@ -28,25 +28,6 @@ spec:
             automtls: true
         controlPlane:
             mtls: true
-        jwksResolverCA: >-
-            -----BEGIN CERTIFICATE-----
-            MIIDDDCCAfSgAwIBAgIBATANBgkqhkiG9w0BAQsFADAmMSQwIgYDVQQDDBtpbmdy
-            ZXNzLW9wZXJhdG9yQDE2Nzk1NTI4NjAwHhcNMjMwMzIzMDYyNzQwWhcNMjUwMzIy
-            MDYyNzQxWjAmMSQwIgYDVQQDDBtpbmdyZXNzLW9wZXJhdG9yQDE2Nzk1NTI4NjAw
-            ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCv48ucT1SXYqfpg7qM1Ofu
-            Vx+y5SjjCwboaSS3EAZ5Wf9imD5ctrTUBTF/SioENYXT6WLXtZFEMn6oR1MsD3tC
-            2Lib1MlGq1ffCXttsOVf2F6cGDe/5yQEQxB3lJ8b9cp6OL5w07Dvka/GE5B4NgaC
-            76G2shzF3T0atsUrfKOF35ewfgGK+LBMvqKwScENq8e+fv2R+GZTq4aRZzQ8By9A
-            suq3EW12VOcX8B0ePWm1K2CZV8+/uBG4bpUnMJLdG8bSNVRYyfGgO1n1m8AcZXkY
-            lvOaf3yZHaJBJH9R+tfJEULafJXIXDPgPcph/SslkyHiovUVMB4AcLYZo1vj1gLr
-            AgMBAAGjRTBDMA4GA1UdDwEB/wQEAwICpDASBgNVHRMBAf8ECDAGAQH/AgEAMB0G
-            A1UdDgQWBBQtRw6uKpRlxH2STkibnYdg29tHhjANBgkqhkiG9w0BAQsFAAOCAQEA
-            H+FjXjOEbxb7+cYTML6NWvI7/vt25lBOfKSkvUzFvqYhKfKR1Zoo5Y0UfK4LATOZ
-            kjqe8/HGAAUUrZPy1R7eP9hwMiWG0aBcLAwP02vlYZdbiNzSKNm+4CsgjpIE49x8
-            lD5ZEG+xioNsP5uD83zqz1W2O0kjkppEbL3McoX+LHKFbTXq4C2zdfwOolQqDVEB
-            B5kerkeglM97MtUKG4n0kItGufSWdvFixHCtsRBSukBVV8HkVRHUaH1SMy5IWAEh
-            8gsN/fwoixTTNFEdHX4Op0bu4fSaKmPTNMmqN2Gu6MixWARBMKSigSnMOhVQXdKb
-            hTje9z/OjnMPUwzqN5P+jQ== -----END CERTIFICATE-----
 
     runtime:
         components:
@@ -132,10 +113,10 @@ spec:
             runtime:
                 #Deployment specific overrides
                 deployment:
-                    replicas: 3
+                    replicas: 1
                     autoScaling:
                         maxReplicas: 10
-                        minReplicas: 3
+                        minReplicas: 1
                         targetCPUUtilizationPercentage: 75
                     strategy: {} #The deployment strategy to use to replace existing pods with new ones.
                 pod: {} #Pod specific overrides
@@ -149,10 +130,10 @@ spec:
             volumes: [] 
             runtime:
                 deployment:
-                    replicas: 3
+                    replicas: 1
                     autoScaling:
                         maxReplicas: 10
-                        minReplicas: 3
+                        minReplicas: 1
                         targetCPUUtilizationPercentage: 75
                     strategy: {} #The deployment strategy to use to replace existing pods with new ones.
                 pod: {} #Pod specific overrides
